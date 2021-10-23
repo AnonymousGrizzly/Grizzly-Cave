@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: SFMonoLight;
+  font-style: normal;
+  src: url("../src/fonts/SFMonoLight.otf");
+}
+@font-face {
+  font-family: SFMonoRegular;
+  font-style: normal;
+  src: url('../src/fonts/SFMonoRegular.otf');
+}
+@font-face {
+  font-family: SFMonoRegularItalic;
+  font-style: italic;
+  src: url('../src/fonts/SFMonoRegularItalic.otf');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'SFMonoLight';
   color: white;
+  background-color: #121212;
 }
 
-.App-link {
-  color: #61dafb;
+body, html, #root{
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1, h2, h3, p {
+  margin-left: 6%;
+}
+
+h1{
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+
+h2{
+  font-size: 32px;
+}
+
+h3{
+  font-size:20px;
+}
+
+p{
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 960px) {
+    h1{
+      font-size: 32px;
+    }
+    h2{
+      font-size: 16px;
+    }
+    p{
+      font-size: 14px;
+    }
 }

@@ -1,0 +1,58 @@
+:root {
+    --primary: #ffffff;
+}
+
+.btn {
+    margin-left: 36px;
+    padding: 8px 20px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(50% -90%, 100% 50%, 50% 190%, 0 50%);
+  }
+
+  .btn--language {
+    background-color: transparent;
+    font-size: 20px;
+    color: black;
+    
+  }
+  
+  .btn--primary {
+    background-color: var(--primary);
+    color: #242424;
+  }
+  
+  .btn--outline {
+    background-color: white;
+    color: black;
+    padding: 8px 20px;
+    transition: all 0.3s ease-out;
+    border-radius: 50px;
+  }
+  
+  .btn--signup {
+    background-color: #380F10;
+    color: rgb(252, 248, 248);
+    padding: 8px 20px;
+  }
+
+  .btn--medium {
+    padding: 8px 20px; 
+    font-size: 18px;
+  }
+  
+  .btn--large {
+    padding: 12px 26px;
+    font-size: 20px;
+  }
+  
+  .btn--large:hover,
+  .btn--medium:hover {
+    transition: all 0.3s ease-out;
+    background:  #380F10;
+    color: rgb(255, 255, 255);
+    transition: 250ms;
+  }
+
