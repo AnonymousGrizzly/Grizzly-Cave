@@ -4,7 +4,7 @@ import {Button} from "./Button"
 import HeroImg from "../images/HeroSection.png"
 
 export default function HeroSection() {
-
+//               <img src={HeroImg} alt=""/>
     return (
         <div className="hero-cntnr" id="Home">
             <h1> A safe place for your files</h1>
@@ -14,7 +14,7 @@ export default function HeroSection() {
                 <Button className="btns" where="#start" buttonSize="btn-large" buttonStyle="btn-primary">About Us</Button> 
                 <Button className="btns" where="/login" buttonSize="btn-large" buttonStyle="btn-outline">Sign Up</Button>
             </div>
-            <img src={HeroImg} alt=""/>
+
             <div className="change-cntnr"></div> 
         </div>
         

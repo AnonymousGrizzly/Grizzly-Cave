@@ -3,11 +3,13 @@ import "aos/dist/aos.css"
 import React, {useEffect} from 'react'
 import "../designs/Cards.css"
 import {Button} from "./Button"
+import GrizzlyFeet from "../images/GrizzlyFeet.png";
 
 export default function Cards() {
     useEffect(() => { Aos.init({duration:1000}); }, []);
     return (
         <div className="cards">
+            <img id="GrizzlyFeet" src={GrizzlyFeet} alt=""/>
             <div className="card-cntnr"> 
                 <section className="aboutus-cntnr">
                     <h2>About Us</h2>
