@@ -22,7 +22,7 @@ export default function Cards() {
                 <section className="newfeatures-cntnr">
                     <h2>Check out new things we added!</h2>
                     <p>There are weekly updates on my web app. If you want to know what's up, click on the button bellow!</p>
-                    <Button className="btns" where="/features" buttonSize="btn-large" buttonStyle="btn-outline">Updates</Button>
+                    <Button className="btns" where="/features" buttonSize="btn-large" buttonStyle="btn--signup">Updates</Button>
                 </section>
             </div>
         </div>
