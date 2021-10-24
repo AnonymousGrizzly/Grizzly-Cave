@@ -23,9 +23,13 @@
     margin-left: 4%;
 }
 
-
+.stopper{
+    width: 30rem;
+    left:0px;
+    background-color: #121212;
+    height: 80px;
+}
    
-
 .change-cntnr{
     left:0px;
     background-color: #380F10;

@@ -29,6 +29,10 @@ function SignUp() {
 
     return (
         <div className="form-cntnr">
+            <div className="title-cntnr">
+                <h1> You are about to enter <br/> <b> The GrizzlyCave </b></h1>
+                <p>- please provide the necessary information to get inside -</p>
+            </div>  
             {isLoggedIn && (
                 <form className="signup-cntnr">
                     <input type="username" name="signup_name" id="signup_name" placeholder="Username" required/>

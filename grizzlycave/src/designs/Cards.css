@@ -1,21 +1,37 @@
-.card-cntnr, .cards, .aboutus-cntnr, .newfeatures-cntnr, .howto-cntnr {
+.card-cntnr, .cards, .aboutus-cntnr, .newfeatures-cntnr, .howto-cntnr , .cards img{
     margin-top: 10rem;
 }
 
 .card-cntnr{
-    margin-left: 270px;
+    float:right;
+    position: relative;
     margin-right: 60px;
+    z-index: 100;
+    width: 60%;
+}
+
+
+.cards{
+    position: relative;
+    
+}
+
+.cards img{
+    
+    position: relative;
+    margin-left: 5%;
+    width: 27%;
 }
 
 h2{
     margin-bottom: 40px;
 }
 
-.cards{
-    
+section{
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    padding-top: 35px;
+    background-color: #121212;
 }
 
-#GrizzlyFeet{
-    height: 10%;
-    width: auto;
-}
