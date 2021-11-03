@@ -25,7 +25,7 @@ function SignUp() {
         } 
     
     //const authCtx = useContext(AuthContext);
-    //const isLoggedIn = authCtx.isLoggedIn;
+    //const isLoggedIn = authCtx.isLoggedIn; 
 
     return (
         <div className="form-cntnr">

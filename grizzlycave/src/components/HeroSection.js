@@ -1,6 +1,7 @@
 import React from 'react'
 import "../designs/HeroSection.css"
 import {Button} from "./Button"
+import btwnsection from "../images/Between-section.png"
 //import HeroImg from "../images/HeroSection.png"
 
 export default function HeroSection() {
@@ -15,7 +16,7 @@ export default function HeroSection() {
             </div>
 
             <div className="change-cntnr"></div> 
-            <div className="stopper"></div>
+            <img src ={btwnsection} alt=""/>
         </div>
         
     )

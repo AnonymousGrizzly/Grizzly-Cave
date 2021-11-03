@@ -32,7 +32,7 @@ export default function Cards() {
                     <h2>Check out new things we added!</h2>
                     <p>
                         There are weekly updates on our web app. If you want to know what's up, click on the button bellow!
-
+                        <br/>
                     </p>
                     
                 </section>
