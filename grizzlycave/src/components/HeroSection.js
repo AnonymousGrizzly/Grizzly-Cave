@@ -16,7 +16,6 @@ export default function HeroSection() {
             </div>
 
             <div className="change-cntnr"></div> 
-            <img src ={btwnsection} alt=""/>
         </div>
         
     )
