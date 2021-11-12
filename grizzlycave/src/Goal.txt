@@ -1,0 +1,17 @@
+SPLETNA STRAN ZA UPRAVLJANJE Z DOKUMENTI
+
+--------- FRONTEND ---------
+-Navbar CSS or all
+-signup CSS probs
+-main page CSS
+-profile page ALL (REACT/CSS)
+    -izbira kaj želi narediti (menu)
+    -tutorial za nove uporabnike ?
+    -
+-footer CSS change! // CSS copied from somewhere
+-
+
+--------- BACKEND ---------
+-a way to store files
+-how to send files
+-
