@@ -1,4 +1,4 @@
-.card-cntnr, .cards, .aboutus-cntnr, .newfeatures-cntnr, .howto-cntnr , .cards img{
+.card-cntnr, .cards, section, .cards img{
     margin-top: 10rem;
 }
 
@@ -7,13 +7,7 @@
     position: relative;
     margin-right: 60px;
     z-index: 100;
-    width: 60%;
-}
-
-
-.cards{
-    position: relative;
-    
+    width: 63%;
 }
 
 .cards img{
@@ -27,7 +21,7 @@ h2{
     margin-bottom: 40px;
 }
 
-section{
+section {
     padding-left: 10px;
     padding-right: 20px;
     padding-bottom: 30px;
@@ -36,3 +30,9 @@ section{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+section :nth-child(odd){
+    margin-right: 60px;
+}
+section :nth-child(even){
+    margin-left: 60px
+}

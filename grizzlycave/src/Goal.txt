@@ -8,10 +8,14 @@ SPLETNA STRAN ZA UPRAVLJANJE Z DOKUMENTI
     -izbira kaj želi narediti (menu)
     -tutorial za nove uporabnike ?
     -
--footer CSS change! // CSS copied from somewhere
--
+-footer JS in CSS change! // CSS copied from somewhere
+-centered div if screen too big (laptop:, monitor:)
+
+
+-get icons from somewhere
 
 --------- BACKEND ---------
 -a way to store files
 -how to send files
+-
 -

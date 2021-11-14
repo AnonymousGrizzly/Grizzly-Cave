@@ -11,14 +11,14 @@ export default function Cards() {
         <div className="cards">
             <img src={GrizzlyFeet} alt=""/>
             <div className="card-cntnr"> 
-                <section className="aboutus-cntnr">
+                <section>
                     <h2>About Us</h2>
                     <p>This is a web app, where you can store and/or send any files.
                         <br/> Set a password and expiry date, along with a message of what kind of file it is.
                         <br/>If you want to send a super secret message without a file, you can do it here too!
                         <br/>It also functions as a storage for passwords.</p>
                 </section>
-                <section className="howto-cntnr">
+                <section >
                     <h2>Security</h2>
                     <p> 
                         Don't worry about other people trying to read your stuff. Focus on your work and leave security to us!
@@ -28,7 +28,7 @@ export default function Cards() {
                         <br/> Database is protected by blobfish, passwords are encripted by differend salts and you can even chose what enryption do you want to use for your messages!
                     </p>
                 </section>
-                <section className="newfeatures-cntnr">
+                <section >
                     <h2>Check out new things we added!</h2>
                     <p>
                         There are weekly updates on our web app. If you want to know what's up, click on the button bellow!

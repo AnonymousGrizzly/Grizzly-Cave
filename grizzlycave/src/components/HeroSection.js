@@ -8,6 +8,7 @@ export default function HeroSection() {
 //               <img src={HeroImg} alt=""/>
     return (
         <div className="hero-cntnr" id="Home">
+            <div className="hero-wrapper">
             <h1> A safe place for your files</h1>
             <p> operate with files safely. </p>
             <div className="hero-btns">
@@ -16,6 +17,7 @@ export default function HeroSection() {
             </div>
 
             <div className="change-cntnr"></div> 
+            </div>
         </div>
         
     )
