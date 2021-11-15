@@ -30,9 +30,9 @@ section {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-section :nth-child(odd){
+section:nth-child(odd){
     margin-right: 60px;
 }
-section :nth-child(even){
+section:nth-child(even){
     margin-left: 60px
 }
