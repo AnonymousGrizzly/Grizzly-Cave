@@ -12,10 +12,6 @@ SPLETNA STRAN ZA UPRAVLJANJE Z DOKUMENTI
 -centered div if screen too big (laptop:, monitor:)
 
 
--get icons from somewhere
 
 --------- BACKEND ---------
--a way to store files
--how to send files
--
--
+-php login/registration

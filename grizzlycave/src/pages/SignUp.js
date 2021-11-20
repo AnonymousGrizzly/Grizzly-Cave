@@ -35,7 +35,7 @@ function SignUp() {
             </div>  
             {isLoggedIn && (
                 <form className="signup-cntnr">
-                    <input type="username" name="signup_name" id="signup_name" placeholder="Username" required/>
+                    <input type="text" name="signup_name" id="signup_name" placeholder="Username" required/>
                     <input type="email" name="signup_email" id="signup_email" placeholder="Email" required/>
                     <input type="password" name="repassword" id="repassword" placeholder="Password" required/>
                     <input type="password" name="signup_password" id="signup_password" placeholder="Retype Password" required/>
