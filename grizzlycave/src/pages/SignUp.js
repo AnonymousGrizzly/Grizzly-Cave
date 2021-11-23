@@ -33,7 +33,7 @@ function SignUp() {
                 <h1> You are about to enter <br/> <b> The GrizzlyCave </b></h1>
                 <p>- please provide the necessary information to get inside -</p>
             </div>  
-            {isLoggedIn && (
+            {isSignedIn && (
                 <form className="signup-cntnr">
                     <input type="text" name="signup_name" id="signup_name" placeholder="Username" required/>
                     <input type="email" name="signup_email" id="signup_email" placeholder="Email" required/>
@@ -42,7 +42,7 @@ function SignUp() {
                     {valid && (<input data-aos="fade-up" type="submit" value="signup_submit"  className="submit-btn"/>)}
                 </form>
             )}
-            {!isLoggedIn && (
+            {!isSignedIn && (
                 <form className="signin-cntnr">
                     <input type="username" name="username" id="username" placeholder="Username" requred/>
                     <input type="password" name="password" id="password" placeholder="Password" required/>
