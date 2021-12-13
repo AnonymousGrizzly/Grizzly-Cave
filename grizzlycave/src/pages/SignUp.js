@@ -39,7 +39,7 @@ function SignUp() {
                     <input type="email" name="signup_email" id="signup_email" placeholder="Email" required/>
                     <input type="password" name="repassword" id="repassword" placeholder="Password" required/>
                     <input type="password" name="signup_password" id="signup_password" placeholder="Retype Password" required/>
-                    {valid && (<input data-aos="fade-up" type="submit" value="signup_submit"  className="submit-btn"/>)}
+                    {valid && (<input data-aos="fade-up" type="submit" value="SignUp"  className="submit-btn"/>)}
                 </form>
             )}
             {!isSignedIn && (
