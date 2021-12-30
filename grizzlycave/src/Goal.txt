@@ -7,7 +7,8 @@ SPLETNA STRAN ZA UPRAVLJANJE Z DOKUMENTI
 -profile page ALL (REACT/CSS)
     -izbira kaj želi narediti (menu)
     -tutorial za nove uporabnike ?
-    -
+    -grafi
+    
 -footer JS in CSS change! // CSS copied from somewhere
 -centered div if screen too big (laptop:, monitor:)
 
@@ -15,3 +16,4 @@ SPLETNA STRAN ZA UPRAVLJANJE Z DOKUMENTI
 
 --------- BACKEND ---------
 -php login/registration
+-sending files

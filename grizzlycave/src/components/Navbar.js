@@ -1,37 +1,48 @@
- import React, {useState, useEffect, useRef} from 'react';
- import FaBars from "../images/menu.svg";
- import Logo from "../images/Grizzly.png"
- import {HashLink as Link} from 'react-router-hash-link';
+import React, {useState, useEffect, useContext} from 'react';
+import {HashLink as Link} from 'react-router-hash-link';
+import '../designs/Navbar.css';
 
 function Navbar() {
-    
-    const [showLinks, setShowLinks] = useState(false);
-    const linkscntnrRef =useRef(null);
-    const linksRef = useRef(null);
-    const toggleLinks =()=>{
-        setShowLinks(!showLinks);
+    const [click, setClick] = useState(false), handleClick = () => setClick(!click), closeMobileMenu = () => setClick(false);
+    const [button, setButton] = useState(true);
+    const showButton = () => {
+        if(window.innerWidth <= 960) {
+            setButton(false);
+        }else{
+            setButton(true);
+        }
     }
-    
+    useEffect  (()=>{ 
+        showButton();
+    }, []);
+   
+    window.addEventListener('resize', showButton);
     return (
-        <nav>
-      <div className='nav-center'>
-        <div className='nav-header'>
-          <img src={Logo} className='logo' alt='logo' />
-          <button className='nav-toggle' onClick={toggleLinks}>
-            <FaBars />
-          </button>
-        </div>
-        <div className='links-cntnr' ref={linkscntnrRef}>
-          <ul className="links">
-            <li>
-             {/*  
-              Put in whatever you need
-             */}
+      <nav className="navbar">
+        <div className="navbar-container">
+          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}> Grizzly Cave </Link>
+          <div className='menu-icon' onClick ={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
+          </div>
+          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            <li className='nav-item'>
+              <Link smooth to='#home' className='nav-links' onClick={closeMobileMenu}> Home </Link>
+            </li>
+            <li className='nav-item'>
+              <Link smooth to='#Partners' className='nav-links' onClick={closeMobileMenu}> Partners </Link>
+            </li>   
+            <li className='nav-item'>
+              <Link smooth to='#ContactUs' className='nav-links' onClick={closeMobileMenu}> Contact Us </Link>
+            </li>
+            <li className='nav-item'>
+              <Link smooth to="#AboutUs" className='nav-links' onClick={closeMobileMenu}> About Us </Link>
+            </li>
+            <li className='nav-item'>
+              <Link smooth to='/login' className='nav-links-mobile' onClick={closeMobileMenu}> LOG IN </Link>
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
+      </nav>
     )
 }
 

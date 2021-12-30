@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import "../design/SignForm.css";
-import AuthContext from "../contexts/auth-context";
+
 
 function SignUp() {
     function validateEmail(signup_email){ //Must contain @, can't be shorter than 8 characters

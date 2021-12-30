@@ -3,7 +3,6 @@ import "../designs/Footer.css"
 import {Hashlink as Link} from "react-router-hash-link";
 
 function Footer() {
-
     return (
         <div className="footer-cntnr">
             <div className="footer-links">
@@ -22,8 +21,6 @@ function Footer() {
                         <Link to=""> Contact3 </Link>
                     </div>
                 </div>
-                
-
             </div>
         </div>
     )
