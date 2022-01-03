@@ -1,0 +1,37 @@
+.contact-form{
+    padding-top: 100px;
+    display: grid;
+    height: 60vh;
+    background-color: #121212;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: repeat(1, auto);
+    height: fit-content;
+}
+form p, form h1{
+    z-index: 10;
+}
+
+#user_name, #user_email{
+    width: 300px;
+    height: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    z-index: 10;
+}
+#user_message{
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    z-index: 10;
+}
+@media screen and (max-width: 1200px) {
+    .contact-form{
+      display: none;
+    }
+  }

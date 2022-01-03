@@ -1,29 +1,42 @@
-import React from "react";
-import "../designs/Footer.css"
-import {Hashlink as Link} from "react-router-hash-link";
+import React from 'react';
+import '../designs/Footer.css';
+import { HashLink as Link} from 'react-router-hash-link';
 
 function Footer() {
-    return (
-        <div className="footer-cntnr">
-            <div className="footer-links">
-                <div className="footer-link-wrapper">
-                    <div className="footer-link-items">
-                        <h2>About us</h2>
-                        <Link to="/signup" > Signup </Link>
-                        <Link to="/"> Terms of Service </Link>
-                        <Link to="/"> Terms of using my service</Link>
-                        <Link to="/"> Terms of not using my service</Link>
-                    </div>
-                    <div className="footer-link-items">
-                        <h2>Contact us</h2>
-                        <Link to=""> Contact1 </Link>
-                        <Link to=""> Contact2 </Link>
-                        <Link to=""> Contact3 </Link>
-                    </div>
-                </div>
+  return (
+    <div className='footer-container'>
+        <div className="change2-cntnr"></div>
+      <div className='footer-links'>
+        
+      </div>
+      <section className='social-media'>
+
+        <div className='social-media-wrap'>
+          <div className="">
+          <Link to="#home" smooth className="social-logo">GrizzlyCave</Link>
+            <div className='footer-logo'>
             </div>
+          </div>
+            
+          <small className='website-rights'>Maks Rogelj, GrizzlyCave © 2022</small>
+          <div className='social-icons'>
+            <a className='social-icon-link facebook' href='https://www.facebook.com/picto.design.ljubljana' target='_blank' aria-label='Facebook'>
+              <i className='fab fa-facebook-f' />
+            </a>
+            <a className='social-icon-link instagram' href='https://www.instagram.com/go_picto/' target='_blank' aria-label='Instagram' >
+              <i className='fab fa-instagram' />
+            </a>
+            <a className='social-icon-link youtube' href='/' target='_blank' aria-label='Youtube'>
+              <i className='fab fa-youtube' />
+            </a>
+            <a className='social-icon-link twitter' href='https://www.google.com/maps/place/Picto.design/@46.0574263,14.5073083,17z/data=!3m1!4b1!4m5!3m4!1s0x477acc9417577119:0x9a591440b9a9dd86!8m2!3d46.0574586!4d14.5094956' target='_blank' aria-label='Twitter'>
+              <i className="fas fa-map-marker-alt"/>
+            </a>
+          </div>
         </div>
-    )
+      </section>
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;

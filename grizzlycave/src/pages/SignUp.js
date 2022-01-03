@@ -15,9 +15,9 @@ function SignUp() {
         const re = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
         re.test(signup_password);
     }
-    const signup_email = document.getElementById("signup_name"), signup_password = document.getElementById("signup_password"), signup_repassword = document.getElementById("repassword");
+    const signup_email = document.getElementById("signup_email"), signup_password = document.getElementById("signup_password"), signup_repassword = document.getElementById("repassword");
     //const valid = !!(validateEmail(signup_email) && validatePassword(signup_password) && signup_password == signup_repassword);
-    let errormsg="0", emptymsg=!!(errormsg!="0");
+    let errormsg="0", emptymsg=!!(errormsg!="0"); 
     
     if(!valid){
         if(!validatePassword(signup_password)){
@@ -43,7 +43,7 @@ function SignUp() {
                     <input type="email" name="signup_email" id="signup_email" placeholder="Email" required/>
                     <br/><span>Must be valid email</span>
                     <input type="password" name="repassword" id="repassword" placeholder="Password" required/>
-                    <br/><span>Must contain: at least 8 characters</span>
+                    <br/><span>Must contain at least 8 characters</span>
                     <input type="password" name="signup_password" id="signup_password" placeholder="Retype Password" required/>
                     <br/><span>Must be same as password</span>
                     {valid && (<input data-aos="fade-up" type="submit" value="SignUp"  className="submit-btn"/>)}

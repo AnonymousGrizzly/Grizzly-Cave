@@ -8,6 +8,7 @@ section, .cards img{
     margin-right: 60px;
     z-index: 100;
     width: 63%;
+    height: fit-content;
 }
 .cards{
     margin-top:0;
@@ -17,6 +18,7 @@ section, .cards img{
     position: relative;
     margin-top:0;
     margin-left: 5%;
+    margin-bottom: 100px;
     width: 300px;
 }
 
