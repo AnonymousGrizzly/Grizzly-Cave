@@ -25,12 +25,8 @@
 body, html, #root{
   margin: 0;
   background-color: #380F10;
-  
 }
 
-h1, h2, h3, p {
-  margin-left: 6%;
-}
 
 h1{
   font-size: 38px;
@@ -59,5 +55,13 @@ p{
     }
     p{
       font-size: 14px;
+    }
+}
+@media screen and (min-width: 1440px){
+    body{
+      width: 1440px;
+      display: block;
+      margin: auto;
+      box-sizing: border-box;
     }
 }

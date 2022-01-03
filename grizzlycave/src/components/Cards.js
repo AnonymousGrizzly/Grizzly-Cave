@@ -11,7 +11,7 @@ export default function Cards() {
         <div className="cards">
             <img src={GrizzlyFeet} alt=""/>
             <div className="card-cntnr"> 
-                <section>
+                <section id="AboutUs">
                     <h2>About Us</h2>
                     <p>This is a web app, where you can store and/or send any files.
                         <br/> Set a password and expiry date, along with a message of what kind of file it is.

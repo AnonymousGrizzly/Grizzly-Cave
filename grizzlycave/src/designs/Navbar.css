@@ -5,24 +5,32 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    width:100%;
+}
+nav{
     z-index: 999;
 }
 .navbar-menu{
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
-    justify-content: end;
 }
 .navbar-logo, .nav-links{
     text-decoration: none;
     padding: 0.5rem 1.5rem;
 }
 .navbar-logo{
-    margin-right:80px;
+    text-align: center;
+    margin:0;
 }
-.navbar{
-    position: sticky;
+#icon{
+    width: 32px;
 }
+.navbar, nav{
+    position: fixed;
+}
+
+
 .nav-menu{
     display: grid;
     grid-template-columns: repeat(5, auto);
@@ -37,4 +45,71 @@
     display: none;
 }
 
-
+@media screen and (max-width: 1060px) {
+    
+      .nav-menu {
+        padding-top: 200px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 65px;
+        left: -150%;
+        opacity: 1;
+        transition: all 0.8s ease;
+        justify-content: start;
+      }
+    
+      .nav-menu.active {
+        background: #121212;
+        left: 0;
+        opacity: 1;
+        transition: all 0.8s ease;
+        z-index: 999;
+      }
+      nav{
+        z-index: 999;
+      }
+      .nav-links {
+        text-align: center;
+        padding: 2rem;
+        margin-top: 20px;
+        width: 100%;
+        display: table;
+      }
+    
+      .nav-links:hover {
+        border-bottom: 2px solid white;
+      }
+      #icon{
+          display: none;
+      }
+      .navbar-logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(25%, 50%);
+      }
+    
+      .menu-icon {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 60%);
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+    
+      .fa-times {
+        color: #fff;
+        font-size: 2rem;
+      }
+    
+      .nav-links-mobile:hover {
+        background: #fff;
+        color: #242424;
+        transition: 250ms;
+      }
+}

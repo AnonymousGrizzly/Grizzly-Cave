@@ -1,4 +1,4 @@
-.card-cntnr, .cards, section, .cards img{
+section, .cards img{
     margin-top: 10rem;
 }
 
@@ -9,15 +9,23 @@
     z-index: 100;
     width: 63%;
 }
+.cards{
+    margin-top:0;
+}
 
 .cards img{
     position: relative;
+    margin-top:0;
     margin-left: 5%;
-    width: 27%;
+    width: 300px;
 }
 
 h2{
     margin-bottom: 40px;
+}
+
+section p, section h2{
+    margin-left: 6%;
 }
 
 section {
@@ -34,4 +42,20 @@ section:nth-child(odd){
 }
 section:nth-child(even){
     margin-left: 60px
+}
+
+@media screen and (max-width:1160px) {
+    .cards img{
+        position: absolute;
+        height:auto;
+        z-index: -1;
+    }
+    section{
+        margin-right: 0;
+    }
+    .card-cntnr{
+        margin-right: 5%;
+        margin-bottom: 100px;
+    }
+    
 }

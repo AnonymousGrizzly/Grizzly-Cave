@@ -2,7 +2,7 @@ import React from 'react'
 import "../designs/HeroSection.css"
 import {Button} from "./Button"
 import btwnsection from "../images/Between-section.png"
-//import HeroImg from "../images/HeroSection.png"
+import HeroImg from "../images/Grizzly.png"
 
 export default function HeroSection() {
 //               <img src={HeroImg} alt=""/>
@@ -11,13 +11,13 @@ export default function HeroSection() {
             <div className="hero-wrapper">
             <h1> A safe place for your files</h1>
             <p> operate with files safely. </p>
+            <img src={HeroImg} alt="Grizzly Cave" id="HeroImg"/>
             <div className="hero-btns">
-                <Button className="btns" where="#start" buttonSize="btn-large" buttonStyle="btn-primary">About Us</Button> 
-                <Button className="btns" where="/login" buttonSize="btn-large" buttonStyle="btn-outline">Sign Up</Button>
+                
             </div>
-
             <div className="change-cntnr"></div> 
             </div>
+            
         </div>
         
     )

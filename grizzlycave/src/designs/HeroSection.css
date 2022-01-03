@@ -6,22 +6,8 @@
     margin-left: 0;
     background-color: #121212;
 }
-
-#HeroSection{
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    margin-top: 125px;
-    margin-right: 120px;
-    width: 35%;
-    background-color: transparent;
-    margin-bottom: 50px;
-}
-
-.hero-cntnr img{
-    position: relative;
-    width: 100%;
-    margin-top: -57%;
+.hero-wrapper h1, .hero-wrapper p, .hero-wrapper h2, .hero-wrapper h3{
+    margin-left: 6%;
 }
 
 .hero-btns {
@@ -45,4 +31,26 @@
     margin-left: 0;
     padding-bottom: 1px;
     clip-path: polygon(100% 0%,100% 0%,105% 101%,0% 101%,0% 50%);
+    position: relative;
 }
+#HeroImg{
+    position: absolute;
+    margin: 0;
+    width: 400px;
+    background-color: transparent;
+    margin-right: 100px;
+    right: 0;
+    display: block;
+    z-index: 1;
+}
+@media screen and (min-width: 1440px) {
+    #HeroImg{
+        margin-right: 25%;
+    }
+}
+@media screen and (max-width: 960px) {
+    #HeroImg{
+        display: none;
+    }
+}
+
