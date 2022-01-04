@@ -1,7 +1,5 @@
 import React from 'react'
 import "../designs/HeroSection.css"
-import {Button} from "./Button"
-import btwnsection from "../images/Between-section.png"
 import HeroImg from "../images/Grizzly.png"
 
 export default function HeroSection() {

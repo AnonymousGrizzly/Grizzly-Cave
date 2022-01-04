@@ -28,9 +28,11 @@ h2{
 
 section p, section h2{
     margin-left: 6%;
+    margin-bottom: 10px;
 }
 
 section {
+    height: fit-content;
     padding-left: 10px;
     padding-right: 20px;
     padding-bottom: 30px;
@@ -44,6 +46,24 @@ section:nth-child(odd){
 }
 section:nth-child(even){
     margin-left: 60px
+}
+.news-btn{
+    height: 30px;
+    margin-left: 6%;
+    padding: 7px 60px;
+    background-color: #000000;
+    text-decoration: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border: 1px solid white;
+}
+.news-btn:hover{
+    background-color: #252525;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+.news-btn:active{
+    transform: translateY(3px) !important;
+    transition: 0.5s ease !important;
 }
 
 @media screen and (max-width:1160px) {

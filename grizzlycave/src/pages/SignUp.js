@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React from 'react'
 import "../designs/SignUp.css";
 
 
@@ -17,14 +17,14 @@ function SignUp() {
     }
     const signup_email = document.getElementById("signup_email"), signup_password = document.getElementById("signup_password"), signup_repassword = document.getElementById("repassword");
     //const valid = !!(validateEmail(signup_email) && validatePassword(signup_password) && signup_password == signup_repassword);
-    let errormsg="0", emptymsg=!!(errormsg!="0"); 
+    let errormsg="0", emptymsg=!!(errormsg!=="0"); 
     
     if(!valid){
         if(!validatePassword(signup_password)){
             errormsg = "Password must contain at least 8 characters, 1 number, 1 letter & 1 unique character (!#$%/?...)";
         }else if(!validateEmail(signup_email)){
             errormsg = "Must be a valid email!";
-        }else if(signup_password != signup_repassword){
+        }else if(signup_password !== signup_repassword){
             errormsg = "Passwords must be the same!"
         }
     } 

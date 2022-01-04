@@ -1,24 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState} from 'react';
 import {HashLink as Link} from 'react-router-hash-link';
 import '../designs/Navbar.css';
 import icon from "../images/encryption-white.png";
 
 function Navbar() {
     const [click, setClick] = useState(false), handleClick = () => setClick(!click), closeMobileMenu = () => setClick(false);
-    const [button, setButton] = useState(true);
-    const showButton = () => {
-        if(window.innerWidth <= 1060) {
-            setButton(false);
-        }else{
-            setButton(true);
-        }
-    }
-
-    useEffect  (()=>{ 
-        showButton();
-    }, []);
-   
-    window.addEventListener('resize', showButton);
+    
     return (
       <nav className="navbar">
         <div className="navbar-container">
@@ -35,10 +22,10 @@ function Navbar() {
               <Link smooth to='#AboutUs' className='nav-links' onClick={closeMobileMenu}> About Us </Link>
             </li>   
             <li className='nav-item'>
-              <Link smooth to='#ContactUs' className='nav-links' onClick={closeMobileMenu}> News </Link>
+              <Link smooth to='/news' className='nav-links' onClick={closeMobileMenu}> News </Link>
             </li>
             <li className='nav-item'>
-              <Link smooth to="#AboutUs" className='nav-links' onClick={closeMobileMenu}> Contact Us </Link>
+              <Link smooth to="#ContactUs" className='nav-links' onClick={closeMobileMenu}> Contact Us </Link>
             </li>
             <li className='nav-item'>
               <Link smooth to='/signup' className='nav-links' onClick={closeMobileMenu}> Sign Up/In </Link>
