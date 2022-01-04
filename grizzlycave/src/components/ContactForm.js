@@ -32,7 +32,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={sendEmail}>
+    <div className="banner">
+     <form className="contact-form" onSubmit={sendEmail}>
         <h1 id ="ContactUs">Contact us <i class="far fa-envelope"></i></h1>
         <p>-  We'd love to hear from you! - </p>
         <input type="text" name="user_name" id="user_name" placeholder="Name or Company"  required/>
@@ -40,7 +41,7 @@ export default function ContactForm() {
         <textarea name="user_message" id="user_message" placeholder="        How can we help you?" required />
         <p><i class="fas fa-user-lock"></i> we NEVER share your email with anyone</p>
         {isValid && (<input data-aos="fade-up" type="submit" value="Send"  className="submit-btn"/>)}
-    </form>
-    
+     </form>
+    </div>
   );
 }

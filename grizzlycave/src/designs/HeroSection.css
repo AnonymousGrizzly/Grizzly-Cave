@@ -1,4 +1,5 @@
 .hero-cntnr{
+    margin-top: 65px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -43,6 +44,7 @@
     display: block;
     z-index: 1;
 }
+
 @media screen and (min-width: 1440px) {
     #HeroImg{
         margin-right: 25%;

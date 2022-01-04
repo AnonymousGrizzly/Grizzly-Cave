@@ -12,7 +12,11 @@
 form p, form h1{
     z-index: 10;
 }
+.banner{
+    width: 100%;
+    border-left: 65px solid black;
 
+}
 #user_name, #user_email{
     width: 300px;
     height: 25px;

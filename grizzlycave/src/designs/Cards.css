@@ -3,6 +3,7 @@ section, .cards img{
 }
 
 .card-cntnr{
+    margin-top: 65px;
     float:right;
     position: relative;
     margin-right: 60px;
