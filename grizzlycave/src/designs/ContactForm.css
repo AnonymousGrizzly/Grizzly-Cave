@@ -14,7 +14,7 @@ form p, form h1{
 }
 .banner{
     width: 100%;
-    border-left: 65px solid black;
+    /*border-left: 65px solid black;*/
 
 }
 #user_name, #user_email{

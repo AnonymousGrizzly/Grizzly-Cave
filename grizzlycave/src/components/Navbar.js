@@ -19,7 +19,7 @@ function Navbar() {
               <Link smooth to={'/'} className='nav-links' onClick={closeMobileMenu}> Home </Link>
             </li>
             <li className='nav-item'>
-              <Link smooth to='#AboutUs' className='nav-links' onClick={closeMobileMenu}> About Us </Link>
+              <Link smooth to='#AboutUs' className='nav-links' onClick={closeMobileMenu}> About </Link>
             </li>   
             <li className='nav-item'>
               <Link smooth to='/news' className='nav-links' onClick={closeMobileMenu}> News </Link>
