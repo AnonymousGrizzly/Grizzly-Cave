@@ -27,7 +27,13 @@ nav{
     width: 32px;
 }
 .navbar, nav{
-    position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+}
+.nav-links:hover{
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transition: all 0.4s ease-out;
 }
 
 .nav-menu{

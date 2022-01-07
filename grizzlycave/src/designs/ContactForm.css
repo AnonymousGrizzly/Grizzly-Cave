@@ -8,6 +8,7 @@
     text-align: center;
     grid-template-columns: repeat(1, auto);
     height: fit-content;
+    padding-bottom: 100px;
 }
 form p, form h1{
     z-index: 10;
