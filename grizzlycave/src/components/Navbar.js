@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {HashLink as Link} from 'react-router-hash-link';
 import '../designs/Navbar.css';
 import icon from "../images/encryption-white.png";
@@ -17,7 +17,6 @@ function Navbar() {
         showButton();
     }, []);
     window.addEventListener('resize', showButton);
-
     return (
       <nav className="navbar">
         <div className="navbar-container">

@@ -10,7 +10,7 @@ export default function News(){
             <h1>News <i class="fas fa-newspaper"></i></h1>
             <hr/>
             <div className="news-blocks">
-
+              
             </div>
           </div>
         </div>
