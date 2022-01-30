@@ -1,0 +1,2 @@
+--FRONT PAGE ACCESS TO PHP
+--popravi headerje 
