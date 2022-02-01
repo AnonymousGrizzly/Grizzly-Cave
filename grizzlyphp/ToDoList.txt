@@ -1,2 +1,3 @@
 --FRONT PAGE ACCESS TO PHP
---popravi headerje 
+--popravi headerje (mozno da sm ze)
+--preveri ce so headerji pravi
