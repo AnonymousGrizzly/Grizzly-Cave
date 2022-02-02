@@ -61,7 +61,8 @@ function SignUp() {
             email,
             password 
         });
-        console.log(response);
+        const parsedResonse = await response.json();
+        setErrorMsg(parsedResonse.message);
     };
 
     return (

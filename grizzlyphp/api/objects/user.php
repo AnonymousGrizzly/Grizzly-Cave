@@ -37,7 +37,20 @@ class User{
         return false;
     }
     //check email
-    function emailExists(){
+    function assignUserData(){
+        $stmt=$this->getUserByEmail();
+        // if email exists, assign values to object properties for easy access and use for php sessions
+        if($stmt->rowCount()>0){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->user_id = $row['user_id'];
+            $this->username = $row['username'];
+            $this->password = $row['password'];
+            return true;
+        }
+        return false;
+    }
+
+    public function getUserByEmail(){
         $query = "SELECT user_id, username, password
                 FROM " . $this->table_name . "
                 WHERE email = ?
@@ -49,19 +62,20 @@ class User{
         // bind given email value
         $stmt->bindParam(1, $this->email);
         $stmt->execute();
-        $num = $stmt->rowCount();
-        
-        // if email exists, assign values to object properties for easy access and use for php sessions
-        if($num>0){
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->user_id = $row['user_id'];
-            $this->username = $row['username'];
-            $this->password = $row['password'];
+        return $stmt;
+    }
 
-            return true;
-        }
-    
-        return false;
+    public function getUserByUsername(){
+        $query = "SELECT user_id, username, password
+                FROM " . $this->table_name . "
+                WHERE username = ?
+                LIMIT 0,1";
+     
+        $stmt = $this->conn->prepare( $query );
+        $this->username=htmlspecialchars(strip_tags($this->username));
+        $stmt->bindParam(1, $this->username);
+        $stmt->execute();
+        return $stmt;
     }
 
     public function update(){

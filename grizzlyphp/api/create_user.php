@@ -22,11 +22,30 @@ $data = json_decode(file_get_contents("php://input"));
 $user->username = $data->username;
 $user->email = $data->email;
 $user->password = $data->password;
-if(!empty($user->firstname) && !empty($user->email) && !empty($user->password) && $user->create() ){ //if able to create user
+
+$stmt = $user -> getUserByEmail();
+
+
+if($stmt->rowCount()>0){
+    http_response_code(400);
+    echo json_encode(array("message" => "Email already exists"));
+    exit();
+}
+
+$stmt = $user -> getUserByUsername();
+
+if($stmt->rowCount()>0){
+    http_response_code(400);
+    echo json_encode(array("message" => "Username already exists"));
+    exit();
+}
+
+if(!empty($user->username) && !empty($user->email) && !empty($user->password) && $user->create() ){ //if able to create user
     http_response_code(200);
     echo json_encode(array("message" => "User created."));
 }else{ // if unable to create user
     http_response_code(400);
     echo json_encode(array("message" => "Unable to create user."));
 }
+
 ?>
