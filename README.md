@@ -1,6 +1,6 @@
 # GrizzlyCave
 
-A cave just right for a grizzly, also maturitetna naloga.
+A cave just right for a grizzly, also <i>maturitetna naloga </i>.
 
 <hr><br/>
 <h3> TO-DO LIST:</h3>
