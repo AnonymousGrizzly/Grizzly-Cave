@@ -9,5 +9,9 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
   <li>FRONT PAGE ACCESS TO PHP</li>
   <li>popravi headerje (mozno da sm ze)</li>
   <li>preveri ce so headerji pravi </li>
+  <li>Uredi footer</li>
+  <li>Uredi SignUp</li>
+  <li>Dodaj osebno stran (profile page) </li>
+  <li>Spremeni nav-bar</li>
 </ul>
 <hr>
