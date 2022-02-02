@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Button from '../components/Button';
 import Input from '../components/Input';
 import "../designs/SignUp.css";
+import { AuthService } from '../services/auth';
 
 function SignUp() {
     const [username, setUsername] = useState("");
@@ -34,10 +35,10 @@ function SignUp() {
     }
    */
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setErrorMsg("");
 
-        
+
 
         const isEmailValid = validateEmail(email);
 
@@ -54,6 +55,13 @@ function SignUp() {
         if (password != repassword) {
             return setErrorMsg("Passwords must be the same!");
         }
+
+        const response = await AuthService.createUser({
+            username,
+            email,
+            password 
+        });
+        console.log(response);
     };
 
     return (

@@ -14,7 +14,7 @@ class User{
         $this->conn = $db;
     }
  
-// create user
+    // create user
     function create(){
         $query = "INSERT INTO " . $this->table_name . "
             SET
@@ -53,20 +53,17 @@ class User{
         
         // if email exists, assign values to object properties for easy access and use for php sessions
         if($num>0){
-            // get values
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            // assign values to object properties
             $this->user_id = $row['user_id'];
             $this->username = $row['username'];
             $this->password = $row['password'];
-     
-            //email exists in the db
+
             return true;
         }
-     
-        //email does not exist in db
+    
         return false;
     }
+
     public function update(){
         $password_set=!empty($this->password) ? ", password = :password" : "";
         $query = "UPDATE " . $this->table_name . "
