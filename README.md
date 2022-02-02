@@ -3,7 +3,7 @@
 A cave just right for a grizzly, also maturitetna naloga.
 
 ////////////////////////////////////////////////////////// <br/>
-                          TO-DO LIST:
+                   &emsp;&emsp;&emsp;       TO-DO LIST:
 __________________________________________________________
 
 --FRONT PAGE ACCESS TO PHP
