@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2022 at 08:12 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Feb 02, 2022 at 10:21 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `grizzlycave_db`
+-- Database: `grizzlybase`
 --
 
 -- --------------------------------------------------------
@@ -66,7 +66,8 @@ CREATE TABLE `packets` (
   `file_id` int(11) NOT NULL,
   `receiver_id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
-  `edit_perm` tinyint(1) NOT NULL DEFAULT 1
+  `edit_perm` tinyint(1) NOT NULL DEFAULT 1,
+  `created_packet` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -79,7 +80,9 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   `email` varchar(64) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
