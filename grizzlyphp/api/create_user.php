@@ -27,7 +27,7 @@ $stmt = $user -> getUserByEmail();
 
 
 if($stmt->rowCount()>0){
-    http_response_code(400);
+    http_response_code(409);
     echo json_encode(array("message" => "Email already exists"));
     exit();
 }
@@ -35,7 +35,7 @@ if($stmt->rowCount()>0){
 $stmt = $user -> getUserByUsername();
 
 if($stmt->rowCount()>0){
-    http_response_code(400);
+    http_response_code(409);
     echo json_encode(array("message" => "Username already exists"));
     exit();
 }

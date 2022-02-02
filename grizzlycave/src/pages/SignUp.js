@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Button from '../components/Button';
 import Input from '../components/Input';
-import "../designs/SignUp.css";
+import "../designs/Auth.css";
 import { AuthService } from '../services/auth';
 
 function SignUp() {
@@ -19,26 +19,9 @@ function SignUp() {
         const re = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
         return re.test(signup_password);
     }
-    /*
-    const signup_email = document.getElementById("signup_email"), signup_password = document.getElementById("signup_password"), signup_repassword = document.getElementById("repassword");
-    //const valid = !!(validateEmail(signup_email) && validatePassword(signup_password) && signup_password == signup_repassword);
-    let errormsg="0", emptymsg=!!(errormsg!=="0"); 
-     
-    if(!valid){  //to ne zgleda da bi delal
-        if(!validatePassword(signup_password)){
-            errormsg = "Password must contain at least 8 characters, 1 number, 1 letter & 1 unique character (!#$%/?...)";
-        }else if(!validateEmail(signup_email)){
-            errormsg = "Must be a valid email!";
-        }else if(signup_password !== signup_repassword){
-            errormsg = "Passwords must be the same!"
-        }
-    }
-   */
 
     const handleSubmit = async () => {
         setErrorMsg("");
-
-
 
         const isEmailValid = validateEmail(email);
 
@@ -66,13 +49,25 @@ function SignUp() {
     };
 
     return (
+        <div>
+            <div className='title-cntnr'>
+                <h1> You are about to enter <br/><b>GrizzlyCave</b> </h1><br/>
+                <p>- please provide the necessary information to get inside -</p><br/>
+            </div>
         <div className="form-cntnr">
             <Input type="text" value={username} setValue={setUsername} placeholder="Username" required/>
+            <br/><p className='spam'>Must be unique</p>
             <Input type="text" value={email} setValue={setEmail} placeholder="Email" required />
+            <br/><p className='spam'>Must be valid email</p>
             <Input type="password" value={password} setValue={setPassword} placeholder="Password" required />
+            <p className='spam'>Must be complex</p>
             <Input type="password" value={repassword} setValue={setRepassword} placeholder="Retype Password" required />
-            <Button text={"Submit"} onClick={handleSubmit} className="submit-btn" />
-            <p>{errorMsg}</p>
+            <br/><p className='spam'>Must be same as password</p>
+            <br/>
+            <Button text={"Create User"} onClick={handleSubmit} className="submit-btn" />
+            
+        </div>
+        <h3 className='errorMsg'>{errorMsg}</h3>
         </div>
     )
 }
