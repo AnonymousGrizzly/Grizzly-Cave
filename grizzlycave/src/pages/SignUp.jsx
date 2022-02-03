@@ -20,9 +20,23 @@ function SignUp() {
         const re = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
         return re.test(signup_password);
     }
+    function validateUsername(username){
+        const signup_username = username.length;
+        if(signup_username.length>20){
+            return false;
+        }
+        const re = /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-)[a-zA-Z0-9])*[a-zA-Z0-9]+$/;
+        return re.test(signup_username);
+    }
 
     const handleSubmit = async () => {
         setErrorMsg("");
+
+        const isUsernameValid = validateUsername(username);
+
+        if(!isUsernameValid){
+            return setErrorMsg("Must be a simple username without special characters!");
+        }
 
         const isEmailValid = validateEmail(email);
 

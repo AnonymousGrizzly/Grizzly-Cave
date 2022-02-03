@@ -7,10 +7,16 @@ import {HashLink as Link} from 'react-router-hash-link';
 
 function SignIn() {
   const [username, setUsername] = useState("");
-    const [email, setEmail] = useState(""); 
-    const [password, setPassword] = useState("");
-    const [errorMsg, setErrorMsg] = useState(""); 
-    const handleSubmit = async () => {}
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState(""); 
+
+  
+
+  const handleSubmit = async () => {
+    setErrorMsg("");
+  }
+  
   return (
     <div>
       <div className='title-cntnr'>
@@ -24,7 +30,6 @@ function SignIn() {
             <Input type="password" value={password} setValue={setPassword} placeholder="Password" required />
             <br/><br/>
             <Button text={"Create User"} onClick={handleSubmit} className="submit-btn" />
-            
         </div>
         <h3 className='errorMsg'>{errorMsg}</h3>
     </div>
