@@ -71,6 +71,23 @@ input{
       font-size: 14px;
     }
 }
+.secondary-btn{
+  height: 30px;
+  padding: 7px 60px;
+  background-color: #000000;
+  text-decoration: none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border: 1px solid white;
+}
+.secondary-btn:hover{
+  background-color: #252525;
+  transform: translateY(0);
+  transition: all 0.5s ease;
+}
+.secondary-btn:active{
+  transform: translateY(3px) !important;
+  transition: 0.5s ease !important;
+}
 
 @media screen and (min-width: 1500px){
   #home_body{

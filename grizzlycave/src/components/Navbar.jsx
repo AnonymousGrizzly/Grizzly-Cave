@@ -30,16 +30,10 @@ function Navbar() {
               <Link smooth to={'/'} className='nav-links' onClick={closeMobileMenu}> Home </Link>
             </li>
             <li className='nav-item'>
-              <Link smooth to='#AboutUs' className='nav-links' onClick={closeMobileMenu}> About </Link>
-            </li>   
-            <li className='nav-item'>
-              <Link smooth to="#ContactUs" className='nav-links' onClick={closeMobileMenu}> Contact Us </Link>
-            </li>
-            <li className='nav-item'>
               <Link smooth to='/news' className='nav-links' onClick={closeMobileMenu}> News </Link>
             </li>
             <li className='nav-item'>
-              <Link smooth to='/signup' className='nav-links' onClick={closeMobileMenu}> Sign Up/In </Link>
+              <Link smooth to='/signin' className='nav-links' onClick={closeMobileMenu}> Sign Up/In </Link>
             </li>
           </ul>
         </div>

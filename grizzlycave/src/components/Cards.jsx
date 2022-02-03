@@ -35,7 +35,7 @@ export default function Cards() {
                         There are weekly updates on our web app. If you want to know what's up, click on the button bellow!
                         <br/><br/>
                     </p>
-                    <Link smooth to="/news" className="news-btn">News <i class="fas fa-long-arrow-alt-right"></i></Link>
+                    <Link smooth to="/news" className="secondary-btn" >News <i class="fas fa-long-arrow-alt-right"></i></Link>
                 </section>
             </div>
         </div>

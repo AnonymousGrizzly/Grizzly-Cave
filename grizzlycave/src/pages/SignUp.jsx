@@ -3,6 +3,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import "../designs/Auth.css";
 import { AuthService } from '../services/auth';
+import {HashLink as Link} from 'react-router-hash-link';
 
 function SignUp() {
     const [username, setUsername] = useState("");
@@ -53,6 +54,7 @@ function SignUp() {
             <div className='title-cntnr'>
                 <h1> You are about to enter <br/><b>GrizzlyCave</b> </h1><br/>
                 <p>- please provide the necessary information to get inside -</p><br/>
+                <Link smooth to="/signin" className="secondary-btn" > Already have an account? Login <i class="fas fa-sign-in-alt"></i></Link>
             </div>
         <div className="form-cntnr">
             <Input type="text" value={username} setValue={setUsername} placeholder="Username" required/>
