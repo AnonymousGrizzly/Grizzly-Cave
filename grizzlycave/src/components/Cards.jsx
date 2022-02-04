@@ -13,14 +13,14 @@ export default function Cards() {
             <img src={GrizzlyFeet} alt=""/>
             <div className="card-cntnr"> 
                 <section id="AboutUs">
-                    <h2><i class="fas fa-id-card"></i> About Us </h2>
+                    <h2><i className="fas fa-id-card"></i> About Us </h2>
                     <p>This is a web app, where you can store and/or send any files.
                         <br/> Set a password and expiry date, along with a message of what kind of file it is.
                         <br/>If you want to send a super secret message without a file, you can do it here too!
                         <br/>It also functions as a storage for passwords.</p>
                 </section>
                 <section >
-                    <h2>Security <i class="fas fa-shield-alt"></i></h2>
+                    <h2>Security <i className="fas fa-shield-alt"></i></h2>
                     <p> 
                         Don't worry about other people trying to read your stuff. Focus on your work and leave security to us!
                         <br/>    
@@ -30,7 +30,7 @@ export default function Cards() {
                     </p>
                 </section>
                 <section >
-                    <h2><i class="fas fa-newspaper"></i> Check out new things we added!</h2>
+                    <h2><i className="fas fa-newspaper"></i> Check out new things we added!</h2>
                     <p>
                         There are weekly updates on our web app. If you want to know what's up, click on the button bellow!
                         <br/><br/>

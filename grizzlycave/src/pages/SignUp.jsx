@@ -4,13 +4,16 @@ import Input from '../components/Input';
 import "../designs/Auth.css";
 import { AuthService } from '../services/auth';
 import {HashLink as Link} from 'react-router-hash-link';
+import { useHistory } from 'react-router';
+import { setItem } from '../helpers/localstorage';
 
 function SignUp() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
     const [repassword, setRepassword] = useState("");
-    const [errorMsg, setErrorMsg] = useState(""); 
+    const [errorMsg, setErrorMsg] = useState("");
+    const history = useHistory(); 
 
     function validateEmail(signup_email){ //Must contain @, can't be shorter than 8 characters
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -32,12 +35,12 @@ function SignUp() {
     const handleSubmit = async () => {
         setErrorMsg("");
 
-        const isUsernameValid = validateUsername(username);
+        /*const isUsernameValid = validateUsername(username);
 
         if(!isUsernameValid){
             return setErrorMsg("Must be a simple username without special characters!");
         }
-
+        */
         const isEmailValid = validateEmail(email);
 
         if (!isEmailValid) {
@@ -59,9 +62,12 @@ function SignUp() {
             email,
             password 
         });
-        const parsedResonse = await response.json();
-        setErrorMsg(parsedResonse.message);
-
+        const parsedResponse = await response.json();
+        setErrorMsg(parsedResponse.message);
+        if (response.ok) {
+            setItem("PHPTOKEN", parsedResponse.jwt);
+            history.push("/profile");
+        }
     };
 
     return (

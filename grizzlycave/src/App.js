@@ -6,18 +6,21 @@ import SignIn from "./pages/SignIn";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
+import GuardedRoute from './components/GuardedRoute';
+import { PublicRoute } from './components/PublicRoute';
 
 function App() {
+  
+
   return (
    <Router>
      <Navbar/>
      <Switch>
-    
-       <Route path="/" exact component={Home} />
-       <Route path="/signin" exact component={SignIn}/>
-       <Route path="/signup" exact component={SignUp} />
+       <Route path="/" exact component={Home}/>
+       <PublicRoute path="/signin" exact component={SignIn} />
+       <PublicRoute path="/signup" exact component={SignUp}/>
        <Route path="/news" exact component={News}/>
-       <Route path="/profile" exact component={Profile} />
+       <GuardedRoute path="/profile" exact component={Profile}/>
      </Switch>
    </Router>
   );

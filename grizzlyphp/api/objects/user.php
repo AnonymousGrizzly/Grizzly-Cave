@@ -43,7 +43,6 @@ class User{
         if($stmt->rowCount()>0){
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $this->user_id = $row['user_id'];
-            $this->email = $row['email'];
             $this->password = $row['password'];
             return true;
         }
