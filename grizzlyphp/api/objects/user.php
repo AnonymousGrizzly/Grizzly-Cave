@@ -38,12 +38,12 @@ class User{
     }
     //check email
     function assignUserData(){
-        $stmt=$this->getUserByEmail();
+        $stmt=$this->getUserByUsername();
         // if email exists, assign values to object properties for easy access and use for php sessions
         if($stmt->rowCount()>0){
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $this->user_id = $row['user_id'];
-            $this->username = $row['username'];
+            $this->email = $row['email'];
             $this->password = $row['password'];
             return true;
         }

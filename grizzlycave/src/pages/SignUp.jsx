@@ -13,15 +13,15 @@ function SignUp() {
     const [errorMsg, setErrorMsg] = useState(""); 
 
     function validateEmail(signup_email){ //Must contain @, can't be shorter than 8 characters
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(signup_email);
     }
     function validatePassword(signup_password){ //  Must contain 8 characters, 1 number, 1 letter and 1 unique character (!#$%/?-.;,:)
         const re = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
         return re.test(signup_password);
     }
-    function validateUsername(username){
-        const signup_username = username.length;
+    function validateUsername(username){ //Must be shorter than 20 characters, no spaces, no special characters
+        const signup_username = username.length; 
         if(signup_username.length>20){
             return false;
         }
@@ -50,7 +50,7 @@ function SignUp() {
             return setErrorMsg("Password must contain at least 8 characters, 1 number, 1 letter & 1 unique character (!#$%/?...)");
         }
 
-        if (password != repassword) {
+        if (password !== repassword) {
             return setErrorMsg("Passwords must be the same!");
         }
 
@@ -61,6 +61,7 @@ function SignUp() {
         });
         const parsedResonse = await response.json();
         setErrorMsg(parsedResonse.message);
+
     };
 
     return (

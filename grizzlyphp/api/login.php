@@ -18,20 +18,18 @@ $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
-// set product property values
-$user->email = $data->email;
-$email_exists = $user->assignUserData();
+$user->username = $data->username;
+$username_exists = $user->assignUserData();
 // generate json web token
 
-if($email_exists && password_verify($data->password, $user->password)){
+if($username_exists && password_verify($data->password, $user->password)){
     $token = array(
        "iat" => $issued_at,
        "exp" => $expiration_time,
        "iss" => $issuer,
        "data" => array(
            "user_id" => $user->user_id,
-           "username" => $user->username,
-           "email" => $user->email
+           "username" => $user->username
        )
     );
     http_response_code(200);

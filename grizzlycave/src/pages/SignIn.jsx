@@ -7,15 +7,24 @@ import {HashLink as Link} from 'react-router-hash-link';
 
 function SignIn() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(""); 
 
-  
+
 
   const handleSubmit = async () => {
     setErrorMsg("");
-  }
+
+    const response = await AuthService.loginUser({
+      username,
+      password
+    });
+    //error
+    const parsedResponse = await response.json();
+    console.log(parsedResponse);
+    setErrorMsg(parsedResponse.message);
+    
+  };
   
   return (
     <div>
@@ -26,10 +35,10 @@ function SignIn() {
             </div>
         <div className="form-cntnr">
             <Input type="text" value={username} setValue={setUsername} placeholder="Username" required/>
-            <Input type="text" value={email} setValue={setEmail} placeholder="Email" required />
+        
             <Input type="password" value={password} setValue={setPassword} placeholder="Password" required />
             <br/><br/>
-            <Button text={"Create User"} onClick={handleSubmit} className="submit-btn" />
+            <Button text={"Log In"} onClick={handleSubmit} className="submit-btn" />
         </div>
         <h3 className='errorMsg'>{errorMsg}</h3>
     </div>
