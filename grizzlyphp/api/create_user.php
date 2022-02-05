@@ -10,20 +10,18 @@ include_once 'libs/php-jwt-main/src/ExpiredException.php';
 include_once 'libs/php-jwt-main/src/SignatureInvalidException.php';
 include_once 'libs/php-jwt-main/src/JWT.php';
 use \Firebase\JWT\JWT;
-// files needed to connect to database
+
 include_once 'config/database.php';
 include_once 'objects/user.php';
  
-// get database connection
+
 $database = new Database();
 $db = $database->getConnection();
  
-// instantiate product object
 $user = new User($db);
- // get posted data
 $data = json_decode(file_get_contents("php://input"));
  
-// set product property values
+
 $user->username = $data->username;
 $user->email = $data->email;
 $user->password = $data->password;

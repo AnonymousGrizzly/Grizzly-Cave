@@ -36,7 +36,7 @@ function SignUp() {
         setErrorMsg("");
 
         /*const isUsernameValid = validateUsername(username);
-
+        
         if(!isUsernameValid){
             return setErrorMsg("Must be a simple username without special characters!");
         }

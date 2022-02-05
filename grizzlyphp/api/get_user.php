@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost/grizzlyphp");
+header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
@@ -11,9 +11,13 @@ include_once 'libs/php-jwt-main/src/SignatureInvalidException.php';
 include_once 'libs/php-jwt-main/src/JWT.php';
 use \Firebase\JWT\JWT;
 
-$data = json_decode(file_get_contents("php://input"));
-$jwt=isset($data->jwt) ? $data->jwt : "";
+include_once 'config/database.php';
+include_once 'objects/user.php';
 
+$database = new Database();
+$db = $database->getConnection();
+ 
+$user = new User($db);
 if($jwt){
     try {
         $decoded = JWT::decode($jwt, $key, array('HS256'));
@@ -33,4 +37,6 @@ if($jwt){
     http_response_code(401);
     echo json_encode(array("message" => "Access denied."));
 }
+
+
 ?>
