@@ -10,8 +10,6 @@ import GuardedRoute from './components/GuardedRoute';
 import { PublicRoute } from './components/PublicRoute';
 
 function App() {
-  
-
   return (
    <Router>
      <Navbar/>

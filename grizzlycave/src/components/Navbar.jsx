@@ -1,22 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {HashLink as Link} from 'react-router-hash-link';
+import { NavLink } from 'react-router-dom';
 import '../designs/Navbar.css';
 import icon from "../images/encryption-white.png";
 
 function Navbar() {
+  /*{!auth && (
+    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+      <li className='nav-item'>
+        <NavLink smooth to='/profile' activeClassName="nav-links-active"  className='nav-links' onClick={closeMobileMenu}> Profile </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink smooth to='/mail' activeClassName="nav-links-active"  className='nav-links' onClick={closeMobileMenu}> Mail </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink smooth to='/storage' activeClassName="nav-links-active"  className='nav-links' onClick={closeMobileMenu}> Storage </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink smooth to='/signout' activeClassName="nav-links-active"  className='nav-links' onClick={closeMobileMenu}> Sign Out </NavLink>
+      </li>
+    </ul>
+  )}
+    const auth = useState(true);*/
     const [click, setClick] = useState(false), handleClick = () => setClick(!click), closeMobileMenu = () => setClick(false);
-    const [button, setButton] = useState(true);
-    const showButton = () => {
-        if(window.innerWidth <= 960) {
-            setButton(false);
-        }else{
-            setButton(true);
-        }
-    }
-    useEffect  (()=>{ 
-        showButton();
-    }, []);
-    window.addEventListener('resize', showButton);
     return (
       <nav className="navbar">
         <div className="navbar-container">
@@ -27,13 +33,13 @@ function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link smooth to={'/'} className='nav-links' onClick={closeMobileMenu}> Home </Link>
+              <NavLink exact smooth to='/' activeClassName="nav-links-active" className='nav-links' onClick={closeMobileMenu}> Home </NavLink>
             </li>
             <li className='nav-item'>
-              <Link smooth to='/news' className='nav-links' onClick={closeMobileMenu}> News </Link>
+              <NavLink smooth to='/news' activeClassName="nav-links-active"  className='nav-links' onClick={closeMobileMenu}> News </NavLink>
             </li>
             <li className='nav-item'>
-              <Link smooth to='/signin' className='nav-links' onClick={closeMobileMenu}> Sign Up/In </Link>
+              <NavLink smooth to='/signin' activeClassName="nav-links-active"  className='nav-links' onClick={closeMobileMenu}> Sign Up/In </NavLink>
             </li>
           </ul>
         </div>

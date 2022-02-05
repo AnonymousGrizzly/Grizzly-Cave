@@ -31,9 +31,11 @@ nav{
   position: sticky;
 }
 .nav-links:hover{
-  border-top: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transition: all 0.4s ease-out;
+  background-color: #252525;
+  transition: all 0.2s ease-out;
+}
+.nav-links{
+  padding: 20px 30px 18px 30px;
 }
 
 .nav-menu{
@@ -48,6 +50,10 @@ nav{
 }
 .nav-links-mobile, .menu-icon{
     display: none;
+}
+
+.nav-links-active{
+  border-bottom: 4px solid #fff;
 }
 
 @media screen and (max-width: 1060px) {
