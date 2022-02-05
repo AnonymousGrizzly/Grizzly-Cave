@@ -6,12 +6,12 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
 <h3> TO-DO LIST:</h3>
 <hr>
 <ul>
-  <li>FRONT PAGE ACCESS TO PHP</li>
-  <li>popravi headerje (mozno da sm ze)</li>
-  <li>preveri ce so headerji pravi </li>
   <li>Uredi footer</li>
-  <li>Uredi SignUp</li>
+  <li>Uredi SignUp:: samo še spam dodaj, da bo večje okno</li>
   <li>Dodaj osebno stran (profile page) </li>
-  <li>Spremeni nav-bar</li>
+   <li>front page za ostale guarded access strani</li>
+  <li>Spremeni nav-bar, da bo drugacen ko se vpises</li>
+  <li>START WITH FILE SENDING FOR FUCK'S SAKE </li>
+  <li>log out</li>
 </ul>
 <hr>
