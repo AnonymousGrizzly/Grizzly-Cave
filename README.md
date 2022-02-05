@@ -11,7 +11,7 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
   <li>Dodaj osebno stran (profile page) </li>
    <li>front page za ostale guarded access strani</li>
   <li>Spremeni nav-bar, da bo drugacen ko se vpises</li>
-  <li>ZAČNI S FAKING FILE SENDINGOM FOR FUCK'S SAKE </li>
+  <li>START WITH FILE SENDING FOR FUCK'S SAKE </li>
   <li>log out</li>
 </ul>
 <hr>
