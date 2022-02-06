@@ -7,7 +7,7 @@ export default function News(){
      <>
         <div className="news-cntnr">
           <div className="news-wrapper">
-            <h1>News <i class="fas fa-newspaper"></i></h1>
+            <h1>News <i className="fas fa-newspaper"></i></h1>
             <hr/>
             <div className="news-blocks">
               

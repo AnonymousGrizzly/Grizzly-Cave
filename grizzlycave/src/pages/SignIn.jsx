@@ -7,8 +7,6 @@ import {HashLink as Link} from 'react-router-hash-link';
 import { setItem } from '../helpers/localstorage';
 import { useHistory } from 'react-router';
 
-
-
 function SignIn() {
   const history = useHistory();
 
@@ -17,20 +15,15 @@ function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(""); 
-  
-
 
   const handleSubmit = async () => {
     setErrorMsg("");
-
     const response = await AuthService.loginUser({
       username,
       password
     });
-
     const parsedResponse = await response.json();
     setErrorMsg(parsedResponse.message);
-
     if (response.ok) {
       setItem("PHPTOKEN", parsedResponse.jwt);
       history.push("/profile");
@@ -43,7 +36,7 @@ function SignIn() {
       <div className='title-cntnr'>
                 <h1> You are about to enter <br/><b>GrizzlyCave</b> </h1><br/>
                 <p>- please provide the necessary information to get inside -</p><br/>
-                <Link smooth to="/signup" className="secondary-btn" > Don't have an account? SignUp! <i className="fas fa-sign-in-alt"></i></Link>
+                <Link   to="/signup" className="secondary-btn" > Don't have an account? SignUp! <i className="fas fa-sign-in-alt"></i></Link>
             </div>
         <div className="form-cntnr">
             <Input type="text" value={username} setValue={setUsername} placeholder="Username" required/>

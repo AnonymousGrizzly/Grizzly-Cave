@@ -15,7 +15,7 @@ nav{
     grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
 }
-.navbar-logo, .nav-links{
+.navbar-logo, .commonLink{
     text-decoration: none;
     padding: 0.5rem 1.5rem;
 }
@@ -30,11 +30,11 @@ nav{
   position: -webkit-sticky;
   position: sticky;
 }
-.nav-links:hover{
+.commonLink:hover{
   background-color: #252525;
   transition: all 0.2s ease-out;
 }
-.nav-links{
+.commonLink{
   padding: 20px 30px 18px 30px;
 }
 
@@ -48,11 +48,11 @@ nav{
     justify-content: end;
     margin-right: 2rem;
 }
-.nav-links-mobile, .menu-icon{
+.commonLink-mobile, .menu-icon{
     display: none;
 }
 
-.nav-links-active{
+.activeLink{
   border-bottom: 4px solid #fff;
 }
 
@@ -83,7 +83,7 @@ nav{
       nav{
         z-index: 999;
       }
-      .nav-links {
+      .commonLink {
         text-align: center;
         padding: 2rem;
         margin-top: 20px;
@@ -91,7 +91,7 @@ nav{
         display: table;
       }
     
-      .nav-links:hover {
+      .commonLink:hover {
         background-color: #252525;
         transform: translateY(3px);
         transition: all 0.5s ease;

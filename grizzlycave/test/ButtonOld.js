@@ -8,7 +8,7 @@ export const Button = ({children, type, onClick, buttonStyle, buttonSize, where}
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
     const checkWhere = Where.includes(where)? where : Where[0]; 
     return (
-        <Link smooth to={checkWhere} className= 'btn-mobile'>
+        <Link   to={checkWhere} className= 'btn-mobile'>
             <button className = {`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type = {type} > {children}
             </button>
         </Link>

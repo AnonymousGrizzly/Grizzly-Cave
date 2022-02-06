@@ -14,7 +14,8 @@ export default function Cards() {
             <div className="card-cntnr"> 
                 <section id="AboutUs">
                     <h2><i className="fas fa-id-card"></i> About Us </h2>
-                    <p>This is a web app, where you can store and/or send any files.
+                    <p>
+                        This is a web app, where you can store and/or send any files.
                         <br/> Set a password and expiry date, along with a message of what kind of file it is.
                         <br/>If you want to send a super secret message without a file, you can do it here too!
                         <br/>It also functions as a storage for passwords.</p>
@@ -35,7 +36,7 @@ export default function Cards() {
                         There are weekly updates on our web app. If you want to know what's up, click on the button bellow!
                         <br/><br/>
                     </p>
-                    <Link smooth to="/news" className="secondary-btn" >News <i class="fas fa-long-arrow-alt-right"></i></Link>
+                    <Link   to="/news" className="secondary-btn" >News <i className="fas fa-long-arrow-alt-right"></i></Link>
                 </section>
             </div>
         </div>

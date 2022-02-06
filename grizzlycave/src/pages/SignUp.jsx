@@ -24,27 +24,22 @@ function SignUp() {
         return re.test(signup_password);
     }
     function validateUsername(username){ //Must be shorter than 20 characters, no spaces, no special characters
-        const signup_username = username.length; 
-        if(signup_username.length>20){
-            return false;
-        }
-        const re = /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-)[a-zA-Z0-9])*[a-zA-Z0-9]+$/;
-        return re.test(signup_username);
+        const re =  /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){2,18}[a-zA-Z0-9]$/;
+        return re.test(username);
     }
 
     const handleSubmit = async () => {
         setErrorMsg("");
 
-        /*const isUsernameValid = validateUsername(username);
+        const isUsernameValid = validateUsername(username);
         
         if(!isUsernameValid){
-            return setErrorMsg("Must be a simple username without special characters!");
+            return setErrorMsg("Username must be without special characters!");
         }
-        */
         const isEmailValid = validateEmail(email);
 
         if (!isEmailValid) {
-            return setErrorMsg("Must be a valid email!");
+            return setErrorMsg("Email must be valid!");
         }
 
         const isPasswordValid = validatePassword(password);
@@ -75,7 +70,7 @@ function SignUp() {
             <div className='title-cntnr'>
                 <h1> You are about to enter <br/><b>GrizzlyCave</b> </h1><br/>
                 <p>- please provide the necessary information to get inside -</p><br/>
-                <Link smooth to="/signin" className="secondary-btn" > Already have an account? Login <i class="fas fa-sign-in-alt"></i></Link>
+                <Link   to="/signin" className="secondary-btn" > Already have an account? Login <i className="fas fa-sign-in-alt"></i></Link>
             </div>
         <div className="form-cntnr">
             <Input type="text" value={username} setValue={setUsername} placeholder="Username" required/>
