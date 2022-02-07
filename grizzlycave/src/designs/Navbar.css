@@ -70,7 +70,6 @@ nav{
         opacity: 1;
         transition: all 0.8s ease;
         justify-content: start;
-       
       }
     
       .nav-menu.active {
