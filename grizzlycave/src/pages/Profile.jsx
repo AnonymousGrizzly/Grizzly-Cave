@@ -8,15 +8,10 @@ import { AuthService } from '../services/auth';
 
 function Profile() {
   const setErrorMsg = ("");
-
-
   const jwt_token = getItem("PHPTOKEN");
-  
  // const response = await AuthService.getUserInfo(jwt_token);
   //const parsedResponse = await response.json();
  // setErrorMsg(parsedResponse.message);
-
-
 
   const username = "AnonymousGrizzly";
   const email = "test1@test1.com";
