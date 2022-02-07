@@ -20,7 +20,7 @@
 }
 
 .submit-btn:active{
-    background-color: #121212;
+    background-color: var(--secondary);
     transform: translateY(3px) !important;
     transition-duration: .5s !important;
 }

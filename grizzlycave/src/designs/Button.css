@@ -33,7 +33,7 @@
   }
   
   .btn--signup {
-    background-color: #380F10;
+    background-color: var(--primary);;
     color: rgb(252, 248, 248);
     padding: 8px 20px;
   }

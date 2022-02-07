@@ -2,7 +2,7 @@
     padding-top: 100px;
     display: grid;
     height: 60vh;
-    background-color: #121212;
+    background-color: var(--secondary);
     justify-content: center;
     align-items: center;
     text-align: center;

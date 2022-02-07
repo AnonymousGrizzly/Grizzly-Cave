@@ -40,7 +40,6 @@ function SignIn() {
             </div>
         <div className="form-cntnr">
             <Input type="text" value={username} setValue={setUsername} placeholder="Username" required/>
-        
             <Input type="password" value={password} setValue={setPassword} placeholder="Password" required />
             <br/><br/>
             <Button text={"Log In"} onClick={handleSubmit} className="submit-btn" />

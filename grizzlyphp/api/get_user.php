@@ -18,25 +18,6 @@ $database = new Database();
 $db = $database->getConnection();
  
 $user = new User($db);
-if($jwt){
-    try {
-        $decoded = JWT::decode($jwt, $key, array('HS256'));
-        http_response_code(200);
-        echo json_encode(array(
-            "message" => "Access granted.",
-            "data" => $decoded->data
-        ));
-    }catch (Exception $e){
-        http_response_code(401);
-        echo json_encode(array(
-            "message" => "Access denied.",
-            "error" => $e->getMessage()
-        ));
-    }
-}else{
-    http_response_code(401);
-    echo json_encode(array("message" => "Access denied."));
-}
 
 
 ?>
