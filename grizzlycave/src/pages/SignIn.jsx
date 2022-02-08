@@ -9,9 +9,6 @@ import { useHistory } from 'react-router';
 
 function SignIn() {
   const history = useHistory();
-
-  //localStorage.removeItem("PHPTOKEN");
- 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(""); 

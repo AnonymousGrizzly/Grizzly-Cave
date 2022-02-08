@@ -14,12 +14,13 @@ function Navbar() {
       history.push("/");
     }
     const jwt_token = getItem("PHPTOKEN");
-
-   //const isLoggedIn =  AuthService.validateToken(jwt_token);
-   const isLoggedIn = true;
-    const [click, setClick] = useState(false), handleClick = () => setClick(!click), closeMobileMenu = () => setClick(false);
+    const isLoggedIn = useState(false);
+    const response = await AuthService.validateToken(jwt_token);
+    if(response.ok){
+      isLoggedIn=useState(true);
+    }
+    const [click, setClick] = useState(false), handleClick = () => setClick(!click), closeMobileMenu = () => setClick(false); //zakaj je to kle
     return (
-
       <nav className="navbar">
         <div className="navbar-container">
           <img src={icon} alt="" id="icon"/>
@@ -36,6 +37,7 @@ function Navbar() {
           ):(
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
               <NavItem text="Profile" to="/profile" className="commonLink" activeClassName="activeLink" onClick={closeMobileMenu}/>
+              <button className='commonLink' onClick={logOut}></button>
             </ul>
           )}
         </div>

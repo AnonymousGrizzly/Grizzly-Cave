@@ -34,6 +34,6 @@ export class AuthService {
             body: JSON.stringify(key)
         });
         return response;
-    }   
+    }
 };
 
