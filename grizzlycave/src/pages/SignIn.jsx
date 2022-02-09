@@ -25,7 +25,6 @@ function SignIn() {
       setItem("PHPTOKEN", parsedResponse.jwt);
       history.push("/profile");
     }
-
   };
   
   return (

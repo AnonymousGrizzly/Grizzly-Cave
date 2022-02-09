@@ -1,3 +1,6 @@
+import { getItem } from "../helpers/localstorage";
+
+
 
 const BASEURL = "http://localhost:3001/grizzlyphp/api/";
 
@@ -25,13 +28,18 @@ export class AuthService {
             method: "POST", 
             body: JSON.stringify(user_id)
         });
-        return response;
+        return response.json();
     }
-    static async validateToken(key){
+    static async validateToken(){
         const url = BASEURL + "validate_token.php";
         const response = await fetch(url,{
             method: "POST", 
-            body: JSON.stringify(key)
+            body: JSON.stringify({
+                jwt: getItem("PHPTOKEN")
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         return response;
     }
