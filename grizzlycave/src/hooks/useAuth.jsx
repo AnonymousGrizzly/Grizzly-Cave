@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AuthService } from '../services/auth';
-
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {

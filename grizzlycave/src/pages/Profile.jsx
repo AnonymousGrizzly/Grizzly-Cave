@@ -14,13 +14,6 @@ function Profile() {
     getProfileData().then((data) => setUserData(data));
   }, [user]);
 
-  /*
-  useEffect(async ()=>{
-    const jwt_token = getItem("PHPTOKEN");
-    const response = await AuthService.getUserInfo(jwt_token);
-    setUserData(response.data);
-  }, []);
-*/
   return (
     <div>
       <div className="profile-cntnr">
