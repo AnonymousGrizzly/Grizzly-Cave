@@ -6,6 +6,8 @@ import SignIn from "./pages/SignIn";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
+import Mail from "./pages/Mail";
+import Storage from "./pages/Storage";
 import GuardedRoute from './components/GuardedRoute';
 import { PublicRoute } from './components/PublicRoute';
 
@@ -19,6 +21,8 @@ function App() {
        <PublicRoute path="/signup" exact component={SignUp}/>
        <Route path="/news" exact component={News}/>
        <GuardedRoute path="/profile" exact component={Profile}/>
+       <GuardedRoute path="/mail" exact component={Mail}/>
+       <GuardedRoute path="/storage" exact component={Storage}/>
      </Switch>
    </Router>
   );
