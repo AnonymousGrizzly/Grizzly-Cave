@@ -55,6 +55,20 @@ function Navbar() {
         ) : (
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <NavItem
+              text="File Send"
+              to="/mail"
+              className="commonLink"
+              activeClassName="activeLink"
+              onClick={closeMobileMenu}
+            />
+            <NavItem
+              text="Storage"
+              to="/storage"
+              className="commonLink"
+              activeClassName="activeLink"
+              onClick={closeMobileMenu}
+            />
+            <NavItem
               text="Profile"
               to="/profile"
               className="commonLink"
