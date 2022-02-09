@@ -1,12 +1,15 @@
-import { Redirect, Route } from "react-router";
-import { getItem } from "../helpers/localstorage";
-
+import { Redirect, Route } from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 export const PublicRoute = ({ component: Component, ...rest }) => {
-    const auth = !!getItem("PHPTOKEN");
-    return <Route {...rest} render={(props) => (
-        auth === true
-            ? <Redirect to='/profile'/>
-            : <Component {...props} />
-    )} />
+  const { user } = useAuth();
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        !!user ? <Redirect to="/profile" /> : <Component {...props} />
+      }
+    />
+  );
 };

@@ -59,7 +59,11 @@ if(!empty($user->username) && !empty($user->email) && !empty($user->password) &&
     echo json_encode(
         array(
             "message" => "User created",
-            "jwt" => $jwt
+            "jwt" => $jwt,
+            "data" => array(
+                "user_id" => $user->user_id,
+                "username" => $user->username
+            )
         )
     );
 }else{ // if unable to create user

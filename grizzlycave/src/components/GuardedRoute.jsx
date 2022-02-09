@@ -1,14 +1,18 @@
 import React from 'react';
-import { Route, Redirect } from "react-router-dom";
-import { getItem } from "../helpers/localstorage";
+import { Route, Redirect } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const GuardedRoute = ({ component: Component, ...rest }) => {
-    const auth= !!getItem("PHPTOKEN");
-    return <Route {...rest} render={(props) => (
-        auth === true
-            ? <Component {...props} />
-            : <Redirect to='/' />
-    )} />
-}
+  const { user } = useAuth();
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        !!user ? <Component {...props} /> : <Redirect to="/" />
+      }
+    />
+  );
+};
 
 export default GuardedRoute;

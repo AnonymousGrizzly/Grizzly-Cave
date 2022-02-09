@@ -17,6 +17,11 @@ include_once 'objects/user.php';
 $database = new Database();
 $db = $database->getConnection();
  
+http_response_code(200);
+echo json_encode(array("data" => array(
+  "email" => "rt",
+  "username" => "rt123"
+)));
 
 
 ?>

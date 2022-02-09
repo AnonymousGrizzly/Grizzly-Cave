@@ -39,7 +39,11 @@ if($username_exists && password_verify($data->password, $user->password)){
     echo json_encode(
         array(
             "message" => "Login successful",
-            "jwt" => $jwt
+            "jwt" => $jwt,
+            "user" =>  array(
+                "user_id" => $user->user_id,
+                "username" => $user->username
+            )
         )
     );
 }else{
