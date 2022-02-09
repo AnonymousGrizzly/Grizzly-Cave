@@ -27,8 +27,8 @@ function Profile() {
             <i className="fas fa-envelope"></i>
             <b> Email:</b> &emsp;&emsp;&emsp;&ensp;{userData.email}
           </p>
-          <br />
-          <br />
+          <br/>
+          <br/>
           <Link to="/update" className="secondary-btn">
             {' '}
             Update Profile <i className="fas fa-long-arrow-alt-right"></i>

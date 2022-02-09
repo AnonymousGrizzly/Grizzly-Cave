@@ -20,6 +20,12 @@ function SignIn() {
     login(username, password);
   };
 
+  const handleKeypress = e => {
+    if(e.keyCode === 13){
+      handleSubmit();
+    }
+  }
+
   return (
     <div>
       <div className="title-cntnr">
@@ -41,6 +47,7 @@ function SignIn() {
           type="text"
           value={username}
           setValue={setUsername}
+          onKeyPress={handleKeypress}
           placeholder="Username"
           required
         />
@@ -48,6 +55,7 @@ function SignIn() {
           type="password"
           value={password}
           setValue={setPassword}
+          onKeyPress={handleKeypress}
           placeholder="Password"
           required
         />

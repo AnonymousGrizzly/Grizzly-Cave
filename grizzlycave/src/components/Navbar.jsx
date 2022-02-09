@@ -61,7 +61,12 @@ function Navbar() {
               activeClassName="activeLink"
               onClick={closeMobileMenu}
             />
-            <button className="commonLink" onClick={logout}></button>
+            <NavItem
+              text="Log Out "
+              to="/"
+              className='commonLink'
+              onClick={logout}
+            />
           </ul>
         )}
       </div>
