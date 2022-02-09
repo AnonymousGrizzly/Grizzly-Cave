@@ -32,12 +32,12 @@ nav{
 }
 .commonLink:hover{
   background-color: #252525;
-  transition: all 0.2s ease-out;
+  border-top: 5px solid #252525;
+  border-bottom: 3px solid #252525;
 }
 .commonLink{
   padding: 20px 30px 18px 30px;
 }
-
 .nav-menu{
     display: grid;
     grid-template-columns: repeat(5, auto);
@@ -53,7 +53,10 @@ nav{
 }
 
 .activeLink{
-  border-bottom: 4px solid #fff;
+  border-bottom: 6px solid #fff;
+}
+.activeLink:hover{
+  border-bottom: 6px solid #fff;
 }
 
 @media screen and (max-width: 1060px) {
