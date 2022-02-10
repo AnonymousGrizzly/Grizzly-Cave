@@ -32,7 +32,7 @@
 }
 #HeroImg{
     position: absolute;
-    margin: 0;
+    margin: -50px;
     width: 400px;
     background-color: transparent;
     margin-right: 100px;
@@ -47,7 +47,9 @@
 }
 @media screen and (max-width: 960px) {
     #HeroImg{
-        display: none;
+        margin-top: 10px;
+        width: 300px;
+        margin-left: 100px;
     }
 }
 

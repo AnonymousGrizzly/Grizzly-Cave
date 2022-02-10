@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import '../designs/Auth.css';
-import { AuthService } from '../services/auth';
 import { HashLink as Link } from 'react-router-hash-link';
-import { setItem } from '../helpers/localstorage';
-import { useHistory } from 'react-router';
 import useAuth from '../hooks/useAuth';
+import TreesRight from '../images/trees-right.png'
+import TreesLeft from '../images/trees-left.png'
 
 function SignIn() {
   const [username, setUsername] = useState('');
@@ -64,6 +63,9 @@ function SignIn() {
         <Button text={'Log In'} onClick={handleSubmit} className="submit-btn" />
       </div>
       <h3 className="errorMsg">{errorMsg}</h3>
+      <img src={TreesRight} alt="" id="trees-right"/>
+      <img src={TreesLeft} alt="" id="trees-left"/>
+      <div className='black'></div>
     </div>
   );
 }

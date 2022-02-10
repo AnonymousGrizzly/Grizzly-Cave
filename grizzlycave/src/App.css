@@ -17,13 +17,15 @@
 :root {
   --primary: #4e1516;
   --secondary: #121212;
+  --primaryText: #ffffff;
+  --secondaryText: #252525;
 }
 
 *{
   margin: 0px;
   padding: 0px;
   font-family: 'SFMonoLight';
-  color: white;
+  color: var(--primaryText);
 }
 
 body, html, #root{
