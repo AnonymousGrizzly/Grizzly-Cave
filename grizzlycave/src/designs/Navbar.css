@@ -28,7 +28,7 @@ nav{
 }
 .navbar, nav{
   position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
 }
 .commonLink:hover{
   background-color: #252525;

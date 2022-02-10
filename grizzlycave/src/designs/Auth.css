@@ -17,14 +17,7 @@
     height: 40px;
     z-index: 10;
 }
-#trees-right{
-    position: absolute;
-    right:0;
-}
-#trees-left{
-    position: absolute;
-    left:0;
-}
+
 .black{
     margin-top: 540px;
     width: 100%;
@@ -48,8 +41,4 @@
     padding: 10px;
     text-align: center;
     color: #d55252;
-}
-
-.main-cntnr{
-    
 }

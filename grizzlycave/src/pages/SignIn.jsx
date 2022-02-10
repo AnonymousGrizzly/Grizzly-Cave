@@ -63,9 +63,7 @@ function SignIn() {
         <Button text={'Log In'} onClick={handleSubmit} className="submit-btn" />
       </div>
       <h3 className="errorMsg">{errorMsg}</h3>
-      <img src={TreesRight} alt="" id="trees-right"/>
-      <img src={TreesLeft} alt="" id="trees-left"/>
-      <div className='black'></div>
+      
     </div>
   );
 }

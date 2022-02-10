@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import '../designs/ContactForm.css';
-
+import TreesRight from '../images/trees-right.png'
+import TreesLeft from '../images/trees-left.png'
 
 export default function ContactForm() {
   const [email, setEmail] = useState();
   const [isValid, setValid] = useState();
-
 
   function sendEmail(e) {
     e.preventDefault();
@@ -25,15 +25,13 @@ export default function ContactForm() {
     validateEmail(email);
   }, [email]);
 
-
   function validateEmail(user_email){ //Must contain @, can't be shorter than 8 characters
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setValid(re.test(user_email));
   }
-
   
   return (
-    <div className="banner">
+    <div className='contactform-cntnr'>
      <form className="contact-form" onSubmit={sendEmail}>
         <h1 id ="ContactUs">Contact us <i className="far fa-envelope"></i></h1>
         <p>-  We'd love to hear from you! - </p>
@@ -43,6 +41,7 @@ export default function ContactForm() {
         <p><i className="fas fa-user-lock"></i> we NEVER share your email with anyone</p>
         {isValid && (<input data-aos="fade-up" type="submit" value="Send"  className="submit-btn"/>)}
      </form>
+    
     </div>
   );
 }

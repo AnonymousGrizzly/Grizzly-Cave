@@ -10,59 +10,33 @@ section, .cards img{
     z-index: 100;
     width: 63%;
     height: fit-content;
+    box-sizing: border-box;
 }
 .cards{
+    height: fit-content;
     margin-top:0;
 }
 
 .cards img{
-    position: relative;
     margin-top:0;
     margin-left: 5%;
     margin-bottom: 100px;
     width: 300px;
 }
 
-h2{
+.card-cntnr h2{
     margin-bottom: 40px;
 }
 
-section p, section h2{
-    margin-left: 6%;
-    margin-bottom: 10px;
-}
-
-section {
-    height: fit-content;
-    padding-left: 10px;
-    padding-right: 20px;
-    padding-bottom: 30px;
-    padding-top: 35px;
-    background-color: var(--secondary);
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-}
-
-section:nth-child(odd){
-    margin-right: 60px;
-}
-section:nth-child(even){
-    margin-left: 60px
-}
-
-section .secondary-btn{
-    margin-left: 6%;
-}
 
 
 @media screen and (max-width:1160px) {
     .cards img{
         position: absolute;
         height:auto;
-        z-index: 0;
+        z-index:2;
     }
-    section{
-        margin-right: 0;
-    }
+    
     .card-cntnr{
         margin-right: 5%;
         margin-bottom: 100px;

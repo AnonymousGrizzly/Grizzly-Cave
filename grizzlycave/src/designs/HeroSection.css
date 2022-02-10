@@ -1,38 +1,27 @@
 .hero-cntnr{
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     padding-top: 10%;
     margin-left: 0;
     background-color: var(--secondary);
+    margin-top: 50px
 }
 .hero-wrapper h1, .hero-wrapper p, .hero-wrapper h2, .hero-wrapper h3{
     margin-left: 6%;
-}
-.hero-btns {
-    margin-top: 50px;
-    margin-left: 4%;
-}
-.stopper{
-    width: 30rem;
-    left:0px;
-    background-color: var(--secondary);
-    height: 80px;
 }
 .change-cntnr{
     left:0px;
     background-color: var(--primary);;
     width: 100%;
-    height: 500px;
+    height: 550px;
     margin-top: -15px;
     margin-left: 0;
     padding-bottom: 1px;
     clip-path: polygon(100% 0%,100% 0%,105% 101%,0% 101%,0% 50%);
-    position: relative;
 }
+
 #HeroImg{
     position: absolute;
-    margin: -50px;
+    margin: -45px;
     width: 400px;
     background-color: transparent;
     margin-right: 100px;

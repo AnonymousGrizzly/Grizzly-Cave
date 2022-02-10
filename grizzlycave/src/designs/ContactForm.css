@@ -2,7 +2,6 @@
     padding-top: 100px;
     display: grid;
     height: 60vh;
-    background-color: var(--secondary);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -10,14 +9,7 @@
     height: fit-content;
     padding-bottom: 100px;
 }
-form p, form h1{
-    z-index: 10;
-}
-.banner{
-    width: 100%;
-    /*border-left: 65px solid black;*/
 
-}
 #user_name, #user_email{
     width: 300px;
     height: 25px;
@@ -36,7 +28,22 @@ form p, form h1{
     z-index: 10;
 }
 @media screen and (max-width: 1200px) {
-    .contact-form{
-      display: none;
+    .contact-form, #TreesRight, #TreesLeft{
+     
     }
-  }
+}
+
+.contactform-cntnr{
+    background-color: var(--secondary);
+}
+#TreesRight, #TreesLeft{
+    position: absolute;
+
+}
+#TreesRight{  
+    right:0;
+}
+#TreesLeft{
+    padding-top:15px;
+    left:-2px;
+}
