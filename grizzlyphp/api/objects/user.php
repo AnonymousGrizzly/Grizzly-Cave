@@ -53,7 +53,7 @@ class User{
         $query = "SELECT user_id, username, password
                 FROM " . $this->table_name . "
                 WHERE email = ?
-                LIMIT 0,1";
+                LIMIT 0, 1";
      
         $stmt = $this->conn->prepare( $query );
         $this->email=htmlspecialchars(strip_tags($this->email));
@@ -68,13 +68,24 @@ class User{
         $query = "SELECT user_id, username, password
                 FROM " . $this->table_name . "
                 WHERE username = ?
-                LIMIT 0,1";
+                LIMIT 0, 1";
      
         $stmt = $this->conn->prepare( $query );
         $this->username=htmlspecialchars(strip_tags($this->username));
         $stmt->bindParam(1, $this->username);
         $stmt->execute();
         return $stmt;
+    }
+
+    public function getUserByUserId(){
+        $query = "SELECT username, email 
+                FROM" . $this->table_name ."
+                WHERE user_id = ?
+                LIMIT 0, 1";
+        $stmt = $this->conn->prepare( $query );
+        $stmt -> bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt; 
     }
 
     public function update(){

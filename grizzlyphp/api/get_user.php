@@ -16,12 +16,24 @@ include_once 'objects/user.php';
 
 $database = new Database();
 $db = $database->getConnection();
- 
-http_response_code(200);
-echo json_encode(array("data" => array(
-  "email" => "rt",
-  "username" => "rt123"
-)));
+$user = new User($db);
+
+$data = json_decode(file_get_contents("php://input"));
+$jwt=isset($data->jwt) ? $data->jwt : "";
+if($jwt){
+  $decoded = JWT::decode($jwt, $key, array('HS256'));
+  $user->user_id= $decoded->$data->user_id;
+  $stmt = $user->getUserByUserId();
+  $result = $stmt->fetch_array(MYSQLI_ASSOC);
+  http_response_code(200);
+  echo json_encode(array("data" => array(
+  "email" => $result['email'],
+  "username" => $result['username'] 
+  )));
+}else{
+  http_response_code(401);
+  echo json_encode(array("message"=>"Unable to retrieve data."));
+}
 
 
 ?>
