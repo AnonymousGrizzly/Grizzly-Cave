@@ -8,13 +8,12 @@ function Footer() {
         <div className='footer-cntnr'>
             <div className='footer-distributed'>
                 <div className='footer-right'>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                    <a href="#"><i class="fa fa-github"></i></a>
+                    <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i className="fa-brands fa-github"></i></a>
                 </div>
-                <div className='footer-left'>
 
+                <div className='footer-left'>
+                  <p> Copyright © 2022 All Rights Reserved by Maks Rogelj</p>
                 </div>
             </div>
         </div>

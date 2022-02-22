@@ -18,7 +18,6 @@ export class AuthService {
       body: JSON.stringify(user),
     });
     const data = await response.json();
-
     return {
       token: data.jwt,
       user: data.user,
@@ -29,7 +28,6 @@ export class AuthService {
     const response = await fetch(url, {
       method: 'GET',
     });
-
     const data = await response.json();
     return data.data;
   }

@@ -83,7 +83,7 @@ class User{
                 WHERE user_id = ?
                 LIMIT 0, 1";
         $stmt = $this->conn->prepare( $query );
-        $stmt -> bindParam(1, $this->user_id);
+        $stmt->bindParam(1, $this->user_id);
         $stmt->execute();
         return $stmt; 
     }

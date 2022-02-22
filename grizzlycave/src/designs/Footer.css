@@ -1,0 +1,21 @@
+.footer-distributed{
+    height:  fit-content;
+    justify-content: center;
+    margin:auto;
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+}
+.footer-cntnr{
+    background-color: #000000;
+}
+
+
+.footer-left{
+
+}
+
+.footer-right{
+    
+}

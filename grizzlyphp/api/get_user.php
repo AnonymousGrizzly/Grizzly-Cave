@@ -20,10 +20,15 @@ $user = new User($db);
 
 $data = json_decode(file_get_contents("php://input"));
 $jwt=isset($data->jwt) ? $data->jwt : "";
+
 if($jwt){
   $decoded = JWT::decode($jwt, $key, array('HS256'));
   $user->user_id= $decoded->$data->user_id;
   $stmt = $user->getUserByUserId();
+  
+  $result['email'] = "neki ne dela";
+  $result['username'] = "ja, neki ne dela";
+
   $result = $stmt->fetch_array(MYSQLI_ASSOC);
   http_response_code(200);
   echo json_encode(array("data" => array(
