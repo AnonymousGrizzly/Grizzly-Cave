@@ -5,7 +5,7 @@
     background-color: var(--secondary);
     margin-top: 50px
 }
-.hero-wrapper h1, .hero-wrapper p, .hero-wrapper h2, .hero-wrapper h3{
+.hero-wrapper h1, .hero-wrapper p, .hero-wrapper h2, .hero-wrapper h3, .hero-btns{
     margin-left: 6%;
 }
 .change-cntnr{
@@ -13,30 +13,87 @@
     background-color: var(--primary);;
     width: 100%;
     height: 550px;
-    margin-top: -15px;
+    margin-top: -280px;
     margin-left: 0;
     padding-bottom: 1px;
     clip-path: polygon(100% 0%,100% 0%,105% 101%,0% 101%,0% 50%);
 }
+.hero-btns{
+    margin-top: 100px;
+    margin-bottom: 150px;
+    width: fit-content;
+    position: relative;
+    z-index: 10;
+}
+.hero-btn{
+    font-size: 20px;
+    text-decoration: none;
+    padding: 17px;
+    padding-left: 20px;
+    padding-right: 27px;
+    background-color: #000000;
+    border: 1px solid #252525; 
+}
+.hero-btn:nth-child(even){
+    margin-left:  100px;
+    border: 1px solid white; 
+}
+.hero-btn:active{
+    transform: translateY(3px) !important;
+    transition: 0.5s ease !important;
+}
+.hero-btn:hover{
+    background-color: #252525;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+.summary-cntnr{
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    gap: 50px;
+    margin-top: 200px;
+    margin-left: 10%;
+    height: fit-content;
 
+}
+.summary-cntnr i{
+    font-size: 40px;
+}
+.summary-cntnr p{
+    margin: 0;
+    margin-top: 10px;
+}
+.summary-item{
+    position: relative;
+    z-index: 5;
+}
 #HeroImg{
     position: absolute;
-    margin: -45px;
+    margin-top: -330px;
+    margin-right: 100px;
     width: 400px;
     background-color: transparent;
-    margin-right: 100px;
     right: 0;
-    display: block;
     z-index: 1;
 }
 @media screen and (min-width: 1440px) {
     #HeroImg{
-        margin-right: 25%;
+        margin-right: 15%;
     }
 }
 @media screen and (max-width: 960px) {
+    .hero-btns{
+        margin-top: 50px;
+    }
+    .hero-btn{
+        padding: 10px;
+        font-size: 17px;
+    }
+    .hero-btn:nth-child(even){
+        margin-left: 50px;
+    }
     #HeroImg{
-        margin-top: 10px;
+        margin-top: -90px;
         width: 300px;
         margin-left: 100px;
     }

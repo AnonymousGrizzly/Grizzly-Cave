@@ -115,7 +115,7 @@ input{
   transform: translateY(0);
   transition: all 0.5s ease;
 }
-.secondary-btn:active{
+.secondary-btn:active {
   transform: translateY(3px) !important;
   transition: 0.5s ease !important;
 }
