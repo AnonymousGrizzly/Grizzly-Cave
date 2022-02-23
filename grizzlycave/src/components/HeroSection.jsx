@@ -1,7 +1,6 @@
 import React from 'react'
 import "../designs/HeroSection.css"
 import HeroImg from "../images/Grizzly.png"
-import Button from './Button'
 import { HashLink as Link } from 'react-router-hash-link';
 
 export default function HeroSection() {
