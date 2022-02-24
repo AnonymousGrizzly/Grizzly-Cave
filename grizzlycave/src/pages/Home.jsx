@@ -12,6 +12,7 @@ export default function Home(){
             <Herosection/>
             <Cards/>
             <ContactForm/>
+            <Footer/>
         </div>
      </>
     )

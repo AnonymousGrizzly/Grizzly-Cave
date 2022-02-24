@@ -26,7 +26,13 @@ export class AuthService {
   static async getUserInfo() {
     const url = BASEURL + 'get_user.php';
     const response = await fetch(url, {
-      method: 'GET',
+      method: 'POST',
+      body: JSON.stringify({
+        jwt: getItem('PHPTOKEN'),
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     const data = await response.json();
     return data.data;

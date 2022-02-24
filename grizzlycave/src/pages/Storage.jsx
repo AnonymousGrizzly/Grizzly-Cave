@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../designs/Storage.css";
+import useAuth from '../hooks/useAuth';
 
 function Storage() {
+  const [userData, setUserData] = useState({});
+  const { getProfileData, user } = useAuth();
+
+  useEffect(() => {
+    getProfileData().then((data) => setUserData(data));
+  }, [user]);
+
+
   return <div>
       <div className='storage-cntnr'>
         <div className='storagetitle-cntnr'>

@@ -13,12 +13,6 @@ export default function HeroSection() {
                     <Link className="hero-btn" to="/signup">Sign In</Link>
                     <Link className="hero-btn" to="/signin">Log In</Link>
                 </div>
-                <div className='summary-cntnr'>
-                    <div className='summary-item'><p>Speed</p></div>
-                    <div className='summary-item'><p>Security</p></div>
-                    <div className='summary-item'><p>Reliability</p></div>
-                    <div className='summary-item'><p></p></div>
-                </div>
             </div>
                 <img src={HeroImg} alt="Grizzly Cave" id="HeroImg"/>
                 <div className="change-cntnr"/>

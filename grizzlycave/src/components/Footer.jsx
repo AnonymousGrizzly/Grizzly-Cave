@@ -7,14 +7,18 @@ function Footer() {
     <div>
         <div className='footer-cntnr'>
             <div className='footer-distributed'>
+            <div className='footer-left'>
+                  <p> Copyright © 2022 All Rights Reserved</p>
+                </div>
+                <div className='footer-centered'>
+                  <p>Maks Rogelj, GrizzlyCave 2022 </p>
+                </div>
                 <div className='footer-right'>
-                    <a href="#"><i className="fa-brands fa-instagram"></i></a>
                     <a href="#"><i className="fa-brands fa-github"></i></a>
+                    <a href="#"></a>
                 </div>
 
-                <div className='footer-left'>
-                  <p> Copyright © 2022 All Rights Reserved by Maks Rogelj</p>
-                </div>
+                
             </div>
         </div>
     </div>

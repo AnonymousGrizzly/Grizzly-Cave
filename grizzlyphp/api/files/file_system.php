@@ -1,16 +1,17 @@
 <?php
 class FileSystem{
-    private $target_dir = "../uploads/";
+    private $target_dir = "../fileUploads/";
     private $max_size = 500000000;
-
     private $table = "files";
-    private $creator_id;
-    private $path;
-    private $name;
-	private $conn;
-    private $id;
+    
+    private $folder_id;
+    private $foldername;
+    private $parenfolder_id;
+
+    private $created_at;
     private $modified_at;
-    private $file_id;
+    private $user_id;
+    private $deleted = 0;
 
     public function update(){
         try{
@@ -29,9 +30,19 @@ class FileSystem{
         }
     }
 
-    public function setFileId($id){
-        $this->file_id = $id;
+    public function delete($fullDelete){
+        if($fullDelete){
+
+        }else{
+            $query = "SET
+                deleted = 1
+                WHERE file_id = ?";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam();
+
+
+        }
     }
-   
+
 }
 ?>

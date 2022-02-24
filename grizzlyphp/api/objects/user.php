@@ -89,6 +89,26 @@ class User{
     }
 
     public function update(){
+        $query = "UPDATE".$this->table_name."
+            SET 
+                username = ?,
+                email = ?,
+                password = ?
+                WHERE id = ?
+            ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->username);
+        $stmt->bindParam(2, $this->email);
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(3, $this->$password_hash);
+        $stmt->bindParam(4, $this->id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
+    public function update2(){
         $password_set=!empty($this->password) ? ", password = :password" : "";
         $query = "UPDATE " . $this->table_name . "
                 SET
@@ -118,3 +138,5 @@ class User{
         return false;
     }
 }
+
+?>
