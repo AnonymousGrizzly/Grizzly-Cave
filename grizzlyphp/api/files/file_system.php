@@ -1,48 +1,82 @@
 <?php
 class FileSystem{
-    private $target_dir = "../fileUploads/";
-    private $max_size = 500000000;
+    private $conn;
+    public $target_dir = "../fileUploads/";
+    public $max_size = 500000000;
     private $table = "files";
     
-    private $folder_id;
-    private $foldername;
-    private $parenfolder_id;
+    //object properties
+    public $file_id;
+    public $filename;
+    public $filesize;
+    public $filetype;
+    
+    //time
+    public $created_at;
+    public $modified_at;
+    
+    //owner
+    public $user_id;
 
-    private $created_at;
-    private $modified_at;
-    private $user_id;
-    private $deleted = 0;
+    //default
+    public $deleted = 0;
+    public $folder_id=0;
 
-    public function update(){
-        try{
-            $table = $this->table;
-            $connection = $this->conn; 
-            $query = "UPDATE".$table." 
-                SET filetype = ?, folder_id=?, modified_at=?, filesize=?, filename=?
-                WHERE file_id = ?";
-            $stmt = $connection->prepare($query);
-            $stmt->bindParam(1, $this->filetype, PDO::PARAM_STR);
-            //$stmt->bindParam(2, $id, PDO::PARAM_STR);
-            //$stmt->bindParam(3, $modified_at, PDO::PARAM_STR);
-            //$stmt->bindParam(4, $this->, PDO::PARAM_STR);
-        }catch(PDOException $e){
-            return false;
-        }
+    public function __construct($db){
+        $this->conn = $db;
     }
 
+    public function create(){
+        $query ="INSERT INTO".$this->table_name."
+            SET
+            folder_id = ?,
+            filename = ?,
+            filesize = ?,
+            filetype = ?,
+            user_id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->folder_id);
+        $stmt->bindParam(2, $this->filename);
+        $stmt->bindParam(3, $this->filesize);
+        $stmt->bindParam(4, $this->filetype);
+        $stmt->bindParam(5, $this->user_id);
+        if($stmt->execute()){ //if successful
+            return true;
+        } 
+        return false;
+    }
+    
     public function delete($fullDelete){
         if($fullDelete){
-
-        }else{
-            $query = "SET
-                deleted = 1
-                WHERE file_id = ?";
+            $query = "DELETE FROM".$this->table."
+            WHERE file_id=?
+            ";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindParam();
-
-
+            $stmt->bindParam(1, $this->file_id);
+            if($stmt->execute()){
+                return true;
+            }
+        }else{
+            $query = "UPDATE FROM".$this->table."
+            SET
+            deleted = 1
+            WHERE file_id = ?";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $this->file_id);
+            if($stmt->execute()){
+                return true;
+            }
         }
+        return false;
     }
-
+    public function updateTRY(){
+        $table = $this->table;
+        $query = "UPDATE".$table." 
+            SET filetype = ?, folder_id=?, modified_at=?, filesize=?, filename=?
+            WHERE file_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->filetype, PDO::PARAM_STR); 
+    }
 }
 ?>

@@ -8,7 +8,11 @@ class User{
     public $username;
     public $email;
     public $password;
- 
+    
+    //time
+    public $created_at;
+    public $modified_at;
+    
     // constructor
     public function __construct($db){
         $this->conn = $db;
@@ -108,6 +112,18 @@ class User{
         return false;
     }
 
+    public function delete(){
+        $query = "DELETE FROM".$this->table_name."
+            WHERE id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }   
+
     public function update2(){
         $password_set=!empty($this->password) ? ", password = :password" : "";
         $query = "UPDATE " . $this->table_name . "
@@ -137,6 +153,7 @@ class User{
      
         return false;
     }
+
 }
 
 ?>
