@@ -26,8 +26,8 @@ class FileSystem{
         $this->conn = $db;
     }
 
-    public function create(){
-        $query ="INSERT INTO".$this->table_name."
+    public function createFile(){
+        $query ="INSERT INTO".$this->table."
             SET
             folder_id = ?,
             filename = ?,
@@ -47,7 +47,7 @@ class FileSystem{
         return false;
     }
     
-    public function delete($fullDelete){
+    public function deleteFile($fullDelete){
         if($fullDelete){
             $query = "DELETE FROM".$this->table."
             WHERE file_id=?
@@ -70,13 +70,51 @@ class FileSystem{
         }
         return false;
     }
-    public function updateTRY(){
-        $table = $this->table;
-        $query = "UPDATE".$table." 
-            SET filetype = ?, folder_id=?, modified_at=?, filesize=?, filename=?
-            WHERE file_id = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->filetype, PDO::PARAM_STR); 
+    public function deleteFileByFolder($fullDelete){
+        if($fullDelete){
+            $query = "DELETE FROM".$this->table."
+            WHERE folder_id=? AND deleted != 1
+            ";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $this->folder_id);
+            if($stmt->execute()){
+                return true;
+            }
+        }else{
+            $query = "UPDATE FROM".$this->table."
+            SET
+            deleted = 1
+            WHERE folder_id = ? AND deleted != 1";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $this->folder_id);
+            if($stmt->execute()){
+                return true;
+            }
+        }
+        return false;
     }
+
+    public function getFiles(){
+        $query = "SELECT file_id, filename, folder_id
+            FROM".$this->table."
+            WHERE user_id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
+    
+    public function getFilesByFolder(){
+        $query = "SELECT file_id, filename, folder_id
+            FROM".$this->table."
+            WHERE folder_id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->folder_id);
+        $stmt->execute();
+        return $stmt;
+    }
+    
 }
 ?>

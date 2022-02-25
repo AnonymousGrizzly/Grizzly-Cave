@@ -101,9 +101,12 @@ class User{
                 WHERE id = ?
             ";
         $stmt = $this->conn->prepare($query);
+        $this->username=htmlspecialchars(strip_tags($this->username));
+        $this->email=htmlspecialchars(strip_tags($this->email));
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->email);
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $this->password=htmlspecialchars(strip_tags($this->password));
         $stmt->bindParam(3, $this->$password_hash);
         $stmt->bindParam(4, $this->id);
         if($stmt->execute()){
@@ -123,36 +126,6 @@ class User{
         }
         return false;
     }   
-
-    public function update2(){
-        $password_set=!empty($this->password) ? ", password = :password" : "";
-        $query = "UPDATE " . $this->table_name . "
-                SET
-                    username = :username,
-                    email = :email
-                    {$password_set}
-                WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $this->username=htmlspecialchars(strip_tags($this->username));
-        $this->email=htmlspecialchars(strip_tags($this->email));
-        $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':email', $this->email);
-     
-        // hash password before saving to database
-        if(!empty($this->password)){
-            $this->password=htmlspecialchars(strip_tags($this->password));
-            $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
-            $stmt->bindParam(':password', $password_hash);
-        }
-     
-        // unique ID of record to be edited
-        $stmt->bindParam(':id', $this->user_id);
-        if($stmt->execute()){
-            return true;
-        }
-     
-        return false;
-    }
 
 }
 
