@@ -58,10 +58,8 @@ class User{
                 FROM " . $this->table_name . "
                 WHERE email = ?
                 LIMIT 0, 1";
-     
         $stmt = $this->conn->prepare( $query );
         $this->email=htmlspecialchars(strip_tags($this->email));
-     
         // bind given email value
         $stmt->bindParam(1, $this->email);
         $stmt->execute();
@@ -127,6 +125,14 @@ class User{
         return false;
     }   
 
+    public function setDev(){
+        $query = "SELECT user_id FROM".$this->table_name."
+        WHERE email = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->email);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 
 ?>

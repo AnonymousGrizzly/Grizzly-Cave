@@ -37,6 +37,13 @@ class FolderSystem{
         $query = "DELETE FROM".$this->table."
             WHERE folder_id = ?
         ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->folder_id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+        
     }
 
 }
