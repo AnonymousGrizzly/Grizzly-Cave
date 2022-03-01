@@ -9,6 +9,7 @@ class FileSystem{
     //object properties
     public $file_id;
     public $filename;
+    public $sanitized_name;
     public $filesize;
     public $filetype;
     
@@ -28,13 +29,14 @@ class FileSystem{
     }
 
     public function createFile(){
-        $query ="INSERT INTO".$this->table."
+        $query ="INSERT INTO ".$this->table."
             SET
             folder_id = ?,
             filename = ?,
             filesize = ?,
             filetype = ?,
-            user_id = ?
+            user_id = ?,
+            sanitized_name = ?
         ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->folder_id);
@@ -42,6 +44,7 @@ class FileSystem{
         $stmt->bindParam(3, $this->filesize);
         $stmt->bindParam(4, $this->filetype);
         $stmt->bindParam(5, $this->user_id);
+        $stmt->bindParam(6, $this->sanitized_name);
         if($stmt->execute()){ //if successful
             return true;
         } 
@@ -50,7 +53,7 @@ class FileSystem{
     
     public function deleteFile($fullDelete){
         if($fullDelete){
-            $query = "DELETE FROM".$this->table."
+            $query = "DELETE FROM ".$this->table."
             WHERE file_id=?
             ";
             $stmt = $this->conn->prepare($query);
@@ -73,7 +76,7 @@ class FileSystem{
     }
     public function deleteFileByFolder($fullDelete){
         if($fullDelete){
-            $query = "DELETE FROM".$this->table."
+            $query = "DELETE FROM ".$this->table."
             WHERE folder_id=? AND deleted != 1
             ";
             $stmt = $this->conn->prepare($query);
@@ -82,7 +85,7 @@ class FileSystem{
                 return true;
             }
         }else{
-            $query = "UPDATE FROM".$this->table."
+            $query = "UPDATE FROM ".$this->table."
             SET
             deleted = 1
             WHERE folder_id = ? AND deleted != 1";
@@ -97,7 +100,7 @@ class FileSystem{
 
     public function getFiles(){
         $query = "SELECT file_id, filename, folder_id
-            FROM".$this->table."
+            FROM ".$this->table."
             WHERE user_id = ?
         ";
         $stmt = $this->conn->prepare($query);
@@ -108,7 +111,7 @@ class FileSystem{
     
     public function getFilesByFolder(){
         $query = "SELECT file_id, filename, folder_id
-            FROM".$this->table."
+            FROM ".$this->table."
             WHERE folder_id = ?
         ";
         $stmt = $this->conn->prepare($query);
@@ -119,7 +122,7 @@ class FileSystem{
     public function getPath(){
         $path=$this->target_dir + $this->user_id + '/';
         $condition = $this->file_id;
-        $query = "SELECT folder_id FROM".$this->$table."
+        $query = "SELECT folder_id FROM ".$this->$table."
             WHERE file_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $condition);
@@ -136,6 +139,13 @@ class FileSystem{
         $path+=$condition+'/';
         return $path;
     }
-    
+    public function getSanitizedName(){
+        $query = "SELECT sanitized_name FROM ".$this->table."
+        WHERE filename = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->filename);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 ?>

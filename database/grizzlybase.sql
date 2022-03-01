@@ -37,6 +37,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `files` (
   `file_id` int(11) NOT NULL,
   `filename` varchar(64) NOT NULL,
+  `sanitized_name` varchar(80) NOT NULL,
   `filesize` int(11) NOT NULL,
   `filetype` varchar(64) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT 0,

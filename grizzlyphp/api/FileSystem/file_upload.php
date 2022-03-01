@@ -8,7 +8,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$bannedExtensions = array('exe', 'dll', 'lnk', 'sys', 'jar', 'swf', 'gzquar', 'scr', 'zix', 'js', 'com', 'bat', 'vbs', 'ocx', 'bin', 'ws', 'class', 'drv', 'ozd', 'aru', 'wmf', 'shs', 'chm', 'pgm', 'dev', 'pif', 'xnxx', 'xlm', 'vbe', 'vxd', 'tps', 'boo', 'vba', '0_full_0_tgod_signed', 'pcx', '386', 'sop', 'tsa', 'hlp', 'vb', 'exe1', 'scr', 'bkd', 'exe_renamed', 'rhk', 'lik', 'vbx', 'osa', 'cih', 'mjz', 'php3', 'dyz', '.9', 'hlw', 'dom', 'dlb', 'dxz', 'mfu', 's7p', 'bup', 'mfu', 's7p', 'cla', 'mjg', 'dyv', 'kcd', 'upa', 'ceo', 'plc', 'blf', 'zvz', 'cc', 'ce0', 'pr', 'qit', 'lok', 'lpaq5', 'fuj', 'atm', 'hsq', 'crypt1', 'nls');
+$bannedExtensions = array('exe', 'php', 'dll', 'lnk', 'sys', 'jar', 'swf', 'gzquar', 'scr', 'zix', 'js', 'com', 'bat', 'vbs', 'ocx', 'bin', 'ws', 'class', 'drv', 'ozd', 'aru', 'wmf', 'shs', 'chm', 'pgm', 'dev', 'pif', 'xnxx', 'xlm', 'vbe', 'vxd', 'tps', 'boo', 'vba', '0_full_0_tgod_signed', 'pcx', '386', 'sop', 'tsa', 'hlp', 'vb', 'exe1', 'scr', 'bkd', 'exe_renamed', 'rhk', 'lik', 'vbx', 'osa', 'cih', 'mjz', 'php3', 'dyz', '.9', 'hlw', 'dom', 'dlb', 'dxz', 'mfu', 's7p', 'bup', 'mfu', 's7p', 'cla', 'mjg', 'dyv', 'kcd', 'upa', 'ceo', 'plc', 'blf', 'zvz', 'cc', 'ce0', 'pr', 'qit', 'lok', 'lpaq5', 'fuj', 'atm', 'hsq', 'crypt1', 'nls');
 
 if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK){
     $fileName = $_FILES['uploadedFile']['name'];
@@ -24,6 +24,7 @@ if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD
         $files->filename = $fileName;
         $files->filesize = $fileSize;
         $files->filetype = $fileType;
+        $file->sanitized_name = $sanitizedFileName;
         // $this->user_id = $userId     Kako dobit user_id z lahkoto?
         $files->createFile();
 
