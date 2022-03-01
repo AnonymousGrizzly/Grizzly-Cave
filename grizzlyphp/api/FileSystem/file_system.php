@@ -4,6 +4,7 @@ class FileSystem{
     public $target_dir = "../fileUploads/";
     public $max_size = 500000000;
     private $table = "files";
+    private $folder_table = "folders";
     
     //object properties
     public $file_id;
@@ -114,6 +115,26 @@ class FileSystem{
         $stmt->bindParam(1, $this->folder_id);
         $stmt->execute();
         return $stmt;
+    }
+    public function getPath(){
+        $path=$this->target_dir + $this->user_id + '/';
+        $condition = $this->file_id;
+        $query = "SELECT folder_id FROM".$this->$table."
+            WHERE file_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $condition);
+        $stmt->execute();
+        $stmt->bind_result($condition);
+        while($stmt->rowCount()>0){
+            $path+=$condition+'/';
+            $query = "SELECT folder_id FROM ".$this->folder_table."
+            WHERE folder_id = ?";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $condition);
+            $stmt->execute();
+        }
+        $path+=$condition+'/';
+        return $path;
     }
     
 }
