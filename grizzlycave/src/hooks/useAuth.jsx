@@ -13,7 +13,7 @@ const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const history = useHistory();
   const location = useLocation();
 
@@ -24,15 +24,22 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     AuthService.validateToken()
       .then((user) => setUser(user.data))
-      .catch((_err) => {});
+      .catch((_err) => {
+        history.push("/login");
+        localStorage.removeItem("PHPTOKEN");
+      });
   }, []);
 
   const login = (username, password) => {
+    setError("");
     AuthService.loginUser({
       username,
       password,
     })
-      .then(({ user, token }) => {
+      .then(({ user, token, wasSuccessful, message }) => {
+        if(!wasSuccessful){
+          return setError(message);
+        }
         setUser(user);
         localStorage.setItem('PHPTOKEN', token);
         history.push('/profile');

@@ -11,7 +11,7 @@ function Profile() {
   const { getProfileData, user } = useAuth();
 
   useEffect(() => {
-    getProfileData().then((data) => setUserData(data));
+    getProfileData().then((data) => setUserData(data)).catch(err=>console.log(err));
   }, [user]);
 
   return (

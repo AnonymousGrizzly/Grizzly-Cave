@@ -52,6 +52,7 @@ class User{
         }
         return false;
     }
+    
 
     public function getUserByEmail(){
         $query = "SELECT user_id, username, password
@@ -81,9 +82,8 @@ class User{
 
     public function getUserByUserId(){
         $query = "SELECT username, email 
-                FROM" . $this->table_name ."
-                WHERE user_id = ?
-                LIMIT 0, 1";
+                FROM " . $this->table_name ."
+                WHERE user_id = ?";
         $stmt = $this->conn->prepare( $query );
         $stmt->bindParam(1, $this->user_id);
         $stmt->execute();
@@ -96,7 +96,7 @@ class User{
                 username = ?,
                 email = ?,
                 password = ?
-                WHERE id = ?
+                WHERE user_id = ?
             ";
         $stmt = $this->conn->prepare($query);
         $this->username=htmlspecialchars(strip_tags($this->username));

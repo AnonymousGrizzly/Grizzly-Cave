@@ -10,12 +10,10 @@ import TreesLeft from '../images/trees-left.png'
 function SignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
 
-  const { login } = useAuth();
+  const { login, error } = useAuth();
 
   const handleSubmit = async () => {
-    setErrorMsg('');
     login(username, password);
   };
 
@@ -62,7 +60,7 @@ function SignIn() {
         <br />
         <Button text={'Log In'} onClick={handleSubmit} className="submit-btn" />
       </div>
-      <h3 className="errorMsg">{errorMsg}</h3>
+      <h3 className="errorMsg">{error}</h3>
       
     </div>
   );

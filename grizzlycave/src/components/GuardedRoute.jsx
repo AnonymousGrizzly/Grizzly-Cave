@@ -4,7 +4,6 @@ import useAuth from '../hooks/useAuth';
 
 const GuardedRoute = ({ component: Component, ...rest }) => {
   const { user } = useAuth();
-
   return (
     <Route
       {...rest}

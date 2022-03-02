@@ -15,12 +15,15 @@ export class AuthService {
     const url = BASEURL + 'login.php';
     const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: JSON.stringify(user)
     });
+    const wasSuccessful = response.status===200;
     const data = await response.json();
     return {
       token: data.jwt,
       user: data.user,
+      wasSuccessful,
+      message: data.message
     };
   }
   static async getUserInfo() {
