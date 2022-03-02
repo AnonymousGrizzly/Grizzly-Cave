@@ -122,7 +122,7 @@ class FileSystem{
     public function getPath(){
         $path=$this->target_dir + $this->user_id + '/';
         $condition = $this->file_id;
-        $query = "SELECT folder_id FROM ".$this->$table."
+        $query = "SELECT folder_id FROM ".$this->table."
             WHERE file_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $condition);
