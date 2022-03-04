@@ -22,22 +22,24 @@ class FileSystem{
 
     //default
     public $deleted = 0;
-    public $folder_id=0;
+    public $folder_id = NULL;
 
     public function __construct($db){
         $this->conn = $db;
     }
 
     public function createFile(){
-        $query ="INSERT INTO ".$this->table."
-            SET
-            folder_id = ?,
-            filename = ?,
-            filesize = ?,
-            filetype = ?,
-            user_id = ?,
-            sanitized_name = ?
+        $query = "INSERT INTO ".$this->table." (folder_id, filename, filesize, filetype, user_id, sanitized_name)
+            VALUES (
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )
         ";
+        var_dump($this->user_id);
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->folder_id);
         $stmt->bindParam(2, $this->filename);
@@ -120,7 +122,12 @@ class FileSystem{
         return $stmt;
     }
     public function getPath(){
-        $path=$this->target_dir + $this->user_id + '/';
+        $path = $this->target_dir . $this->user_id . '/';
+
+        if ($this->folder_id === NULL) {
+            return $path;
+        }
+
         $condition = $this->file_id;
         $query = "SELECT folder_id FROM ".$this->table."
             WHERE file_id = ?";
@@ -129,14 +136,14 @@ class FileSystem{
         $stmt->execute();
         $stmt->bind_result($condition);
         while($stmt->rowCount()>0){
-            $path+=$condition+'/';
+            $path .= $condition .'/';
             $query = "SELECT folder_id FROM ".$this->folder_table."
             WHERE folder_id = ?";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $condition);
             $stmt->execute();
         }
-        $path+=$condition+'/';
+        $path .= $condition .'/';
         return $path;
     }
     public function getSanitizedName(){
