@@ -1,36 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import "../designs/Storage.css";
-import useAuth from '../hooks/useAuth';
+import React, { useRef, useState } from 'react';
+import Button from '../components/Button';
+import '../designs/Storage.css';
+import { FileService } from '../services/file';
 
 function Storage() {
-  const [userData, setUserData] = useState({});
-  const { getProfileData, user } = useAuth();
+  const fileInput = useRef();
+  const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    getProfileData().then((data) => setUserData(data));
-  }, [user]);
+  const onClick = () => {
+    fileInput.current.click();
+  };
 
+  const onFiles = async () => {
+    const file = fileInput.current.files[0];
 
-  return <div>
-      <div className='storage-cntnr'>
-        <div className='storagetitle-cntnr'>
+    if (!file) return;
+
+    await FileService.uploadFile(file, (pr) => {
+      setProgress(pr);
+    });
+  };
+
+  return (
+    <div>
+      <div className="storage-cntnr">
+        <div className="storagetitle-cntnr">
           <h1>File Storage</h1>
         </div>
-        <div className='files-cntnr'>
+        <div className="files-cntnr"></div>
+        <div className="control-panel">
+          <Button
+            className={'secondary-btn'}
+            onClick={onClick}
+            text={'Upload'}
+          ></Button>
 
-        </div>
-        <div className='control-panel'>
-          <ul className=''>
-            <li>
-
-            </li>
-            <li>
-              
-            </li>
+          <div>{progress.toFixed(1)} %</div>
+          <ul className="">
+            <li></li>
+            <li></li>
           </ul>
         </div>
       </div>
-  </div>;
+      <input
+        type="file"
+        ref={fileInput}
+        onChange={onFiles}
+        style={{
+          display: 'none',
+        }}
+      />
+    </div>
+  );
 }
 
 export default Storage;
