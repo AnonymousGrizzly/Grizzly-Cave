@@ -3,12 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const GuardedRoute = ({ component: Component, ...rest }) => {
-  const { user } = useAuth();
+  const { isLoggedIn } = useAuth();
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        !!user ? <Component {...props} /> : <Redirect to="/" />
+        isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

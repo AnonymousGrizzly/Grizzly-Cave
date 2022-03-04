@@ -6,17 +6,12 @@ import NavItem from './NavItem';
 import useAuth from '../hooks/useAuth';
 
 function Navbar() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const { user, logout } = useAuth();
-
-  useEffect(() => {
-    if (user) setLoggedIn(true);
-    else if (!user) setLoggedIn(false);
-  }, [user]);
+  const { isLoggedIn, logout } = useAuth();
 
   const [click, setClick] = useState(false); //click za mobile menu
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -78,7 +73,7 @@ function Navbar() {
             <NavItem
               text="Log Out "
               to="/"
-              className='commonLink'
+              className="commonLink"
               onClick={logout}
             />
           </ul>

@@ -3,17 +3,20 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AuthService } from '../services/auth';
 
-
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
-  const [error, setError] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem('PHPTOKEN')
+  );
+  const [error, setError] = useState('');
   const history = useHistory();
   const location = useLocation();
 
@@ -22,27 +25,36 @@ export function AuthProvider({ children }) {
   }, [location.pathname]);
 
   useEffect(() => {
-    AuthService.validateToken()
-      .then((user) => setUser(user.data))
-      .catch((_err) => {
-        history.push("/login");
-        localStorage.removeItem("PHPTOKEN");
-      });
+    async function validateToken() {
+      try {
+        const user = await AuthService.validateToken();
+
+        if (user.wasSuccessful) {
+          setUser(user.data);
+        }
+      } catch (err) {
+        setError(err);
+      }
+    }
+
+    validateToken();
   }, []);
 
   const login = (username, password) => {
-    setError("");
+    setError('');
     AuthService.loginUser({
       username,
       password,
     })
       .then(({ user, token, wasSuccessful, message }) => {
-        if(!wasSuccessful){
-          return setError(message);
+        if (wasSuccessful) {
+          setUser(user);
+          setIsLoggedIn(true);
+          localStorage.setItem('PHPTOKEN', token);
+          history.push('/profile');
+        } else {
+          setError(message);
         }
-        setUser(user);
-        localStorage.setItem('PHPTOKEN', token);
-        history.push('/profile');
       })
       .catch((error) => setError(error));
   };
@@ -66,6 +78,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     setUser(undefined);
+    setIsLoggedIn(false);
     localStorage.removeItem('PHPTOKEN');
   };
 
@@ -76,9 +89,10 @@ export function AuthProvider({ children }) {
       login,
       signUp,
       getProfileData,
+      isLoggedIn,
       logout,
     }),
-    [user, error]
+    [user, error, isLoggedIn]
   );
 
   return (
