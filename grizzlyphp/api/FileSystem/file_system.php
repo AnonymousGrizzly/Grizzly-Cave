@@ -1,10 +1,11 @@
 <?php
 class FileSystem{
     private $conn;
-    public $target_dir = "../fileUploads/";
-    public $max_size = 500000000;
     private $table = "files";
     private $folder_table = "folders";
+    
+    public $target_dir = "../fileUploads/";
+    public $max_size = 500000000;
     
     //object properties
     public $file_id;
@@ -161,15 +162,7 @@ class FileSystem{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->file_id);
         $stmt->execute();
-        $result = array();
-        $stmt->bind_result(
-            $result['filetype'],
-            $result['filesize'],
-            $result['filename'], 
-            $result['sanitized_name']
-        );
-
-        return $result;
+        return $stmt;
     }
 }
 ?>

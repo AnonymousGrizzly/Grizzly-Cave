@@ -6,10 +6,15 @@ import { FileService } from '../services/file';
 function Storage() {
   const fileInput = useRef();
   const [progress, setProgress] = useState(0);
+  const [uploadStart, setUploadStart] = useState(false);
+  const [uploadDone, setUploadDone] = useState(true);
 
   const onClick = () => {
     fileInput.current.click();
   };
+  const createFolder= ()=>{
+
+  }
 
   const onFiles = async () => {
     const file = fileInput.current.files[0];
@@ -17,25 +22,41 @@ function Storage() {
     if (!file) return;
 
     await FileService.uploadFile(file, (pr) => {
-      setProgress(pr);
+      if(pr > 99)
+        setUploadDone(false);
+
+      if(pr > 0){
+        setUploadStart(true);
+        setProgress(pr);
+      }
+      
     });
   };
-
+  //dokončaj progress bar (data-aos, box shadow, timer, data-aos, out!)
+  
   return (
-    <div>
+    <div id="storage">
+            {uploadStart && <div className="progressbar">{uploadDone ? (progress.toFixed(1)+" %") : "Done!  "  } </div>}
       <div className="storage-cntnr">
-        <div className="storagetitle-cntnr">
+        <div className="storagetitle-cntnr"> 
           <h1>File Storage</h1>
         </div>
-        <div className="files-cntnr"></div>
-        <div className="control-panel">
-          <Button
-            className={'secondary-btn'}
-            onClick={onClick}
-            text={'Upload'}
-          ></Button>
-
-          <div>{progress.toFixed(1)} %</div>
+        <div className='content-cntnr'>
+          <div className="files-cntnr">
+          </div>
+          <div className="control-panel">
+            <h3>Control Panel</h3><br/>
+            <Button
+              className={'secondary-btn'}
+              onClick={onClick}
+              text={'Upload File'}
+            /><br/><br/>
+            <Button
+              className={'secondary-btn'}
+              text={"Create Folder"}
+              onClick={createFolder}
+            />
+          </div>
         </div>
       </div>
       <input

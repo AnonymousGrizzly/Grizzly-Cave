@@ -38,14 +38,14 @@ if($jwtData){
 
     $file = new FileSystem($db);
     
-    $fileDetails = $file->getFileDetails();
+    $fileDetails = $file->getFileDetails()->fetch();
 
     $file->filetype = $fileDetails['filetype'];
     $file->filesize = $fileDetails['filesize'];
     $file->filename = $fileDetails['filename'];
+    $file->sanitized_name = $fileDetails['sanitized_name'];
     $file->user_id = $decoded->data->user_id;
     $file->file_id = $decoded->data->file_id;
-    $file->sanitized_name = $fileDetails['sanitized_name'];
 
     $path = $file->getPath();
     $path .= '/'.$file->sanitized_name;
@@ -62,7 +62,7 @@ if($jwtData){
         http_response_code(401);
         echo json_encode(array("message"=>"Unable to download file."));
     }
-    
+
     
 }
 
