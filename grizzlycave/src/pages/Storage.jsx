@@ -36,10 +36,6 @@ function Storage() {
           ></Button>
 
           <div>{progress.toFixed(1)} %</div>
-          <ul className="">
-            <li></li>
-            <li></li>
-          </ul>
         </div>
       </div>
       <input

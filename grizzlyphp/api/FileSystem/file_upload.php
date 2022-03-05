@@ -48,15 +48,15 @@ if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD
     $sanitizedFileName = md5(time() . $fileName) . '.' . $fileExtension;
     if(!in_array($fileExtension, $bannedExtensions)){
         
-        $files = new FileSystem($db);
-        $files->filename = $fileName;
-        $files->filesize = $fileSize;
-        $files->filetype = $fileType;
-        $files->sanitized_name = $sanitizedFileName;
-        $files->user_id = $decoded->data->user_id;
-        $files->createFile();
+        $file = new FileSystem($db);
+        $file->filename = $fileName;
+        $file->filesize = $fileSize;
+        $file->filetype = $fileType;
+        $file->sanitized_name = $sanitizedFileName;
+        $file->user_id = $decoded->data->user_id;
+        $file->createFile();
 
-        $uploadFileDir = $files->getPath();
+        $uploadFileDir = $file->getPath();
         $destinationPath = $uploadFileDir . $sanitizedFileName;
 
         if ( ! is_dir($uploadFileDir)) {

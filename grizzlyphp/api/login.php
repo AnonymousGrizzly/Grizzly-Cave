@@ -22,6 +22,8 @@ $user->username = $data->username;
 $username_exists = $user->assignUserData();
 // generate json web token
 
+
+
 if($username_exists && password_verify($data->password, $user->password)){
     $token = array(
        "iat" => $issued_at,
@@ -47,7 +49,15 @@ if($username_exists && password_verify($data->password, $user->password)){
         )
     );
 }else{
+    if(empty($data->username)){
+        http_response_code(411);
+        echo json_encode(array("message" => "Username required."));
+    }else if(empty($data->password)){
+        http_response_code(411);
+        echo json_encode(array("message" => "Password required."));
+    }else{
     http_response_code(401);
     echo json_encode(array("message" => "Login failed."));
+    }
 }
 ?>

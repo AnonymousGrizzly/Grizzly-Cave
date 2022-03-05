@@ -29,7 +29,8 @@ function SignIn() {
         <h1>
           {' '}
           You are about to enter <br />
-          <b>GrizzlyCave</b>{' '}
+          <b>GrizzlyCave</b>
+          {' '}
         </h1>
         <br />
         <p>- please provide the necessary information to get inside -</p>

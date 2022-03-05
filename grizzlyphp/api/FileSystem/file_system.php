@@ -39,7 +39,6 @@ class FileSystem{
             ?
         )
         ";
-        var_dump($this->user_id);
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->folder_id);
         $stmt->bindParam(2, $this->filename);
@@ -146,13 +145,31 @@ class FileSystem{
         $path .= $condition .'/';
         return $path;
     }
-    public function getSanitizedName(){
+    /*public function getSanitizedName(){
         $query = "SELECT sanitized_name FROM ".$this->table."
-        WHERE filename = ?";
+        WHERE file_id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->filename);
+        $stmt->bindParam(1, $this->file_id);
         $stmt->execute();
-        return $stmt;
+        $result = '';
+        $stmt->bind_result($result);
+        return $result;
+    }*/
+    public function getFileDetails(){
+        $query = "SELECT filetype, filesize, filename, sanitized_name FROM ".$this->table."
+        WHERE file_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->file_id);
+        $stmt->execute();
+        $result = array();
+        $stmt->bind_result(
+            $result['filetype'],
+            $result['filesize'],
+            $result['filename'], 
+            $result['sanitized_name']
+        );
+
+        return $result;
     }
 }
 ?>
