@@ -26,6 +26,14 @@ export class AuthService {
       message: data.message,
     };
   }
+  static async updateUser(user){
+    const url = BASEURL + 'update_user.php';
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(user),
+    });
+    return response;
+  }
   static async getUserInfo() {
     const url = BASEURL + 'get_user.php';
     const response = await fetch(url, {
@@ -56,4 +64,6 @@ export class AuthService {
       data: await response.json(),
     };
   }
+  
+
 }

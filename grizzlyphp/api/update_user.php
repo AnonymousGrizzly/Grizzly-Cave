@@ -9,7 +9,10 @@ include_once 'libs/php-jwt-main/src/BeforeValidException.php';
 include_once 'libs/php-jwt-main/src/ExpiredException.php';
 include_once 'libs/php-jwt-main/src/SignatureInvalidException.php';
 include_once 'libs/php-jwt-main/src/JWT.php';
+include_once '../libs/php-jwt-main/src/Key.php';
+
 use \Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 include_once 'config/database.php';
 include_once 'objects/user.php';
@@ -21,7 +24,7 @@ $data = json_decode(file_get_contents("php://input"));
 $jwt=isset($data->jwt) ? $data->jwt : "";
 if($jwt){
     try {
-        $decoded = JWT::decode($jwt, $key, array('HS256'));
+        $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         $user->username = $data->username;
         $user->email = $data->email;
         $user->password = $data->password;

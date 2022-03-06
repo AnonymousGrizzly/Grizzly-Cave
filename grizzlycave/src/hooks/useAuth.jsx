@@ -71,16 +71,33 @@ export function AuthProvider({ children }) {
     });
   };
 
-  const getProfileData = async () => {
-    const data = await AuthService.getUserInfo();
-    return data;
-  };
-
   const logout = () => {
     setUser(undefined);
     setIsLoggedIn(false);
     localStorage.removeItem('PHPTOKEN');
   };
+  
+  const getProfileData = async () => {
+    const data = await AuthService.getUserInfo();
+    return data;
+  };
+
+  const updateUser = async (username, email, password) => {
+    const user = await AuthService.validateToken();
+    if (!user.wasSuccessful) {
+      logout();
+    }else{
+      AuthService.updateUser(
+        username,
+        email,
+        password,
+      ).then(({ user, token }) => {
+        setUser(user);
+        localStorage.setItem('PHPTOKEN', token);
+        history.push('/profile');
+      });
+    }
+  }
 
   const memoizedValue = useMemo(
     () => ({
