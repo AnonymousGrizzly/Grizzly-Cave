@@ -5,6 +5,7 @@ import '../designs/Profile.css';
 import { getItem } from '../helpers/localstorage';
 import useAuth from '../hooks/useAuth';
 import Input from '../components/Input';
+import Button from '../components/Button';
 import { useHistory } from 'react-router';
 
 import { AuthService } from '../services/auth';
@@ -12,7 +13,8 @@ import { AuthService } from '../services/auth';
 function Profile() {
   const [userData, setUserData] = useState({});
   const { getProfileData, user } = useAuth();
-
+  const [showUpdate, setShowUpdate] = useState(false);
+ 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -82,28 +84,38 @@ function Profile() {
           </p>
           <br/>
           <br/>
-          <Link to="/update" className="secondary-btn">
+          <Link className="secondary-btn">
             {' '}
-            Update Profile <i className="fas fa-long-arrow-alt-right"></i>
+            Update Profile <i className="fas fa-long-arrow-alt-right"/>
           </Link>
-          <div className='update-profile'>
-          
-            <Input 
-              type = "text"
-              value={userData.email}
-              setValue={setEmail}
-            /><br/>
-            <Input 
-              type = "text"
-              value={userData.username}
-              setValue={setUsername}
-            /><br/>
-            <Input 
-              type = "password"
-              value={password}
-              setValue={setPassword}
-            />
-          </div>
+          {showUpdate && (
+             <div className='update-profile'>
+               <p><b>Email:</b></p>
+             <Input 
+               type = "text"
+               value={userData.email}
+               setValue={setEmail}
+             /><br/>
+             <p><b>Username:</b></p>
+             <Input 
+               type = "text"
+               value={userData.username}
+               setValue={setUsername}
+             /><br/>
+             <p><b>Password:</b></p>
+             <Input 
+               type = "password"
+               value={password}
+               setValue={setPassword}
+               placeholder="new password"
+             />
+             <Button
+               text = "UPDATE"
+               onClick = {handleSubmit}
+               className = "secondary-btn"
+             />
+           </div>
+          )}
         </div>
       </div>
     </div>

@@ -22,8 +22,12 @@ function Storage() {
     if (!file) return;
 
     await FileService.uploadFile(file, (pr) => {
-      if(pr > 99)
+      if(pr > 99){
+        setTimeout(() => { //prever a dela
+          setUploadStart(false);
+        }, 3000);
         setUploadDone(false);
+      }
 
       if(pr > 0){
         setUploadStart(true);
@@ -32,11 +36,10 @@ function Storage() {
       
     });
   };
-  //dokončaj progress bar (data-aos, box shadow, timer, data-aos, out!)
   
   return (
     <div id="storage">
-            {uploadStart && <div className="progressbar"  data-aos="fade-left">{uploadDone ? (progress.toFixed(1)+" %") : "Done!  "  } </div>}
+      {uploadStart && <div className="progressbar"  data-aos="fade-left">{uploadDone ? (progress.toFixed(1)+" %") : "Done! "  } </div>}
       <div className="storage-cntnr">
         <div className="storagetitle-cntnr"> 
           <h1>File Storage</h1>

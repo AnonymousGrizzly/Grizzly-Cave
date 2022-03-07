@@ -42,4 +42,5 @@
     height: fit-content;
     padding: 0 20px;
     border-right: 200px solid #d55252;
+    box-shadow: rgba(37, 38, 39, 0.3) 0px 1px 2px 0px, rgba(82, 83, 85, 0.15) 0px 2px 6px 2px;
 }
