@@ -36,7 +36,7 @@ function Storage() {
   
   return (
     <div id="storage">
-            {uploadStart && <div className="progressbar">{uploadDone ? (progress.toFixed(1)+" %") : "Done!  "  } </div>}
+            {uploadStart && <div className="progressbar"  data-aos="fade-left">{uploadDone ? (progress.toFixed(1)+" %") : "Done!  "  } </div>}
       <div className="storage-cntnr">
         <div className="storagetitle-cntnr"> 
           <h1>File Storage</h1>
