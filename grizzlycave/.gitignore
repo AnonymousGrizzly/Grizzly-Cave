@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/grizzlyphp/api/libs/**
-/grizzlyphp/fileUploads/**
+../grizzlyphp/api/libs/**
+../grizzlyphp/fileUploads/**
 /node_modules
 /.pnp
 .pnp.js
