@@ -20,7 +20,7 @@ function Profile() {
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const history = useHistory();
-
+  const { updateUser } = useAuth();
 
   function validateEmail(signup_email) {
     //Must contain @, can't be shorter than 8 characters
@@ -65,30 +65,16 @@ function Profile() {
       );
     }
 
-    
-
+    updateUser(username, email, password);
+    setShowUpdate(false);
   };
 
   return (
     <div>
       <div className="profile-cntnr">
         <div className="profile-wrapper">
-          <h2>PROFILE</h2>
-          <p id="username">
-            <i className="fas fa-user"></i>
-            <b> Username:</b>{userData.username}
-          </p>
-          <p id="email">
-            <i className="fas fa-envelope"></i>
-            <b> Email:</b>{userData.email}
-          </p>
-          <br/>
-          <br/>
-          <Link className="secondary-btn">
-            {' '}
-            Update Profile <i className="fas fa-long-arrow-alt-right"/>
-          </Link>
-          {showUpdate && (
+          
+          {showUpdate ? (
              <div className='update-profile'>
                <p><b>Email:</b></p>
              <Input 
@@ -115,8 +101,28 @@ function Profile() {
                className = "secondary-btn"
              />
            </div>
+          ):(
+            <div>
+              <h2>PROFILE</h2>
+              <p id="username">
+                <i className="fas fa-user"></i>
+                <b> Username:</b>{userData.username}
+              </p>
+              <p id="email">
+                <i className="fas fa-envelope"></i>
+                <b> Email:</b>{userData.email}
+              </p>
+              <br/>
+              <br/>
+              <Button
+                text={"Update Profile"}
+                className="secondary-btn"
+                onClick = {setShowUpdate(true)}
+              ><i className="fas fa-long-arrow-alt-right"/></Button>
+            </div>
           )}
         </div>
+        <h3 className="errorMsg">{errorMsg}</h3>
       </div>
     </div>
   );

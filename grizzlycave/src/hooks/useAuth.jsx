@@ -83,19 +83,22 @@ export function AuthProvider({ children }) {
   };
 
   const updateUser = async (username, email, password) => {
-    const user = await AuthService.validateToken();
-    if (!user.wasSuccessful) {
+    try {
+      const user = await AuthService.validateToken();
+      if (user.wasSuccessful) {
+        AuthService.updateUser(
+          username,
+          email,
+          password,
+        ).then(({ user, token }) => {
+          setUser(user);
+          localStorage.setItem('PHPTOKEN', token);
+          history.push('/profile');
+        });
+      }
+    } catch (err) {
+      setError(err);
       logout();
-    }else{
-      AuthService.updateUser(
-        username,
-        email,
-        password,
-      ).then(({ user, token }) => {
-        setUser(user);
-        localStorage.setItem('PHPTOKEN', token);
-        history.push('/profile');
-      });
     }
   }
 
