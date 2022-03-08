@@ -1,2 +1,5 @@
 /api/libs/**
 /fileUploads/**
+
+#git rm --cache grizzlyphp/api/libs/**
+#git rm --cache grizzlyphp/fileUploads
