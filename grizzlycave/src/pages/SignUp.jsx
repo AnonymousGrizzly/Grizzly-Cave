@@ -5,6 +5,7 @@ import '../designs/Auth.css';
 import { AuthService } from '../services/auth';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router';
+import { LogIn } from 'react-feather';
 import { setItem } from '../helpers/localstorage';
 import useAuth from '../hooks/useAuth';
 
@@ -69,15 +70,17 @@ function SignUp() {
         <h1>
           {' '}
           You are about to enter <br />
-          <b>GrizzlyCave</b>{' '}
+          <b> GrizzlyCave </b>
+          {' '}
         </h1>
         <br />
         <p>- please provide the necessary information to get inside -</p>
         <br />
-        <Link to="/signin" className="secondary-btn">
-          {' '}
-          Already have an account? Login <i className="fas fa-sign-in-alt"></i>
-        </Link>
+        <div className='btn-centered'>
+          <Link to="/signin" className="secondary-btn icon">
+            Already have an account? Login &nbsp; <LogIn size="20"/>
+          </Link>
+        </div>
       </div>
       <div className="form-cntnr">
         <Input

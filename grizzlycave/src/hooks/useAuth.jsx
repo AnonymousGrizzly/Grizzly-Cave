@@ -109,6 +109,7 @@ export function AuthProvider({ children }) {
       login,
       signUp,
       getProfileData,
+      updateUser, 
       isLoggedIn,
       logout,
     }),

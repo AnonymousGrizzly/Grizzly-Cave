@@ -4,6 +4,7 @@ import '../designs/Navbar.css';
 import icon from '../images/encryption-white.png';
 import NavItem from './NavItem';
 import useAuth from '../hooks/useAuth';
+import {Menu, X} from 'react-feather'
 
 function Navbar() {
   const { isLoggedIn, logout } = useAuth();
@@ -20,9 +21,10 @@ function Navbar() {
           {' '}
           GrizzlyCave{' '}
         </Link>
-        <div className="menu-icon" onClick={handleClick}>
-          <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+        <div className="menu-icon" onClick={handleClick} >
+          {click ? (<X size="35"/>): (<Menu size="35"/>)}  
         </div>
+        
         {!isLoggedIn ? (
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <NavItem

@@ -13,7 +13,7 @@ import { AuthService } from '../services/auth';
 function Profile() {
   const [userData, setUserData] = useState({});
   const { getProfileData, user } = useAuth();
-  const [showUpdate, setShowUpdate] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(true);
  
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -69,47 +69,24 @@ function Profile() {
     setShowUpdate(false);
   };
 
+  const UpdateFunction = () =>{
+    setShowUpdate(false);
+  };
+
   return (
     <div>
       <div className="profile-cntnr">
         <div className="profile-wrapper">
           
           {showUpdate ? (
-             <div className='update-profile'>
-               <p><b>Email:</b></p>
-             <Input 
-               type = "text"
-               value={userData.email}
-               setValue={setEmail}
-             /><br/>
-             <p><b>Username:</b></p>
-             <Input 
-               type = "text"
-               value={userData.username}
-               setValue={setUsername}
-             /><br/>
-             <p><b>Password:</b></p>
-             <Input 
-               type = "password"
-               value={password}
-               setValue={setPassword}
-               placeholder="new password"
-             />
-             <Button
-               text = "UPDATE"
-               onClick = {handleSubmit}
-               className = "secondary-btn"
-             />
-           </div>
-          ):(
             <div>
               <h2>PROFILE</h2>
               <p id="username">
-                <i className="fas fa-user"></i>
+                
                 <b> Username:</b>{userData.username}
               </p>
               <p id="email">
-                <i className="fas fa-envelope"></i>
+                
                 <b> Email:</b>{userData.email}
               </p>
               <br/>
@@ -117,10 +94,38 @@ function Profile() {
               <Button
                 text={"Update Profile"}
                 className="secondary-btn"
-                onClick = {setShowUpdate(true)}
-              ><i className="fas fa-long-arrow-alt-right"/></Button>
+                onClick = {UpdateFunction}
+              ></Button>
             </div>
-          )}
+          ):(
+            <div className='update-profile'>
+              <h1>Update profile</h1>
+              <p><b>Email:</b></p>
+            <Input 
+              type = "text"
+              value={userData.email}
+              setValue={setEmail}
+            /><br/>
+            <p><b>Username:</b></p>
+            <Input 
+              type = "text"
+              value={userData.username}
+              setValue={setUsername}
+            /><br/>
+            <p><b>Password:</b></p>
+            <Input 
+              type = "password"
+              value={password}
+              setValue={setPassword}
+              placeholder="new password"
+            /><br/><br/>
+            <Button
+              text = "UPDATE"
+              onClick = {handleSubmit}
+              className = "secondary-btn"
+            />
+          </div>
+         )}
         </div>
         <h3 className="errorMsg">{errorMsg}</h3>
       </div>

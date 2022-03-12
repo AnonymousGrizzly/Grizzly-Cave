@@ -44,3 +44,37 @@
     border-right: 200px solid #d55252;
     box-shadow: rgba(37, 38, 39, 0.3) 0px 1px 2px 0px, rgba(82, 83, 85, 0.15) 0px 2px 6px 2px;
 }
+table{
+    display: flex;
+    flex-direction: column;
+}
+tbody{
+    font-size: 14px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+thead{
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 3px solid white;
+    text-align: left;
+}
+tr{
+    
+}
+th:first-of-type, td:first-of-type{
+    width: 25px;
+}
+td{
+    border-bottom: 1px solid #252525;
+}
+td:last-child, td:first-child{
+    border-bottom: none;
+}
+td, th{
+    padding: 10px 30px 10px 0px;
+    width: 150px;
+}
+td:last-child{
+    padding: 10px 0px 7px 0px;
+}

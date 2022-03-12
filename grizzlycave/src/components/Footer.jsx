@@ -1,5 +1,7 @@
 import React from 'react'
 import '../designs/Footer.css';
+import { GitHub, Instagram } from 'react-feather';
+
 
 
 function Footer() {
@@ -14,10 +16,9 @@ function Footer() {
                   <p>Maks Rogelj, GrizzlyCave 2022 </p>
                 </div>
                 <div className='footer-right'>
-                    <a href="#"><i className="fa-brands fa-github"></i></a>
-                    <a href="#"></a>
+                    <a href="#"><GitHub /></a>
+                    <a href="#"><Instagram /></a>
                 </div>
-
                 
             </div>
         </div>

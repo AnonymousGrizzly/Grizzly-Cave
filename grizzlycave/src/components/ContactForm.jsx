@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import '../designs/ContactForm.css';
+import { Mail, Lock } from 'react-feather';
 import TreesRight from '../images/trees-right.png'
 import TreesLeft from '../images/trees-left.png'
 
@@ -33,12 +34,12 @@ export default function ContactForm() {
   return (
     <div className='contactform-cntnr'>
      <form className="contact-form" onSubmit={sendEmail}>
-        <h1 id ="ContactUs">Contact us <i className="far fa-envelope"></i></h1>
+        <h1 id ="ContactUs" className='icon2'>Contact us &nbsp; <Mail size="35"/></h1>
         <p>-  We'd love to hear from you! - </p>
         <input type="text" name="user_name" id="user_name" placeholder="Name or Company"  required/>
         <input type="email" onInput={(e) => setEmail(e.target.value)} value={email} name="user_email" id="user_email" placeholder="Email" clasname="field" required/>
         <textarea name="user_message" id="user_message" placeholder="        How can we help you?" required />
-        <p><i className="fas fa-user-lock"></i> we NEVER share your email with anyone</p>
+        <p className='icon'><Lock size="20"/> &nbsp; we NEVER share your email with anyone</p>
         {isValid && (<input data-aos="fade-up" type="submit" value="Send"  className="submit-btn"/>)}
      </form>
     

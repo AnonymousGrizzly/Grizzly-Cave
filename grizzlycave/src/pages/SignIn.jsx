@@ -4,6 +4,7 @@ import Input from '../components/Input';
 import '../designs/Auth.css';
 import { HashLink as Link } from 'react-router-hash-link';
 import useAuth from '../hooks/useAuth';
+import { LogIn } from 'react-feather';
 import TreesRight from '../images/trees-right.png'
 import TreesLeft from '../images/trees-left.png'
 
@@ -35,10 +36,11 @@ function SignIn() {
         <br />
         <p>- please provide the necessary information to get inside -</p>
         <br />
-        <Link to="/signup" className="secondary-btn">
-          {' '}
-          Don't have an account? SignUp! <i className="fas fa-sign-in-alt"></i>
+        <div className='btn-centered'>
+        <Link to="/signup" className="secondary-btn icon">
+          Don't have an account? SignUp  &nbsp; <LogIn size="20"/>
         </Link>
+        </div>
       </div>
       <div className="form-cntnr">
         <Input
