@@ -13,11 +13,12 @@
     margin: auto;
     padding-left: 40px;
     padding-right: 40px;
-    height: 600px;
+    height: fit-content;
 }
 .profile-wrapper h2{
     padding-bottom: 25px;
 }
-.update-profile{
-    
+.update-profile input{
+    margin-bottom: 30px;
+    margin-top: -10px;
 }

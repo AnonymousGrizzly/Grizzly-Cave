@@ -6,6 +6,7 @@ import {Upload, FolderPlus, Mail, Tool} from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
 
+
 function Storage() {
   const history = useHistory();
   const fileInput = useRef();

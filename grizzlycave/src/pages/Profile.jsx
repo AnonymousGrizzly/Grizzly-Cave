@@ -7,7 +7,7 @@ import useAuth from '../hooks/useAuth';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { useHistory } from 'react-router';
-
+import {Lock, Mail, User} from 'react-feather';
 import { AuthService } from '../services/auth';
 
 function Profile() {
@@ -77,16 +77,15 @@ function Profile() {
     <div>
       <div className="profile-cntnr">
         <div className="profile-wrapper">
-          
           {showUpdate ? (
             <div>
-              <h2>PROFILE</h2>
-              <p id="username">
-                
+              <h2>Profile</h2>
+              <p id="username" className='icon'>
+                <User size="18"/> &nbsp;
                 <b> Username:</b>{userData.username}
               </p>
-              <p id="email">
-                
+              <p id="email" className='icon'>
+                <Mail size="18"/> &nbsp;
                 <b> Email:</b>{userData.email}
               </p>
               <br/>
@@ -100,25 +99,37 @@ function Profile() {
           ):(
             <div className='update-profile'>
               <h1>Update profile</h1>
-              <p><b>Email:</b></p>
+              <p className='icon'>
+                <Mail size={"18"}/>&nbsp;
+                <b>Email:</b>
+              </p>
             <Input 
               type = "text"
               value={userData.email}
               setValue={setEmail}
             /><br/>
-            <p><b>Username:</b></p>
+            <p className='icon'> 
+              <User size={"18"}/>&nbsp;
+              <b>Username:</b>
+            </p>
             <Input 
               type = "text"
               value={userData.username}
               setValue={setUsername}
             /><br/>
-            <p><b>Password:</b></p>
+            <p className='icon'>
+              <Lock size="18"/> &nbsp;
+              <b>Password:</b>
+            </p>
             <Input 
               type = "password"
               value={password}
               setValue={setPassword}
               placeholder="new password"
-            /><br/><br/>
+              /><br/>
+              <p>
+                * Note that restrictions still apply
+              </p><br/><br/>
             <Button
               text = "UPDATE"
               onClick = {handleSubmit}
