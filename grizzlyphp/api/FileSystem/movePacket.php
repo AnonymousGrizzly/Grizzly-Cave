@@ -20,11 +20,6 @@ include_once 'file_system.php';
 include_once 'folder_system.php';
 include_once 'packet_system.php';
 
-if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
-    http_response_code(200);
-    die;
-}
-
 $database = new Database();
 
 

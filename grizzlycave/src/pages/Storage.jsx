@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
 import '../designs/Storage.css';
 import { FileService } from '../services/file';
 import {Upload, FolderPlus, Mail, Tool} from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
+import { FolderService } from '../services/folder';
 
 
 function Storage() {
@@ -13,6 +14,16 @@ function Storage() {
   const [progress, setProgress] = useState(0);
   const [uploadStart, setUploadStart] = useState(false);
   const [uploadDone, setUploadDone] = useState(true);
+  const [currentFolderId, setCurrentFolderId] = useState(null);
+  const [data, setData] = useState({
+    files:[],
+    folders:[]
+  });
+  useEffect(()=>{
+    FolderService.getData(currentFolderId).then((data)=>{
+      setData(data);
+    })
+  }, [currentFolderId]);
 
   const onClick = () => {
     fileInput.current.click();
@@ -70,13 +81,17 @@ function Storage() {
                 </tr>
               </thead>
               <tbody>
-                <TableRow
-                  Name={"FileTest"}
-                  onClick={openFile}
-                  lastModified={"12.3.2022"}
-                  fileSize={"1300 b"}
-                  folder={false}
-                />
+                {
+                  data.files.map((file, i)=>{
+                    return <TableRow
+                      Name={file.filename}
+                      onClick={openFile}
+                      lastModified={"-"}
+                      fileSize={"-"}
+                      folder={false}
+                  /> 
+                  })
+                }
                 <TableRow
                   Name={"FolderTest"}
                   onClick={openFolder}
