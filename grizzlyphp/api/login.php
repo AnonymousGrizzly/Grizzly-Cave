@@ -20,7 +20,6 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 $user->username = $data->username;
 $username_exists = $user->assignUserData();
-// generate json web token
 
 
 

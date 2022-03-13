@@ -19,8 +19,5 @@ export class FileService {
       },
     });
   }
-  static async downloadFile(){
-    //download 
-    
-  }
+  
 }

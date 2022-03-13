@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../designs/Auth.css';
 import '../designs/Profile.css';
-import { getItem } from '../helpers/localstorage';
 import useAuth from '../hooks/useAuth';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { useHistory } from 'react-router';
 import {Lock, Mail, User} from 'react-feather';
-import { AuthService } from '../services/auth';
+
 
 function Profile() {
   const [userData, setUserData] = useState({});
@@ -19,7 +15,6 @@ function Profile() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const history = useHistory();
   const { updateUser } = useAuth();
 
   function validateEmail(signup_email) {
@@ -46,24 +41,37 @@ function Profile() {
   const handleSubmit = async () => {
     setErrorMsg('');
 
-    const isUsernameValid = validateUsername(username);
 
-    if (!isUsernameValid) {
-      return setErrorMsg('Username must be without special characters!');
+    if(username.length > 0 ){
+      const isUsernameValid = validateUsername(username);
+
+      if (!isUsernameValid) {
+        return setErrorMsg('Username must be without special characters!');
+      }
+    }else{
+      setUsername(userData.username);
     }
-    const isEmailValid = validateEmail(email);
+    
+    if(email.length > 0){
+      const isEmailValid = validateEmail(email);
 
-    if (!isEmailValid) {
-      return setErrorMsg('Email must be valid!');
+      if (!isEmailValid) {
+        return setErrorMsg('Email must be valid!');
+      }
+    }else{
+      setEmail(userData.email);
     }
 
-    const isPasswordValid = validatePassword(password);
+    if(password.length > 0){
+      const isPasswordValid = validatePassword(password);
 
-    if (!isPasswordValid) {
-      return setErrorMsg(
-        'Password must contain at least 8 characters, 1 number, 1 letter & 1 unique character (!#$%/?...)'
-      );
+      if (!isPasswordValid) {
+        return setErrorMsg(
+          'Password must contain at least 8 characters, 1 number, 1 letter & 1 unique character (!#$%/?...)'
+        );
+      }
     }
+
 
     updateUser(username, email, password);
     setShowUpdate(false);
@@ -98,15 +106,16 @@ function Profile() {
             </div>
           ):(
             <div className='update-profile'>
-              <h1>Update profile</h1>
+              <h2>Update profile</h2>
               <p className='icon'>
                 <Mail size={"18"}/>&nbsp;
                 <b>Email:</b>
               </p>
             <Input 
               type = "text"
-              value={userData.email}
+              placeholder={userData.email}
               setValue={setEmail}
+              value={email}
             /><br/>
             <p className='icon'> 
               <User size={"18"}/>&nbsp;
@@ -114,8 +123,9 @@ function Profile() {
             </p>
             <Input 
               type = "text"
-              value={userData.username}
+              placeholder={userData.username}
               setValue={setUsername}
+              value={username}
             /><br/>
             <p className='icon'>
               <Lock size="18"/> &nbsp;
@@ -123,7 +133,7 @@ function Profile() {
             </p>
             <Input 
               type = "password"
-              value={password}
+              value ={password}
               setValue={setPassword}
               placeholder="new password"
               /><br/>
