@@ -111,16 +111,19 @@ class FileSystem{
         return $stmt;
     }
     
-    public function getFilesByFolder(){
+    public function getFilesByFolder($user_id, $folder_id){
         $query = "SELECT file_id, filename, folder_id
             FROM ".$this->table."
-            WHERE folder_id = ?
+            WHERE folder_id = ? AND 
+            user_id = ?
         ";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->folder_id);
+        $stmt->bindParam(1, $folder_id);
+        $stmt->bindParam(2, $user_id);
         $stmt->execute();
         return $stmt;
     }
+
     public function getPath(){
         $path = $this->target_dir . $this->user_id . '/';
 

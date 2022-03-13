@@ -9,8 +9,16 @@ export class AuthService {
       method: 'POST',
       body: JSON.stringify(user),
     });
-    return response;
+    const wasSuccessful = response.status === 201;
+    const data = await response.json();
+    return {
+      token: data.jwt,
+      user: data.user,
+      wasSuccessful,
+      message: data.message,
+    };
   }
+
   static async loginUser(user) {
     const url = BASEURL + 'login.php';
     const response = await fetch(url, {
@@ -30,10 +38,13 @@ export class AuthService {
     const url = BASEURL + 'update_user.php';
     const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: JSON.stringify({
+        ...user, jwt: getItem('PHPTOKEN'),
+      }),
     });
     return response;
   }
+
   static async getUserInfo() {
     const url = BASEURL + 'get_user.php';
     const response = await fetch(url, {

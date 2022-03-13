@@ -16,7 +16,7 @@ function SignUp() {
   const [repassword, setRepassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const history = useHistory();
-  const { signUp } = useAuth();
+  const { signUp, error } = useAuth();
 
   function validateEmail(signup_email) {
     //Must contain @, can't be shorter than 8 characters
@@ -125,7 +125,7 @@ function SignUp() {
           className="submit-btn"
         />
       </div>
-      <h3 className="errorMsg">{errorMsg}</h3>
+      <h3 className="errorMsg">{error}</h3>
     </div>
   );
 }

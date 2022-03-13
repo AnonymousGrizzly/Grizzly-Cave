@@ -64,11 +64,17 @@ export function AuthProvider({ children }) {
       username,
       email,
       password,
-    }).then(({ user, token }) => {
-      setUser(user);
-      localStorage.setItem('PHPTOKEN', token);
-      history.push('/profile');
-    });
+    }).then(({ user, token, wasSuccessful, message }) => {
+      if (wasSuccessful) {
+        setUser(user);
+        setIsLoggedIn(true);
+        localStorage.setItem('PHPTOKEN', token);
+        history.push('/profile');
+      } else {
+        setError(message);
+      }
+    })
+    .catch((error) => setError(error));
   };
 
   const logout = () => {
@@ -83,19 +89,14 @@ export function AuthProvider({ children }) {
   };
 
   const updateUser = async (username, email, password) => {
-    try {
-      const user = await AuthService.validateToken();
-      if (user.wasSuccessful) {
+    try{
         AuthService.updateUser(
           username,
           email,
           password,
-        ).then(({ user, token }) => {
+        ).then(({ user }) => {
           setUser(user);
-          localStorage.setItem('PHPTOKEN', token);
-          history.push('/profile');
         });
-      }
     } catch (err) {
       setError(err);
       logout();

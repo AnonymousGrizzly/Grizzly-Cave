@@ -35,7 +35,8 @@ class User{
         // hash
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
         $stmt->bindParam(':password', $password_hash);
-        if($stmt->execute()){ //if successful
+        if($stmt->execute()){
+            $this->user_id = $this->conn->lastInsertId();
             return true;
         } 
         return false;

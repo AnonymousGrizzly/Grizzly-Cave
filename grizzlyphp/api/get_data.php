@@ -20,38 +20,24 @@ include_once 'file_system.php';
 include_once 'folder_system.php';
 include_once 'packet_system.php';
 
-if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
-    http_response_code(200);
-    die;
-}
-
 $database = new Database();
-
-
 $db = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $jwtData=isset($data->jwt) ? $data->jwt : "";
 
-$folder = new FolderSystem($db);
-$file = new FileSystem($db);
 
-if($jwt){
-    $decoded = JWT::decode($jwt,  new Key($key, 'HS256'));
-    $packet = new PacketSystem($db);
-    $packet->packet_id = $decoded->data->packet_id;
-    $packet->getPacketDetails();
-    $file->file_id = $packet->file_id;
-    $fileDetails = $file->getFileDetails()->fetch();
-    $file->filetype = $fileDetails['filetype'];
-    $file->filesize = $fileDetails['filesize'];
-    $file->filename = $fileDetails['filename'];
-    $file->sanitized_name = $fileDetails['sanitized_name'];
-    $file->user_id = $packet->receiver_id;
-    
-    $folder->foldername = "Mailbox";
-    $folder->createFolder();
-    
-    //get folder id
-    $file->createFile();
-
+if(!$jwtData){
+    http_response_code(401);
+    die(json_encode(array("message" => "Access denied."))); 
 }
+
+$decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+
+$user_id = $decoded->data->user_id;
+$parent_folder_id = $data->parent_folder_id;
+
+$fs = new FileSystem($db);
+
+$file = $fs->getFilesByFolder($user_id, $parent_folder_id);
+
+http_response_code(200);
