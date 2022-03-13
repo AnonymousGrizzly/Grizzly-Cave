@@ -64,6 +64,7 @@ th:first-of-type, td:first-of-type{
 }
 td{
     border-bottom: 1px solid #252525;
+    cursor: pointer;
 }
 td:first-child{
     border-bottom: none;
