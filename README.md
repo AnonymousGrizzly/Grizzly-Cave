@@ -7,16 +7,16 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
 <hr>
 <ul>
   <li>Uredi footer</li>
-  <li>Uredi SignUp:: samo še spam dodaj, da bo večje okno</li>
-  <li>Dodaj osebno stran (profile page) </li>
-   <li>front page za ostale guarded access strani</li>
-  <li>Spremeni nav-bar, da bo drugacen ko se vpises</li>
-  <li>START WITH FILE SENDING FOR FUCK'S SAKE </li>
-  <li>log out</li>
+  <li>Izpiši file in folderje</li>
+  <li>Naredi pakete</li>
+  <li>Poveži že narjeno kodo v php s frontendom</li>
+  <li>Že napisane funkcije uredi v svoje file</li>
+  <li>Uredi news page in besedilo na main strani</li>
+  <li>Delete user btn</li>
 </ul>
 <hr>
 <h3>NOTES:</h3>
 <hr>
-<h1>FOOTER CSS JE HUGE BUG, delete that shit as fast as you can</h1>
-al ga pa fakin spremen
+<p></p>
+<p>Zakaj nimamo asociativno tabelo pr fetchAll?</p>
 <hr>
