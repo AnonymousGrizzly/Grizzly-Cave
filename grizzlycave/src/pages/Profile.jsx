@@ -3,7 +3,7 @@ import '../designs/Profile.css';
 import useAuth from '../hooks/useAuth';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import {Lock, Mail, User} from 'react-feather';
+import {Lock, Mail, X, User} from 'react-feather';
 
 
 function Profile() {
@@ -81,18 +81,22 @@ function Profile() {
     setShowUpdate(false);
   };
 
+  const backUpdate = () => {
+    setShowUpdate(true);
+  }
+
   return (
     <div>
       <div className="profile-cntnr">
+        <h1>Profile</h1>
         <div className="profile-wrapper">
           {showUpdate ? (
             <div>
-              <h2>Profile</h2>
-              <p id="username" className='icon'>
+              <p id="username" className='icon profile-content'>
                 <User size="18"/> &nbsp;
                 <b> Username:</b>{userData.username}
               </p>
-              <p id="email" className='icon'>
+              <p id="email" className='icon profile-content'>
                 <Mail size="18"/> &nbsp;
                 <b> Email:</b>{userData.email}
               </p>
@@ -103,10 +107,21 @@ function Profile() {
                 className="secondary-btn"
                 onClick = {UpdateFunction}
               ></Button>
+              <br/>
+              <br/>
+              <Button
+              text = "Delete User"
+              onClick = {handleSubmit}
+              className = "secondary-btn"
+            />
             </div>
           ):(
             <div className='update-profile'>
-              <h2>Update profile</h2>
+              <h2>Update profile  &nbsp; &nbsp;<Button
+                text = {<X size={"22"}/>}
+                onClick = {backUpdate}
+                className = "icon-btn"
+              /></h2>
               <p className='icon'>
                 <Mail size={"18"}/>&nbsp;
                 <b>Email:</b>
@@ -145,6 +160,7 @@ function Profile() {
               onClick = {handleSubmit}
               className = "secondary-btn"
             />
+            
           </div>
          )}
         </div>

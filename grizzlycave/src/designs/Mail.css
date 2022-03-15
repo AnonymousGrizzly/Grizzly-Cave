@@ -16,3 +16,10 @@
     background-color: var(--secondary);
     width:  57%;
 } 
+@media screen and (min-width: 1500px){
+    .mail-cntnr{
+        width: 1450px;
+        margin: auto;
+        margin-top: 100px;
+    }
+}

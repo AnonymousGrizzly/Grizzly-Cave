@@ -27,6 +27,7 @@ export default function News(){
             <h1>News &ensp; <Coffee size="38" /> </h1>
             <hr/>
             <div className="news-blocks">
+              <br/>
               <p>Time left till push: so long the countdown hasn't even started.</p>
               
             </div>

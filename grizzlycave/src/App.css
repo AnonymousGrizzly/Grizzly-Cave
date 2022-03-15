@@ -144,6 +144,18 @@ input{
 
 .third-btn:hover{
   border-bottom: 1px solid #ffffff;
+  
+}
+
+.icon-btn{
+  text-decoration: none;
+  background-color: #000000;
+  box-shadow: none;
+  border: none;
+  border: 1px solid white;
+  padding-left: 1px;
+  padding-right: 1px;
+
 }
 
 @media screen and (max-width:1160px) {

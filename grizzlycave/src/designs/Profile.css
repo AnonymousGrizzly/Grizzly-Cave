@@ -5,14 +5,18 @@
     margin-top:100px;
     margin-bottom: 100px;
 }
+.profile-cntnr h1{
+    margin-left: 6%;
+}
+
 .profile-wrapper{
     background-color: var(--secondary);
     padding-bottom: 100px;
     padding-top: 50px;
-    width: 600px;
-    margin: auto;
-    padding-left: 40px;
-    padding-right: 40px;
+    width: 400px;
+    margin-left: 6%;
+    padding-left: 50px;
+    padding-right: 50px;
     height: fit-content;
 }
 .profile-wrapper h2{
@@ -21,4 +25,11 @@
 .update-profile input{
     margin-bottom: 30px;
     margin-top: -10px;
+}
+@media screen and (min-width: 1500px){
+    .profile-cntnr{
+        width: 1450px;
+        margin: auto;
+        margin-top: 100px;
+    }
 }
