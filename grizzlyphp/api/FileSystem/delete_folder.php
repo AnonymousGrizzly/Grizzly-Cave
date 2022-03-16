@@ -47,7 +47,6 @@ try{
         http_response_code(401);
         echo json_encode(array("message" => "Unable to delete folder."));
     }
-    
 }catch (Exception $e){
     http_response_code(401);
     echo json_encode(array(
