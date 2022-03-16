@@ -91,7 +91,7 @@ class User{
     }
 
     public function update(){
-        $query = "UPDATE".$this->table_name."
+        $query = "UPDATE ".$this->table_name."
             SET 
                 username = ?,
                 email = ?,
@@ -106,7 +106,7 @@ class User{
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
         $this->password=htmlspecialchars(strip_tags($this->password));
         $stmt->bindParam(3, $this->$password_hash);
-        $stmt->bindParam(4, $this->id);
+        $stmt->bindParam(4, $this->user_id);
         if($stmt->execute()){
             return true;
         }
@@ -114,7 +114,7 @@ class User{
     }
 
     public function updateWithoutPassword(){
-        $query = "UPDATE".$this->table_name."
+        $query = "UPDATE ".$this->table_name."
                 SET 
                     username = ?,
                     email = ?
@@ -125,7 +125,7 @@ class User{
         $this->email=htmlspecialchars(strip_tags($this->email));
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->email);
-        $stmt->bindParam(3, $this->id);
+        $stmt->bindParam(3, $this->user_id);
         if($stmt->execute()){
             return true;
         }
@@ -133,12 +133,13 @@ class User{
     }
 
     public function delete(){
-        $query = "DELETE FROM".$this->table_name."
-            WHERE id = ?
+        $query = "DELETE FROM ".$this->table_name."
+            WHERE user_id = ?
         ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->user_id);
         if($stmt->execute()){
+            sleep(7);
             return true;
         }
         return false;

@@ -32,7 +32,7 @@ $jwt=isset($data->jwt) ? $data->jwt : "";
 if($jwt){
     try {
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-        $user->id = $decoded->data->user_id;
+        $user->user_id = $decoded->data->user_id;
         $user->username = $data->username;
         $stmt = $user->getUserByUsername();
         if($stmt->rowCount()>0){

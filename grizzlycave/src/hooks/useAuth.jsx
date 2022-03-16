@@ -103,6 +103,17 @@ export function AuthProvider({ children }) {
     }
   }
 
+  const deleteUser = async () => {
+    try{
+      AuthService.deleteUser().then(()=>{
+        
+      });
+    } catch (err){
+      setError(err);
+      
+    }
+  }
+
   const memoizedValue = useMemo(
     () => ({
       user,
@@ -110,7 +121,8 @@ export function AuthProvider({ children }) {
       login,
       signUp,
       getProfileData,
-      updateUser, 
+      updateUser,
+      deleteUser, 
       isLoggedIn,
       logout,
     }),

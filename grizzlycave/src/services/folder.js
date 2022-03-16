@@ -14,4 +14,19 @@ export class FolderService {
             folders: []
         };
     }
+    static async createFolder(parentId, folderName){
+        const response = await axios.post(`${BASEURL}/create_folder.php`, {
+            parent_folder_id: parentId,
+            foldername: folderName,
+            jwt: getItem('PHPTOKEN')
+        });
+        return response;
+    }
+    static async deleteFolder(folderId){
+        const response = await axios.post(`${BASEURL}/create_folder.php`, {
+            folder_id: folderId,
+            jwt: getItem('PHPTOKEN')
+        });
+        return response;
+    }
 }
