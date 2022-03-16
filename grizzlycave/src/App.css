@@ -144,7 +144,6 @@ input{
 
 .third-btn:hover{
   border-bottom: 1px solid #ffffff;
-  
 }
 
 .icon-btn{
@@ -155,11 +154,25 @@ input{
   border: 1px solid white;
   padding-left: 1px;
   padding-right: 1px;
+}
 
+.error-btn{
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+  background-color: #000000;
+  color: #d55252;
+  border: 1px solid #d55252;
+  padding: 7px 73px;
+}
+
+.error-btn:active{
+  background-color: #d55252;
+  color: #000;
 }
 
 @media screen and (max-width:1160px) {
   .section{
     margin-right: 0;
-  } 
+  }
 }

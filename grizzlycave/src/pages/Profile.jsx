@@ -15,7 +15,8 @@ function Profile() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const { updateUser } = useAuth();
+
+  const { updateUser, deleteUser } = useAuth();
 
   function validateEmail(signup_email) {
     //Must contain @, can't be shorter than 8 characters
@@ -40,7 +41,6 @@ function Profile() {
 
   const handleSubmit = async () => {
     setErrorMsg('');
-
 
     if(username.length > 0 ){
       const isUsernameValid = validateUsername(username);
@@ -77,12 +77,17 @@ function Profile() {
     setShowUpdate(false);
   };
 
-  const UpdateFunction = () =>{
+  const UpdateFunction = () => {
     setShowUpdate(false);
   };
-
   const backUpdate = () => {
     setShowUpdate(true);
+  }
+  function handleDeleteSubmit(){
+    if(deleteUser()){
+      return setErrorMsg('Goodbye . . .');
+    }
+    return true;
   }
 
   return (
@@ -111,8 +116,8 @@ function Profile() {
               <br/>
               <Button
               text = "Delete User"
-              onClick = {handleSubmit}
-              className = "secondary-btn"
+              onClick = {handleDeleteSubmit}
+              className = "error-btn"
             />
             </div>
           ):(

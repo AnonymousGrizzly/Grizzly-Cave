@@ -44,7 +44,16 @@ export class AuthService {
     });
     return response;
   }
-
+  static async deleteUser(){
+    const url = BASEURL + 'delete_user.php';
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        jwt: getItem('PHPTOKEN'),
+      }),
+    })
+    return response;
+  }
   static async getUserInfo() {
     const url = BASEURL + 'get_user.php';
     const response = await fetch(url, {
