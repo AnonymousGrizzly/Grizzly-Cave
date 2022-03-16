@@ -15,10 +15,8 @@ use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 include_once '../config/database.php';
-include_once '../objects/user.php';
-include_once 'file_system.php';
 include_once 'folder_system.php';
-include_once 'packet_system.php';
+
 
 $database = new Database();
 
@@ -54,3 +52,6 @@ try{
         "error" => $e->getMessage()
     ));
 }
+
+//nared semi delete v folder system in kle
+?>

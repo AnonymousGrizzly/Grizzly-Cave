@@ -15,40 +15,35 @@ use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 include_once '../config/database.php';
-include_once '../objects/user.php';
 include_once 'file_system.php';
-include_once 'folder_system.php';
-include_once 'packet_system.php';
 
 $database = new Database();
+
 
 $db = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $jwtData=isset($data->jwt) ? $data->jwt : "";
+
+$file = new FileSystem($db);
+
+$decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
+
+$file->user_id = $decoded->data->user_id;
+$file->folder_id = $data->folder_id;
 
 if(!$jwtData){
     http_response_code(401);
     die( json_encode(array("message" => "Access denied."))); 
 }
 
-$folder = new FolderSystem($db);
-
-$decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
-
-$folder->user_id = $decoded->data->user_id;
-$folder->parentfolder_id = $data->folder_id;
-$folder->foldername = $data->foldername;
-
-
 try{
-    if($folder->createFolder()){
+    if($file->deleteFile(false)){
         http_response_code(200);
-        echo json_encode(array("message" => "Folder created."));
+        echo json_encode(array("message" => "Folder deleted."));
     }else{
         http_response_code(401);
-        echo json_encode(array("message" => "Unable to create folder."));
+        echo json_encode(array("message" => "Unable to delete folder."));
     }
-    
 }catch (Exception $e){
     http_response_code(401);
     echo json_encode(array(
@@ -56,4 +51,7 @@ try{
         "error" => $e->getMessage()
     ));
 }
+
+//dokončaj full delete pa semi delete
+
 ?>

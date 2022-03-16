@@ -42,7 +42,7 @@ function Storage() {
 
     await FileService.uploadFile(file, (pr) => {
       if(pr > 99){
-        setTimeout(() => { //prever a dela
+        setTimeout(() => {
           setUploadStart(false);
         }, 3000);
         setUploadDone(false);
