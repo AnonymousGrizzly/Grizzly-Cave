@@ -17,6 +17,6 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
 <hr>
 <h3>NOTES:</h3>
 <hr>
-<p></p>
+<p>Dodaj key v TableRow component</p>
 <p>Zakaj nimamo asociativno tabelo pr fetchAll?</p>
 <hr>
