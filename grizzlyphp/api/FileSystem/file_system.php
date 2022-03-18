@@ -100,7 +100,7 @@ class FileSystem{
         return false;
     }
 
-    public function getFiles(){
+    public function getFiles(){ //files without folders
         $query = "SELECT file_id, filename, folder_id
             FROM ".$this->table."
             WHERE user_id = ?
@@ -111,18 +111,24 @@ class FileSystem{
         return $stmt;
     }
     
-    public function getFilesByFolder($user_id, $folder_id){
-        $query = "SELECT file_id, filename, folder_id
+    public function getFilesByFolder($user_id, $folder_id){ //normal file system 
+        $query = "SELECT 
+        file_id,
+        filename, 
+        folder_id, 
+        modified_at, 
+        created_at, 
+        filesize
             FROM ".$this->table."
             WHERE ((? IS NULL AND folder_id IS NULL) OR (folder_id = ?)) AND 
             user_id = ?
         ";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $folder_id);
-        $stmt->bindParam(2, $folder_id);
-        $stmt->bindParam(3, $user_id);
+        $stmt->bindParam(1, $folder_id); //if parent folder id is root 
+        $stmt->bindParam(2, $folder_id); //if not parent folder
+        $stmt->bindParam(3, $user_id); //owner 
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); //return associative table of files
     }
 
     public function getPath(){

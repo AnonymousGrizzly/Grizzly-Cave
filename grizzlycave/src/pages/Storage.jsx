@@ -86,10 +86,23 @@ function Storage() {
                     return <TableRow
                       Name={file.filename}
                       onClick={openFile}
-                      lastModified={"-"}
-                      fileSize={"-"}
+                      lastModified={file.modified_at}
+                      fileSize={file.filesize}
                       folder={false}
+                      key={i}
                   /> 
+                  })
+                }
+                {
+                  data.folders.map((folder, i)=>{
+                    return <TableRow
+                      Name={folder.foldername}
+                      onClick={openFolder}
+                      lastModified={folder.modified_at}
+                      fileSize={"-"}
+                      folder={true}
+                      key={i}
+                    />
                   })
                 }
                 <TableRow

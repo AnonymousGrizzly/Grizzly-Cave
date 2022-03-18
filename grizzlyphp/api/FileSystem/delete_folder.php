@@ -52,6 +52,4 @@ try{
         "error" => $e->getMessage()
     ));
 }
-
-//nared semi delete v folder system in kle
 ?>
