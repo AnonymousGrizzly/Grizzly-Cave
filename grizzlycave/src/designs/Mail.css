@@ -1,21 +1,61 @@
-
 .mail-cntnr h1{
     margin-top: 100px;
     margin-left: 6%;
 }
 .postaloffice-cntnr{
-    width: 57%;
-    height: 500px;
+    width: fit-content;
+    height: fit-content;
     background-color: var(--secondary);
     padding: 50px;
     margin-left: 50px;
 }
+
 .mailbox-cntnr{
     margin-left: 50px;
+    margin-bottom: 50px;
     padding: 50px;
     background-color: var(--secondary);
-    width:  57%;
+    width:  254px;
 } 
+
+.mail-cntnr h3{
+    margin-bottom: 30px;
+}
+
+.mailbox-cntnr p{
+    text-align: center;
+}
+
+.choose-btn{
+    box-shadow: none;
+    text-decoration: none;
+    background-color: #252525;
+    border: none;
+    border: 1px solid #fff;
+    padding: 6px 10px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-right: auto;
+}
+.postaloffice-cntnr p{
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.postaloffice-cntnr input{
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.office-btns{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.office-btns .secondary-btn{
+    margin: auto;
+}
+
 @media screen and (min-width: 1500px){
     .mail-cntnr{
         width: 1450px;
