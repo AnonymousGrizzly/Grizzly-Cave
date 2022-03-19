@@ -41,6 +41,10 @@ if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD
 
     $fileName = $_FILES['uploadedFile']['name'];
     $fileSize = $_FILES['uploadedFile']['size'];
+    if($fileSize>50000){
+        http_response_code(413);
+        die(json_encode(array("message"=>"File to large!")));
+    }
     $fileType = $_FILES['uploadedFile']['type'];
     $fileNameCmps = explode(".", $fileName);
     $fileExtension = strtolower(end($fileNameCmps));

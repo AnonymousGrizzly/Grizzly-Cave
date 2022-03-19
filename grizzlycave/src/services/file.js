@@ -19,5 +19,12 @@ export class FileService {
       },
     });
   }
+  static async downloadFile(fileId) {
+    await axios.post(`${BASEURL}/FileSystem/file_download.php`, fileId, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
   
 }

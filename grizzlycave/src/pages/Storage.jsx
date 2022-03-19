@@ -28,9 +28,7 @@ function Storage() {
   const onClick = () => {
     fileInput.current.click();
   };
-  const createFolder = ()=>{
-
-  }
+  
   const fileSend = () => {
     history.push('/mail');
   }
@@ -55,12 +53,15 @@ function Storage() {
       
     });
   };
-  const openFile = ()=>{
-
+  const openFile = () => {
+    
   };
-  const openFolder = ()=>{
-
+  const openFolder = (folderId)=>{
+    setCurrentFolderId(folderId);
   };
+  const createFolder = async () => {
+    await FolderService.createFolder();
+  }
   return (
     <div id="storage">
       {uploadStart && <div className="progressbar"  data-aos="fade-left">{uploadDone ? (progress.toFixed(1)+" %") : "Done! "  } </div>}
@@ -97,7 +98,7 @@ function Storage() {
                   data.folders.map((folder, i)=>{
                     return <TableRow
                       Name={folder.foldername}
-                      onClick={openFolder}
+                      onClick={openFolder(folder.folder_id)}
                       lastModified={folder.modified_at}
                       fileSize={"-"}
                       folder={true}
@@ -107,7 +108,7 @@ function Storage() {
                 }
                 <TableRow
                   Name={"FolderTest"}
-                  onClick={openFolder}
+                  
                   lastModified={"12.3.2022"}
                   fileSize={"-"}
                   folder={true}
