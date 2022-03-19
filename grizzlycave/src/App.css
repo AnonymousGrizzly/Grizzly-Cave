@@ -170,6 +170,18 @@ input{
   background-color: #d55252;
   color: #000;
 }
+.mini-btn{
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+  background-color: #121212;
+  margin-left: 5px;
+  padding: 3px;
+}
+
+.mini-btn, .error-btn, .icon-btn, .secondary-btn, .third-btn{
+  cursor: pointer;
+}
 
 @media screen and (max-width:1160px) {
   .section{

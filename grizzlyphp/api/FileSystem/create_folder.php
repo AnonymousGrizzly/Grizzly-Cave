@@ -20,8 +20,13 @@ include_once 'file_system.php';
 include_once 'folder_system.php';
 include_once 'packet_system.php';
 
-$database = new Database();
 
+if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
+    http_response_code(200);
+    die;
+}
+
+$database = new Database();
 $db = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $jwtData=isset($data->jwt) ? $data->jwt : "";

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
 import '../designs/Storage.css';
 import { FileService } from '../services/file';
-import {Upload, FolderPlus, Mail, Tool} from 'react-feather';
+import {Upload, FolderPlus, Mail, Tool, ArrowRightCircle} from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
 import { FolderService } from '../services/folder';
@@ -11,10 +11,12 @@ import { FolderService } from '../services/folder';
 function Storage() {
   const history = useHistory();
   const fileInput = useRef();
+  const folderInput = useRef();
   const [progress, setProgress] = useState(0);
   const [uploadStart, setUploadStart] = useState(false);
   const [uploadDone, setUploadDone] = useState(true);
   const [currentFolderId, setCurrentFolderId] = useState(null);
+  const [showFolderInput, setShowFolderInput] = useState(false);
   const [data, setData] = useState({
     files:[],
     folders:[]
@@ -31,6 +33,18 @@ function Storage() {
   
   const fileSend = () => {
     history.push('/mail');
+  }
+
+  function validateFolderName(folderName){
+    //special chars not allowed, at least 3 chars, just numbers and letters
+    const re = /^([a-zA-Z0-9][^*/><?\|:]*)$/;
+    return re.test(folderName);
+  }
+
+  const handleFolderSubmit = async (currentFolder, folderName) => {
+    if(validateFolderName(folderName)){
+      await FolderService.createFolder(currentFolder, folderName);
+    }
   }
 
   const onFiles = async () => {
@@ -54,13 +68,13 @@ function Storage() {
     });
   };
   const openFile = () => {
-    
+
   };
   const openFolder = (folderId)=>{
     setCurrentFolderId(folderId);
   };
-  const createFolder = async () => {
-    await FolderService.createFolder();
+  const changeShowInput = () => {
+    setShowFolderInput(!showFolderInput);
   }
   return (
     <div id="storage">
@@ -108,7 +122,6 @@ function Storage() {
                 }
                 <TableRow
                   Name={"FolderTest"}
-                  
                   lastModified={"12.3.2022"}
                   fileSize={"-"}
                   folder={true}
@@ -126,8 +139,21 @@ function Storage() {
             <Button
               className={'third-btn'}
               text={"Create Folder"}
-              onClick={createFolder}
-            /><FolderPlus size={"18"}/><br/>
+              onClick={changeShowInput}
+            /><FolderPlus size={"18"}/>
+            {showFolderInput && (
+              <div>
+                <input 
+                  className='folderInput' 
+                  ref={folderInput}
+                />
+                <Button
+                  text={<ArrowRightCircle size={"18"}/>}
+                  className={'mini-btn'}
+                  onClick={handleFolderSubmit(currentFolderId, folderInput)}
+                />
+              </div>
+            )}<br/>
             <Button 
               className={'third-btn'}
               text={"Send File"}

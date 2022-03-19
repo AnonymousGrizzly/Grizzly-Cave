@@ -75,6 +75,15 @@ td:last-child{
     padding: 10px 0px 7px 0px;
     text-align: right;
 }
+td:active, table:active, table:hover{
+    background-color: var(--secondary);
+}
+
+.folderInput{
+    margin: 0;
+    padding: 0px;
+    width: 138px;
+}
 
 @media screen and (min-width: 1500px){
     .storage-cntnr{
