@@ -11,6 +11,7 @@ import Storage from './pages/Storage';
 import GuardedRoute from './components/GuardedRoute';
 import { PublicRoute } from './components/PublicRoute';
 import { AuthProvider } from './hooks/useAuth';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <GuardedRoute path="/profile" exact component={Profile} />
           <GuardedRoute path="/mail" exact component={Mail} />
           <GuardedRoute path="/storage" exact component={Storage} />
+          <Route path="*" component={NotFound}/>
         </Switch>
       </AuthProvider>
     </Router>
