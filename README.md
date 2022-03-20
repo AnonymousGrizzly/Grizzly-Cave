@@ -17,6 +17,7 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
 <hr>
 <h3>NOTES:</h3>
 <hr>
+<p>Folder se izpiše, potem pa kar zgine</p>
 <p>Mamo par buggov v folder in files</p>
 <p>Mamo par buggov tut v packet</p>
 <hr>
