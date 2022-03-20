@@ -25,16 +25,17 @@ export default function Cards() {
                 <div className='section'>
                     <h2 className='icon'>Security &nbsp;<Shield size="30"/></h2>
                     <p> 
-                        Don't worry about other people trying to read your stuff. Focus on your work and leave security to us!
-                        <br/>    
-                        This web app is well secured with many systems to battle sql injections 
-                        .......
+                        Don't worry about other people trying to read your stuff. Focus on your work and leave security to us!<br/>    
+                        This web app is well secured with many ways to battle sql injections, backdoor entrances and other hacks.<br/>
+                        With the help of regular expressions we even avoid client based errors, with passwords needing to be complex and users needing to relogin after 6 hours.<br/>
+                        It's still a new web app, so we are still programming new ways to secure our application. To read more about what we add every day, check out our news page!
                     </p>
                 </div>
                 <div className='section'>
                     <h2 className='icon'><Coffee size="28"/>&nbsp; Check out new things we added!</h2>
                     <p>
-                        There are weekly updates on our web app. If you want to know what's up, click on the button bellow!
+                        Our app is still new, so there are daily updates to make your stay in our cave more comfortable.<br/>
+                        If you want to know what's up, click on the button bellow!
                         <br/><br/>
                     </p>
                     <Link   to="/news" className="secondary-btn" >News <i className="fas fa-long-arrow-alt-right"></i></Link>

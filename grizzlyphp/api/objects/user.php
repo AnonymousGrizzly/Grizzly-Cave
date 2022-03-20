@@ -115,7 +115,7 @@ class User{
 
     public function updateWithoutPassword(){
         $query = "UPDATE ".$this->table_name."
-                SET 
+                SET
                     username = ?,
                     email = ?
                     WHERE user_id = ?
