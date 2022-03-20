@@ -6,7 +6,6 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
 <h3> TO-DO LIST:</h3>
 <hr>
 <ul>
-  <li>Uredi footer links</li>
   <li>Izpiši folderje</li>
   <li>Naredi pakete</li>
   <li>Poveži že narjeno kodo v php s frontendom</li>
