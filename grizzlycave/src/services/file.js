@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getItem } from '../helpers/localstorage';
 
 const BASEURL = 'http://localhost:3001/grizzlyphp/api/';
 
@@ -18,13 +19,21 @@ export class FileService {
         changeProgress(progress * 100);
       },
     });
+    return file;
   }
   static async downloadFile(fileId) {
-    await axios.post(`${BASEURL}/FileSystem/file_download.php`, fileId, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-  }
   
+  const response = await fetch(`${BASEURL}/FileSystem/file_download.php`, {
+    method: "POST",
+    body: JSON.stringify({
+      jwt: getItem('PHPTOKEN'),
+      fileId
+    }),
+   });
+    const arrayBuffer = await response.arrayBuffer()
+    const blob = new Blob([arrayBuffer]);
+    const url = URL.createObjectURL(blob);  
+    return url;
+
+  }
 }

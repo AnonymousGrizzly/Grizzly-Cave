@@ -135,26 +135,10 @@ class FileSystem{
         $path = $this->target_dir . $this->user_id . '/';
 
         if ($this->folder_id === NULL) {
-            return $path;
+    
+            return $path.$this->sanitized_name;
         }
-
-        $condition = $this->file_id;
-        $query = "SELECT folder_id FROM ".$this->table."
-            WHERE file_id = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $condition);
-        $stmt->execute();
-        $stmt->bind_result($condition);
-        while($stmt->rowCount()>0){
-            $path .= $condition .'/';
-            $query = "SELECT folder_id FROM ".$this->folder_table."
-            WHERE folder_id = ?";
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(1, $condition);
-            $stmt->execute();
-        }
-        $path .= $condition .'/';
-        return $path;
+        return $path.$this->sanitized_name;
     }
     /*public function getSanitizedName(){
         $query = "SELECT sanitized_name FROM ".$this->table."
@@ -166,11 +150,12 @@ class FileSystem{
         $stmt->bind_result($result);
         return $result;
     }*/
-    public function getFileDetails(){
+    public function getFileDetails($fileId, $userId){
         $query = "SELECT filetype, filesize, filename, sanitized_name FROM ".$this->table."
-        WHERE file_id = ?";
+        WHERE file_id = ? AND user_id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->file_id);
+        $stmt->bindParam(1, $fileId);
+        $stmt->bindParam(2, $userId);
         $stmt->execute();
         return $stmt;
     }

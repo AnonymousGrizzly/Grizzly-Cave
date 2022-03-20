@@ -41,14 +41,14 @@ $folder = new FolderSystem($db);
 $decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
 
 $folder->user_id = $decoded->data->user_id;
-$folder->parentfolder_id = $data->folder_id;
+$folder->parentfolder_id = $data->parent_folder_id;
 $folder->foldername = $data->foldername;
 
 
 try{
-    if($folder->createFolder()){
+    if($folder->createFolder()){        
         http_response_code(200);
-        echo json_encode(array("message" => "Folder created."));
+        echo json_encode(array("message" => "Folder created.", "data" => $folder) );
     }else{
         http_response_code(401);
         echo json_encode(array("message" => "Unable to create folder."));

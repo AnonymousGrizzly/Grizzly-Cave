@@ -54,7 +54,7 @@ if($jwt){
                     "exp" => $expiration_time,
                     "iss" => $issuer,
                     "data" => array(
-                        "user_id" => $user->id,
+                        "user_id" => $user->user_id,
                         "username" => $user->username
                     )
                  );
@@ -82,7 +82,7 @@ if($jwt){
                 "exp" => $expiration_time,
                 "iss" => $issuer,
                 "data" => array(
-                    "user_id" => $user->id,
+                    "user_id" => $user->user_id,
                     "username" => $user->username
                 )
              );

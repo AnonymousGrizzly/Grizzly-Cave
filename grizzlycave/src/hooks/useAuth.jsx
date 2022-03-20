@@ -90,11 +90,11 @@ export function AuthProvider({ children }) {
 
   const updateUser = async (username, email, password) => {
     try{
-        AuthService.updateUser(
+        AuthService.updateUser({
           username,
           email,
           password,
-        ).then(({ user }) => {
+        }).then(({ user }) => {
           setUser(user);
         });
     } catch (err) {
@@ -106,11 +106,10 @@ export function AuthProvider({ children }) {
   const deleteUser = async () => {
     try{
       AuthService.deleteUser().then(()=>{
-        
+        logout();
       });
     } catch (err){
       setError(err);
-      
     }
   }
 

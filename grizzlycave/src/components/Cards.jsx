@@ -15,19 +15,20 @@ export default function Cards() {
                 <div id="AboutUs" className='section'>
                     <h2 className='icon'><Info size="28" />&nbsp; About Us </h2>
                     <p>
-                        This is a web app, where you can store and/or send any files.
-                        <br/> Set a password and expiry date, along with a message of what kind of file it is.
-                        <br/>If you want to send a super secret message without a file, you can do it here too!
-                        <br/>It also functions as a storage for passwords.</p>
+                        This is a web app for storing and sending files. <br/>
+                        To start, click on the button "Sign Up/In"
+                        or the buttons on the hero section to proceed to the login/signup page to create or use your account.<br/>
+                        If you need help or if you want to contact us, feel free to check the contact us form down below. <br/>
+                        For more information, click on the buttons in the footer section.
+                    </p>
                 </div>
                 <div className='section'>
                     <h2 className='icon'>Security &nbsp;<Shield size="30"/></h2>
                     <p> 
                         Don't worry about other people trying to read your stuff. Focus on your work and leave security to us!
                         <br/>    
-                        <br/>First of all, it uses https to load your page, which means any data you type into this site is not sent to our server in plaintext, which helps protecting your data on the journey to the safe grizzlycave.
-                        <br/>You can try to guess your password only a few times, before grizzly decides you are trying to break in.
-                        <br/> Database is protected by bcrypt, passwords are encripted by different salts and you can even chose what enryption do you want to use for your messages!
+                        This web app is well secured with many systems to battle sql injections 
+                        .......
                     </p>
                 </div>
                 <div className='section'>

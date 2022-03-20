@@ -6,6 +6,8 @@ import {Upload, FolderPlus, Mail, Tool, ArrowRightCircle} from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
 import { FolderService } from '../services/folder';
+import { formatDate } from '../helpers/formatDate';
+import { formatBytes } from '../helpers/formatSize';
 
 
 function Storage() {
@@ -14,7 +16,7 @@ function Storage() {
   const folderInput = useRef();
   const [progress, setProgress] = useState(0);
   const [uploadStart, setUploadStart] = useState(false);
-  const [uploadDone, setUploadDone] = useState(true);
+  const [uploadDone, setUploadDone] = useState(false);
   const [currentFolderId, setCurrentFolderId] = useState(null);
   const [showFolderInput, setShowFolderInput] = useState(false);
   const [data, setData] = useState({
@@ -42,8 +44,13 @@ function Storage() {
   }
 
   const handleFolderSubmit = async (currentFolder, folderName) => {
+    console.log(folderName, currentFolder);
     if(validateFolderName(folderName)){
-      await FolderService.createFolder(currentFolder, folderName);
+      const folder = await FolderService.createFolder(currentFolder, folderName);
+      setData({
+        files: data.files,
+        folders: [...data.folders, folder]
+      });
     }
   }
 
@@ -51,34 +58,40 @@ function Storage() {
     const file = fileInput.current.files[0];
 
     if (!file) return;
-
-    await FileService.uploadFile(file, (pr) => {
+    setUploadStart(true);
+    const uploadedFile = await FileService.uploadFile(file, (pr) => {
       if(pr > 99){
-        setTimeout(() => {
+          setTimeout(() => {
           setUploadStart(false);
         }, 3000);
-        setUploadDone(false);
+        setUploadDone(true);
       }
 
       if(pr > 0){
-        setUploadStart(true);
         setProgress(pr);
       }
       
     });
+    fileInput.current.value = null;
   };
-  const openFile = () => {
-
+  const openFile = async (id, filename) => {
+    const url = await FileService.downloadFile(id);
+    const a = document.createElement('a');
+    a.setAttribute('href', url);
+    a.setAttribute('download', filename);
+    a.click();
+  
   };
   const openFolder = (folderId)=>{
     setCurrentFolderId(folderId);
   };
+
   const changeShowInput = () => {
     setShowFolderInput(!showFolderInput);
   }
   return (
     <div id="storage">
-      {uploadStart && <div className="progressbar"  data-aos="fade-left">{uploadDone ? (progress.toFixed(1)+" %") : "Done! "  } </div>}
+      {uploadStart && <div className="progressbar"  >{uploadDone ? "Done! " : (progress.toFixed(1)+" %")   } </div>}
       <div className="storage-cntnr">
         <div className="storagetitle-cntnr"> 
           <h1>File Storage</h1>
@@ -101,10 +114,11 @@ function Storage() {
                     return <TableRow
                       Name={file.filename}
                       onClick={openFile}
-                      lastModified={file.modified_at}
-                      fileSize={file.filesize}
+                      lastModified={formatDate(file.modified_at)}
+                      fileSize={formatBytes(file.filesize)}
                       folder={false}
                       key={i}
+                      id={file.file_id}
                   /> 
                   })
                 }
@@ -113,7 +127,7 @@ function Storage() {
                     return <TableRow
                       Name={folder.foldername}
                       onClick={openFolder(folder.folder_id)}
-                      lastModified={folder.modified_at}
+                      lastModified={formatDate(folder.modified_at)}
                       fileSize={"-"}
                       folder={true}
                       key={i}
@@ -150,7 +164,7 @@ function Storage() {
                 <Button
                   text={<ArrowRightCircle size={"18"}/>}
                   className={'mini-btn'}
-                  onClick={handleFolderSubmit(currentFolderId, folderInput)}
+                  onClick={()=>handleFolderSubmit(currentFolderId, folderInput.current.value)}
                 />
               </div>
             )}<br/>

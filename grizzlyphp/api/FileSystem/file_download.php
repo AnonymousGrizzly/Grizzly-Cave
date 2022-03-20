@@ -26,45 +26,39 @@ if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
 $database = new Database();
 $db = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
-$jwtData=isset($data->jwt) ? $data->jwt : "";
-$jwt = $_POST['token'];
+$jwt = isset($data->jwt) ? $data->jwt : "";
 
 if (!$jwt) {
     http_response_code(401);
     die(json_encode(array("message"=>"Must be logged in.")));
 }
-if($jwtData){
-    $decoded = JWT::decode($jwt,  new Key($key, 'HS256'));
 
-    $file = new FileSystem($db);
-    
-    $fileDetails = $file->getFileDetails()->fetch();
+$decoded = JWT::decode($jwt,  new Key($key, 'HS256'));
 
-    $file->filetype = $fileDetails['filetype'];
-    $file->filesize = $fileDetails['filesize'];
-    $file->filename = $fileDetails['filename'];
-    $file->sanitized_name = $fileDetails['sanitized_name'];
-    $file->user_id = $decoded->data->user_id;
-    $file->file_id = $decoded->data->file_id;
-
-    $path = $file->getPath();
-    $path .= '/'.$file->sanitized_name;
-
-    header("Content-Description: File Transfer");
-    header("Content-Type: ".$file->$filetype);
-    header ("Content-Length: ".$file->$filesize);
-    header ("Content-Disposition: attachment; filename=".$file->filename);
-
-    if(readfile($path)){
-        http_response_code(200);
-        echo json_encode(array("message"=>"File downloaded successfully."));
-    }else{
-        http_response_code(401);
-        echo json_encode(array("message"=>"Unable to download file."));
-    }
-
-    
+$file = new FileSystem($db);
+$fileId = $data->fileId;
+$userId = $decoded->data->user_id;
+$file->user_id = $userId;
+$fileDetails = $file->getFileDetails($fileId, $userId)->fetch();
+if($fileDetails == NULL){
+    http_response_code(404);
+    die(json_encode(array("message"=>"File doesn't exist.")));
 }
+$file->filesize = $fileDetails['filesize'];
+$file->filename = $fileDetails['filename'];
+$file->sanitized_name = $fileDetails['sanitized_name'];
+
+$path = $file->getPath();
+header("Content-Description: File Transfer");
+header ("Content-Disposition: attachment; filename=".$file->filename);
+
+if(readfile($path)){
+    http_response_code(200);
+}else{
+    http_response_code(401);
+}
+
+    
 
 
 ?>

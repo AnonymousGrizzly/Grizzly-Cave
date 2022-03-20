@@ -139,7 +139,6 @@ class User{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->user_id);
         if($stmt->execute()){
-            sleep(7);
             return true;
         }
         return false;
