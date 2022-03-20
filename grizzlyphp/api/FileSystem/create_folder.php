@@ -43,7 +43,8 @@ $decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
 $folder->user_id = $decoded->data->user_id;
 $folder->parentfolder_id = $data->parent_folder_id;
 $folder->foldername = $data->foldername;
-
+$folder->created_at = time();
+$folder->modified_at = time();
 
 try{
     if($folder->createFolder()){        

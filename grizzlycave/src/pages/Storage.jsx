@@ -126,7 +126,7 @@ function Storage() {
                   data.folders.map((folder, i)=>{
                     return <TableRow
                       Name={folder.foldername}
-                      onClick={openFolder(folder.folder_id)}
+                      onClick={() => openFolder(folder.folder_id)}
                       lastModified={formatDate(folder.modified_at)}
                       fileSize={"-"}
                       folder={true}

@@ -19,7 +19,7 @@ class FolderSystem{
     }
 
     public function createFolder(){
-        $query ="INSERT INTO".$this->table."
+        $query ="INSERT INTO ".$this->table."
         (foldername, parentfolder_id, user_id)
         VALUES (
         ?,
