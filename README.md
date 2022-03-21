@@ -10,7 +10,6 @@ A cave just right for a grizzly, also <i>maturitetna naloga </i>.
   <li>Naredi pakete</li>
   <li>Poveži že narjeno kodo v php s frontendom</li>
   <li>Že napisane funkcije uredi v svoje file</li>
-  <li>Uredi news page in besedilo na main strani</li>
   <li>Nared modal box za file in folder</li>
   <li>Če boš imel čas naredi tudi za hold spust</li>
 </ul>
