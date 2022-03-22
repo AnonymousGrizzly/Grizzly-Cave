@@ -8,9 +8,12 @@ import TableRow from '../components/TableRow';
 import { FolderService } from '../services/folder';
 import { formatDate } from '../helpers/formatDate';
 import { formatBytes } from '../helpers/formatSize';
-
+import useModal from '../hooks/useModal';
+import Modal from '../components/Modal';
 
 function Storage() {
+  const {isShowing, toggle} = useModal();
+
   const history = useHistory();
   const fileInput = useRef();
   const folderInput = useRef();
@@ -139,6 +142,7 @@ function Storage() {
                   lastModified={"12.3.2022"}
                   fileSize={"-"}
                   folder={true}
+                  showMore={toggle}
                 />
               </tbody>
             </table>
@@ -183,6 +187,10 @@ function Storage() {
         style={{
           display: 'none',
         }}
+      />
+      <Modal 
+        isShowing={isShowing}
+        hide={toggle}
       />
     </div>
   );

@@ -2,31 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './Button';
 import Input from './Input';
+import "../designs/Modal.css"
+import {Lock, Mail, X, User} from 'react-feather';
 
-const Modal = ({ isShowing, hide, createFolder }) => isShowing ? ReactDOM.createPortal(
+const Modal = ({ isShowing, hide }) => isShowing ? ReactDOM.createPortal(
   <React.Fragment>
-    <div className='modal-overlay'>
-      <div className='modal-cntnr'>
-        <p>
-          Folder name:
-        </p>
-        <Input
-          placeholder={"New Folder"}
-
-          required
-        />
-        <div className='modal-btns'>
+    <div className="modal-overlay"/>
+    <div className="modal-wrapper" >
+      <div className="modal">
+        <div className="modal-header">
           <Button
-            className={"secondary-btn"}
-            text={"Create"}
-            onClick={createFolder}
-          />
-          <Button
-            className={"primary-btn"}
-            text={"Cancel"}
-            onClick={hide}
-          />
+                className={"icon-btn"}
+                text={<X size={"22"}/>}
+                onClick={hide}
+              />
         </div>
+        <h3>
+          Edit Folder:
+        </h3>
       </div>
     </div>
   </React.Fragment>, document.body
