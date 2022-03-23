@@ -1,16 +1,16 @@
 # GrizzlyCave
 
-A cave just right for a grizzly, also <i>maturitetna naloga </i>.
+A cave just right for a grizzly, also <i>matura examination project. </i>
 
 <hr><br/>
 <h3> TO-DO LIST:</h3>
 <hr>
 <ul>
-  <li>Izpiši folderje</li>
-  <li>Naredi pakete</li>
+  <li>Izpiši folderje </li>
+  <li>Naredi pakete </li>
   <li>Poveži že narjeno kodo v php s frontendom</li>
   <li>Že napisane funkcije uredi v svoje file</li>
-  <li>Nared modal box za file in folder</li>
+  <li>Nared še modal box za file</li>
   <li>Če boš imel čas naredi tudi za hold spust</li>
 </ul>
 <hr>

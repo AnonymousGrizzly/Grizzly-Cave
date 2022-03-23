@@ -5,7 +5,7 @@ import Input from './Input';
 import "../designs/Modal.css"
 import {Lock, Mail, X, User} from 'react-feather';
 
-const Modal = ({ isShowing, hide }) => isShowing ? ReactDOM.createPortal(
+const Modal = ({ isShowing, hide, remove, open, isFolder }) => isShowing ? ReactDOM.createPortal(
   <React.Fragment>
     <div className="modal-overlay"/>
     <div className="modal-wrapper" >
@@ -18,8 +18,36 @@ const Modal = ({ isShowing, hide }) => isShowing ? ReactDOM.createPortal(
               />
         </div>
         <h3>
-          Edit Folder:
+          {isFolder ? (<h3>Folder Settings</h3>):(<h3>File Settings</h3>)}
         </h3>
+        {isFolder ? (
+          <div className='modal-btns'>
+          <Button 
+            text="Remove"
+            className={"error-btn"}
+            onClick={remove}
+          />
+          <Button
+            text="Open Folder"
+            className={"secondary-btn"}
+            onClick={open}
+          />
+        </div>
+        ) : (
+          <div className='modal-btns'>
+            <Button 
+            text="Remove"
+            className={"error-btn"}
+            onClick={remove}
+          />
+          <Button
+            text="Download File"
+            className={"secondary-btn"}
+            onClick={open}
+          />
+          </div>
+        )}
+        
       </div>
     </div>
   </React.Fragment>, document.body
