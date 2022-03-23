@@ -35,3 +35,10 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .modal-btns{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }

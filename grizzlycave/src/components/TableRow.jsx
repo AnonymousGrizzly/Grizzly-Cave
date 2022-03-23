@@ -13,4 +13,4 @@ function TableRow({Name, onClick, lastModified, fileSize, folder, showMore, inde
   )
 }
 
-export default TableRow
+export default TableRow;
