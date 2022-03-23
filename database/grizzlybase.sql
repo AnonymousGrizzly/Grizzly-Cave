@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2022 at 09:38 PM
+-- Generation Time: Mar 23, 2022 at 11:26 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -36,8 +36,16 @@ CREATE TABLE `files` (
   `modified_at` datetime NOT NULL DEFAULT current_timestamp(),
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL,
-  `folder_id` int(11) NOT NULL
+  `folder_id` int(11) DEFAULT NULL,
+  `sanitized_name` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`file_id`, `filename`, `filesize`, `filetype`, `deleted`, `modified_at`, `created_at`, `user_id`, `folder_id`, `sanitized_name`) VALUES
+(17, 'polar-bear.svg', 45803, 'image/svg+xml', 0, '2022-03-21 17:33:59', '2022-03-21 17:33:59', 21, NULL, '71235ded5de2d50ead44d31f22b28920.svg');
 
 -- --------------------------------------------------------
 
@@ -55,6 +63,13 @@ CREATE TABLE `folders` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `folders`
+--
+
+INSERT INTO `folders` (`folder_id`, `foldername`, `parentfolder_id`, `created_at`, `deleted`, `modified_at`, `user_id`) VALUES
+(9, 'neki', NULL, '2022-03-20 18:06:42', 0, '2022-03-20 18:06:42', 21);
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +79,7 @@ CREATE TABLE `folders` (
 CREATE TABLE `packets` (
   `packet_id` int(11) NOT NULL,
   `file_id` int(11) NOT NULL,
-  `receiver_id` int(11) NOT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
   `sender_id` int(11) NOT NULL,
   `edit_perm` tinyint(1) NOT NULL DEFAULT 1,
   `created_packet` datetime NOT NULL DEFAULT current_timestamp()
@@ -90,10 +105,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `created`, `modified`) VALUES
-(3, 'test1', 'test1@gmail.com', '$2y$10$gC8Ee7ox2M4sNBQ1GVCGl.aiKScBy.YJvNzxC7awDNwbwU8f6/OCu', '2022-02-02 21:51:26', '2022-02-02 20:51:26'),
-(6, 'AnonymousGrizzly', 'maks.rogelj.123@gmail.com', '$2y$10$QoOaHN/ml4RWIVGTLJrfPeElTAOQcMYfkOA.R9pq3oUwMDIcYOFzC', '2022-02-04 11:13:43', '2022-02-04 10:13:43'),
-(7, 'testing', 'test2@test2.com', '$2y$10$4lV1AJ.GEGVomXGsmGMhLes8PJm8HvyCE4K6QSY7leKBXsB9RK77m', '2022-02-04 15:29:02', '2022-02-04 14:29:02'),
-(8, 'AnonymousShrimp', 'maks.rogelj@gmail.com', '$2y$10$N3WQDEzow9hVSbbS9gGi7eNFbpjgsxAnj1OzTdPpBwaahhkcu8cVe', '2022-02-05 12:38:53', '2022-02-05 11:38:53');
+(17, 'Neva', 'neva.accetto@yahoo.com', '$2y$10$udKDaaflc1YADdImOrCUJeSYR53sk8wba9gJGizBPKi/5Qh3Zq7UO', '2022-03-19 12:34:12', '2022-03-19 11:34:12'),
+(21, 'Test1', 'test1@gmail.com', '$2y$10$7mmfaE339gV/nvg.Cc6PcuxtSRcmSbozrxzXK/CoyTBBkTlZMbF6O', '2022-03-20 18:06:33', '2022-03-20 17:06:33');
 
 --
 -- Indexes for dumped tables
@@ -121,8 +134,8 @@ ALTER TABLE `folders`
 ALTER TABLE `packets`
   ADD PRIMARY KEY (`packet_id`),
   ADD KEY `file_id` (`file_id`),
-  ADD KEY `receiver_id` (`receiver_id`),
-  ADD KEY `sender_id` (`sender_id`);
+  ADD KEY `sender_id` (`sender_id`),
+  ADD KEY `receiver_id` (`receiver_id`);
 
 --
 -- Indexes for table `users`
@@ -140,13 +153,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `folders`
 --
 ALTER TABLE `folders`
-  MODIFY `folder_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `folder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `packets`
@@ -158,7 +171,7 @@ ALTER TABLE `packets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
@@ -168,23 +181,23 @@ ALTER TABLE `users`
 -- Constraints for table `files`
 --
 ALTER TABLE `files`
-  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `files_ibfk_2` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`folder_id`);
+  ADD CONSTRAINT `files_ibfk_2` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`folder_id`),
+  ADD CONSTRAINT `files_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `folders`
 --
 ALTER TABLE `folders`
-  ADD CONSTRAINT `folders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `folders_ibfk_2` FOREIGN KEY (`parentfolder_id`) REFERENCES `folders` (`folder_id`);
+  ADD CONSTRAINT `folders_ibfk_2` FOREIGN KEY (`parentfolder_id`) REFERENCES `folders` (`folder_id`),
+  ADD CONSTRAINT `folders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `packets`
 --
 ALTER TABLE `packets`
   ADD CONSTRAINT `packets_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `packets_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `packets_ibfk_3` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `packets_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `packets_ibfk_3` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
