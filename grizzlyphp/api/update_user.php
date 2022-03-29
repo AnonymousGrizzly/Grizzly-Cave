@@ -33,19 +33,30 @@ if($jwt){
     try {
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         $user->user_id = $decoded->data->user_id;
-        $user->username = $data->username;
-        $stmt = $user->getUserByUsername();
-        if($stmt->rowCount()>0){
-            http_response_code(409);
-            echo json_encode(array("message" => "Username already exists"));
-            exit();
+        
+        if(empty($data->username) ){
+            $result = $user->getUserByUserId()->fetch();
+            $user->username = $result['username'];
+        }else{
+            $user->username = $data->username;
+            $stmt = $user->getUserByUsername();
+            if($stmt->rowCount()>0){
+                http_response_code(409);
+                echo json_encode(array("message" => "Username already exists"));
+                exit();
+            }
         }
-        $user->email = $data->email;
-        $stmt = $user->getUserByEmail();
-        if($stmt->rowCount()>0){
-            http_response_code(409);
-            echo json_encode(array("message" => "Email already exists"));
-            exit();
+        if(empty($data->email)){
+            $result = $user->getUserByUserId()->fetch();
+            $user->email = $result['email'];
+        }else{
+            $user->email = $data->email;
+            $stmt = $user->getUserByEmail();
+            if($stmt->rowCount()>0){
+                http_response_code(409);
+                echo json_encode(array("message" => "Email already exists"));
+                exit();
+            }
         }
         if(empty($data->password)){
             if($user->updateWithoutPassword()){

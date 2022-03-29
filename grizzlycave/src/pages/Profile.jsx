@@ -48,8 +48,6 @@ function Profile() {
       if (!isUsernameValid) {
         return setErrorMsg('Username must be without special characters!');
       }
-    }else{
-      setUsername(userData.username);
     }
     
     if(email.length > 0){
@@ -58,8 +56,6 @@ function Profile() {
       if (!isEmailValid) {
         return setErrorMsg('Email must be valid!');
       }
-    }else{
-      setEmail(userData.email);
     }
 
     if(password.length > 0){

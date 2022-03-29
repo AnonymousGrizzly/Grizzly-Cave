@@ -34,6 +34,5 @@ export class FileService {
     const blob = new Blob([arrayBuffer]);
     const url = URL.createObjectURL(blob);  
     return url;
-
   }
 }

@@ -4,6 +4,8 @@ import Button from './Button';
 import Input from './Input';
 import "../designs/Modal.css"
 import {Lock, Mail, X, User} from 'react-feather';
+import { FolderService } from '../services/folder';
+import { FileService } from '../services/file';
 
 const Modal = ({ isShowing, hide, remove, open, isFolder }) => isShowing ? ReactDOM.createPortal(
   <React.Fragment>
