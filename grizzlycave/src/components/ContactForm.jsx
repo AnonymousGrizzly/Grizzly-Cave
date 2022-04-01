@@ -40,7 +40,7 @@ export default function ContactForm() {
         <input type="email" onInput={(e) => setEmail(e.target.value)} value={email} name="user_email" id="user_email" placeholder="Email" clasname="field" required/>
         <textarea name="user_message" id="user_message" placeholder="        How can we help you?" required />
         <p className='icon'><Lock size="20"/> &nbsp; we NEVER share your email with anyone</p>
-        {isValid && (<input data-aos="fade-up" type="submit" value="Send"  className="submit-btn"/>)}
+        {isValid && (<input type="submit" value="Send"  className="submit-btn"/>)}
      </form>
     
     </div>
