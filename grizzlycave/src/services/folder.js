@@ -15,7 +15,7 @@ export class FolderService {
         };
     }
     static async createFolder(parentId, folderName){
-        const response = await axios.post(`${BASEURL}/FileSystem/create_folder.php`, {
+        const response = await axios.post(`${BASEURL}/create_folder.php`, {
             parent_folder_id: parentId,
             foldername: folderName,
             jwt: getItem('PHPTOKEN')
@@ -23,14 +23,14 @@ export class FolderService {
         return response.data.data;
     }
     static async deleteFolder(folderId){
-        const response = await axios.post(`${BASEURL}/FileSystem/delete_folder.php`, {
+        const response = await axios.post(`${BASEURL}/delete_folder.php`, {
             folder_id: folderId,
             jwt: getItem('PHPTOKEN')
         });
         return response;
     }
     static async updateFolder(folderId, folderName){
-        const response = await axios.post(`${BASEURL}/FileSystem/update_folder.php`,{
+        const response = await axios.post(`${BASEURL}/update_folder.php`,{
             foldername: folderName,
             folder_id: folderId,
             jwt: getItem('PHPTOKEN')

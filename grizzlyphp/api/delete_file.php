@@ -14,8 +14,12 @@ include_once '../libs/php-jwt-main/src/Key.php';
 use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-include_once '../config/database.php';
-include_once 'file_system.php';
+include_once './config/database.php';
+
+include_once './objects/file_system.php';
+
+
+
 
 $database = new Database();
 

@@ -9,7 +9,7 @@ export class FileService {
     formData.append('uploadedFile', file);
     formData.append('token', localStorage.getItem('PHPTOKEN'));
 
-    await axios.post(`${BASEURL}/FileSystem/file_upload.php`, formData, {
+    await axios.post(`${BASEURL}/file_upload.php`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -23,7 +23,7 @@ export class FileService {
   }
   static async downloadFile(fileId) {
   
-  const response = await fetch(`${BASEURL}/FileSystem/file_download.php`, {
+  const response = await fetch(`${BASEURL}/file_download.php`, {
     method: "POST",
     body: JSON.stringify({
       jwt: getItem('PHPTOKEN'),
