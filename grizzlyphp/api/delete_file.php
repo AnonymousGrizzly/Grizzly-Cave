@@ -15,10 +15,12 @@ use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 include_once './config/database.php';
-
 include_once './objects/file_system.php';
 
-
+if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
+    http_response_code(200);
+    die;
+}
 
 
 $database = new Database();
