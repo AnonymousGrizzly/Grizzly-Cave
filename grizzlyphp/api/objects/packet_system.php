@@ -37,5 +37,13 @@ class PacketSystem{
         $stmt->execute();
         return $stmt;
     }
+    public function deletePacket(){
+        $query = "DELETE FROM ".$this->table."
+        WHERE packet_id = ?"
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->packet_id);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 ?>
