@@ -1,10 +1,10 @@
 <?php
 class Database{
-    private $host = "localhost";
-    private $db_name = "grizzlybase";
-    private $username = "root";
-    private $password = "";
-    public $conn;
+    private $host = "localhost"; //name of host
+    private $db_name = "grizzlybase"; //name of database
+    private $username = "root"; //name of username
+    private $password = ""; //password
+    public $conn; //connection
  
     // get the database connection
     public function getConnection(){

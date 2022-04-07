@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 11:26 PM
+-- Generation Time: Apr 07, 2022 at 05:34 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -82,7 +82,8 @@ CREATE TABLE `packets` (
   `receiver_id` int(11) DEFAULT NULL,
   `sender_id` int(11) NOT NULL,
   `edit_perm` tinyint(1) NOT NULL DEFAULT 1,
-  `created_packet` datetime NOT NULL DEFAULT current_timestamp()
+  `created_packet` datetime NOT NULL DEFAULT current_timestamp(),
+  `message` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
