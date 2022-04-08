@@ -2,7 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
 import '../designs/Storage.css';
 import { FileService } from '../services/file';
-import {Upload, FolderPlus, Mail, Tool, ArrowRightCircle} from 'react-feather';
+import {
+  Upload,
+  FolderPlus,
+  Mail,
+  Tool,
+  ArrowRightCircle,
+} from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
 import { FolderService } from '../services/folder';
@@ -10,9 +16,13 @@ import { formatDate } from '../helpers/formatDate';
 import { formatBytes } from '../helpers/formatSize';
 import useModal from '../hooks/useModal';
 import Modal from '../components/Modal';
+import { useMemo } from 'react';
+import { useCallback } from 'react';
+import { useContext } from 'react';
+import ModalContext, { ModalType } from '../contexts/ModalContext';
 
 function Storage() {
-  const {isShowing, toggle} = useModal();
+  const { closeModal, type, openModal } = useContext(ModalContext);
 
   const history = useHistory();
   const fileInput = useRef();
@@ -23,24 +33,25 @@ function Storage() {
   const [currentFolderId, setCurrentFolderId] = useState(null);
   const [showFolderInput, setShowFolderInput] = useState(false);
   const [data, setData] = useState({
-    files:[],
-    folders:[]
+    files: [],
+    folders: [],
   });
-  useEffect(()=>{
-    FolderService.getData(currentFolderId).then((data)=>{
+
+  useEffect(() => {
+    FolderService.getData(currentFolderId).then((data) => {
       setData(data);
-    })
+    });
   }, [currentFolderId]);
 
   const onClick = () => {
     fileInput.current.click();
   };
-  
+
   const fileSend = () => {
     history.push('/mail');
-  }
+  };
 
-  function validateFolderName(folderName){
+  function validateFolderName(folderName) {
     //special chars not allowed, at least 3 chars, just numbers and letters
     const re = /^([a-zA-Z0-9][^*/><?\|:]*)$/;
     return re.test(folderName);
@@ -48,60 +59,129 @@ function Storage() {
 
   const handleFolderSubmit = async (currentFolder, folderName) => {
     console.log(folderName, currentFolder);
-    if(validateFolderName(folderName)){
-      const folder = await FolderService.createFolder(currentFolder, folderName);
+    if (validateFolderName(folderName)) {
+      const folder = await FolderService.createFolder(
+        currentFolder,
+        folderName
+      );
       setData({
         files: data.files,
-        folders: [...data.folders, folder]
+        folders: [...data.folders, folder],
       });
     }
-  }
+  };
 
   const onFiles = async () => {
     const file = fileInput.current.files[0];
 
     if (!file) return;
     setUploadStart(true);
-    const uploadedFile = await FileService.uploadFile(file, (pr) => {
-      if(pr > 99){
+    const uploadedFile = await FileService.uploadFile(
+      {
+        file,
+        parentFolderId: currentFolderId,
+      },
+      (pr) => {
+        if (pr > 99) {
           setTimeout(() => {
-          setUploadStart(false);
-        }, 3000);
-        setUploadDone(true);
-      }
+            setUploadStart(false);
+          }, 3000);
+          setUploadDone(true);
+        }
 
-      if(pr > 0){
-        setProgress(pr);
+        if (pr > 0) {
+          setProgress(pr);
+        }
       }
-      
+    );
+
+    setData({
+      folders: data.folders,
+      files: [...data.files, uploadedFile],
     });
+
     fileInput.current.value = null;
   };
+
+  const deleteFolder = async (folderId) => {
+    const { success } = await FolderService.deleteFolder(folderId);
+
+    if (success) {
+      return setData({
+        folders: data.folders.filter((f) => f.folder_id !== folderId),
+        files: data.files,
+      });
+    }
+  };
+
+  const deleteFile = async (fileId) => {
+    const { success } = await FileService.deleteFile(fileId);
+
+    if (success) {
+      return setData({
+        folders: data.folders,
+        files: data.files.filter((f) => f.file_id !== fileId),
+      });
+    }
+
+    // if not | show message
+  };
+
   const openFile = async (id, filename) => {
     const url = await FileService.downloadFile(id);
     const a = document.createElement('a');
     a.setAttribute('href', url);
     a.setAttribute('download', filename);
     a.click();
-  
   };
-  const openFolder = (folderId)=>{
+  const openFolder = (folderId) => {
     setCurrentFolderId(folderId);
   };
 
   const changeShowInput = () => {
     setShowFolderInput(!showFolderInput);
-  }
+  };
+
+  const openFolderMenu = (folder) => {
+    openModal(ModalType.FOLDER_ACTION_MENU, {
+      openFolder: () => {
+        openFolder(folder.folder_id);
+        closeModal();
+      },
+      removeFolder: async () => {
+        await deleteFolder(folder.folder_id);
+        closeModal();
+      },
+    });
+  };
+
+  const openFileMenu = (file) => {
+    openModal(ModalType.FILE_ACTION_MENU, {
+      downloadFile: () => {
+        openFile(file.file_id, file.filename);
+        closeModal();
+      },
+      removeFile: async () => {
+        await deleteFile(file.file_id);
+        closeModal();
+      },
+    });
+  };
+
   return (
     <div id="storage">
-      {uploadStart && <div className="progressbar"  >{uploadDone ? "Done! " : (progress.toFixed(1)+" %")   } </div>}
+      {uploadStart && (
+        <div className="progressbar">
+          {uploadDone ? 'Done! ' : progress.toFixed(1) + ' %'}{' '}
+        </div>
+      )}
       <div className="storage-cntnr">
-        <div className="storagetitle-cntnr"> 
+        <div className="storagetitle-cntnr">
           <h1>File Storage</h1>
         </div>
-        <div className='content-cntnr'>
+        <div className="content-cntnr">
           <div className="files-cntnr">
-            <table className='files-table'>
+            <table className="files-table">
               <thead>
                 <tr>
                   <th></th>
@@ -112,9 +192,9 @@ function Storage() {
                 </tr>
               </thead>
               <tbody>
-                {
-                  data.files.map((file, i)=>{
-                    return <TableRow
+                {data.files.map((file, i) => {
+                  return (
+                    <TableRow
                       Name={file.filename}
                       onClick={openFile}
                       lastModified={formatDate(file.modified_at)}
@@ -122,61 +202,75 @@ function Storage() {
                       folder={false}
                       key={i}
                       id={file.file_id}
-                  /> 
-                  })
-                }
-                {
-                  data.folders.map((folder, i)=>{
-                    return <TableRow
+                      showMore={() => openFileMenu(file)}
+                    />
+                  );
+                })}
+                {data.folders.map((folder, i) => {
+                  return (
+                    <TableRow
                       Name={folder.foldername}
                       onClick={() => openFolder(folder.folder_id)}
                       lastModified={formatDate(folder.modified_at)}
-                      fileSize={"-"}
+                      fileSize={'-'}
                       folder={true}
+                      showMore={() => openFolderMenu(folder)}
                       key={i}
                     />
-                  })
-                }
-                <TableRow
-                  Name={"FolderTest"}
-                  lastModified={"12.3.2022"}
-                  fileSize={"-"}
+                  );
+                })}
+                {/* <TableRow
+                  Name={'FolderTest'}
+                  lastModified={'12.3.2022'}
+                  fileSize={'-'}
                   folder={true}
                   showMore={toggle}
-                />
+                /> */}
               </tbody>
             </table>
           </div>
           <div className="control-panel">
-            <h3 className='icon'><Tool size="22"/>&nbsp;Control Panel </h3><br/>
+            <h3 className="icon">
+              <Tool size="22" />
+              &nbsp;Control Panel{' '}
+            </h3>
+            <br />
             <Button
               className={'third-btn'}
               onClick={onClick}
               text={'Upload File'}
-            /><Upload size="18"/><br/>
+            />
+            <Upload size="18" />
+            <br />
             <Button
               className={'third-btn'}
-              text={"Create Folder"}
+              text={'Create Folder'}
               onClick={changeShowInput}
-            /><FolderPlus size={"18"}/>
+            />
+            <FolderPlus size={'18'} />
             {showFolderInput && (
               <div>
-                <input 
-                  className='folderInput' 
-                  ref={folderInput}
-                />
+                <input className="folderInput" ref={folderInput} />
                 <Button
-                  text={<ArrowRightCircle size={"18"}/>}
+                  text={<ArrowRightCircle size={'18'} />}
                   className={'mini-btn'}
-                  onClick={()=>handleFolderSubmit(currentFolderId, folderInput.current.value)}
+                  onClick={() =>
+                    handleFolderSubmit(
+                      currentFolderId,
+                      folderInput.current.value
+                    )
+                  }
                 />
               </div>
-            )}<br/>
-            <Button 
+            )}
+            <br />
+            <Button
               className={'third-btn'}
-              text={"Send File"}
+              text={'Send File'}
               onClick={fileSend}
-            /><Mail size={"18"}/><br/>
+            />
+            <Mail size={'18'} />
+            <br />
           </div>
         </div>
       </div>
@@ -187,10 +281,6 @@ function Storage() {
         style={{
           display: 'none',
         }}
-      />
-      <Modal 
-        isShowing={isShowing}
-        hide={toggle}
       />
     </div>
   );

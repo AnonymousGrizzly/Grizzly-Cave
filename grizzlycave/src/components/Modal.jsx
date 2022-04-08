@@ -2,57 +2,51 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './Button';
 import Input from './Input';
-import "../designs/Modal.css"
-import {Lock, Mail, X, User} from 'react-feather';
+import '../designs/Modal.css';
+import { Lock, Mail, X, User } from 'react-feather';
 import { FolderService } from '../services/folder';
 import { FileService } from '../services/file';
+import { useContext } from 'react';
+import ModalContext, { ModalType } from '../contexts/ModalContext';
+import FolderActionMenu from './modals/FolderActionMenu';
+import FileActionMenu from './modals/FileActionMenu';
+import PacketActionMenu from './modals/PacketActionMenu';
 
-const Modal = ({ isShowing, hide, remove, open, isFolder }) => isShowing ? ReactDOM.createPortal(
-  <React.Fragment>
-    <div className="modal-overlay"/>
-    <div className="modal-wrapper" >
-      <div className="modal">
-        <div className="modal-header">
-          <Button
-                className={"icon-btn"}
-                text={<X size={"22"}/>}
-                onClick={hide}
-              />
-        </div>
-        <h3>
-          {isFolder ? (<h3>Folder Settings</h3>):(<h3>File Settings</h3>)}
-        </h3>
-        {isFolder ? (
-          <div className='modal-btns'>
-          <Button 
-            text="Remove"
-            className={"error-btn"}
-            onClick={remove}
-          />
-          <Button
-            text="Open Folder"
-            className={"secondary-btn"}
-            onClick={open}
-          />
-        </div>
-        ) : (
-          <div className='modal-btns'>
-            <Button 
-            text="Remove"
-            className={"error-btn"}
-            onClick={remove}
-          />
-          <Button
-            text="Download File"
-            className={"secondary-btn"}
-            onClick={open}
-          />
+const MODALS = {
+  [ModalType.FILE_ACTION_MENU]: FileActionMenu,
+  [ModalType.FOLDER_ACTION_MENU]: FolderActionMenu,
+  [ModalType.PACKET_ACTION_MENU]: PacketActionMenu,
+};
+
+const Modal = () => {
+  const { data, type, closeModal } = useContext(ModalContext);
+
+  if (type === null) {
+    return null;
+  }
+
+  const Component = MODALS[type];
+
+  console.log(data);
+
+  return ReactDOM.createPortal(
+    <React.Fragment>
+      <div className="modal-overlay" />
+      <div className="modal-wrapper">
+        <div className="modal">
+          <div className="modal-header">
+            <Button
+              className={'icon-btn'}
+              text={<X size={'22'} />}
+              onClick={closeModal}
+            />
           </div>
-        )}
-        
+          <Component {...data} />
+        </div>
       </div>
-    </div>
-  </React.Fragment>, document.body
-) : null;
+    </React.Fragment>,
+    document.getElementById('modal-root')
+  );
+};
 
 export default Modal;

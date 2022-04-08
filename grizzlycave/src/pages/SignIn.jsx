@@ -5,12 +5,22 @@ import '../designs/Auth.css';
 import { HashLink as Link } from 'react-router-hash-link';
 import useAuth from '../hooks/useAuth';
 import { LogIn } from 'react-feather';
-import TreesRight from '../images/trees-right.png'
-import TreesLeft from '../images/trees-left.png'
+import TreesRight from '../images/trees-right.png';
+import TreesLeft from '../images/trees-left.png';
+import useKeyPress from '../hooks/useKeyPress';
+import { useEffect } from 'react';
 
 function SignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const isEnterPressed = useKeyPress('Enter');
+
+  useEffect(() => {
+    if (isEnterPressed === true) {
+      handleSubmit();
+    }
+  }, [isEnterPressed]);
 
   const { login, error } = useAuth();
 
@@ -18,11 +28,11 @@ function SignIn() {
     login(username, password);
   };
 
-  const handleKeypress = e => {
-    if(e.keyCode === 13){
+  const handleKeypress = (e) => {
+    if (e.keyCode === 13) {
       handleSubmit();
     }
-  }
+  };
 
   return (
     <div>
@@ -30,16 +40,15 @@ function SignIn() {
         <h1>
           {' '}
           You are about to enter <br />
-          <b>GrizzlyCave</b>
-          {' '}
+          <b>GrizzlyCave</b>{' '}
         </h1>
         <br />
         <p>- please provide the necessary information to get inside -</p>
         <br />
-        <div className='btn-centered'>
-        <Link to="/signup" className="secondary-btn icon">
-          Don't have an account? SignUp  &nbsp; <LogIn size="20"/>
-        </Link>
+        <div className="btn-centered">
+          <Link to="/signup" className="secondary-btn icon">
+            Don't have an account? SignUp &nbsp; <LogIn size="20" />
+          </Link>
         </div>
       </div>
       <div className="form-cntnr">
@@ -64,7 +73,6 @@ function SignIn() {
         <Button text={'Log In'} onClick={handleSubmit} className="submit-btn" />
       </div>
       <h3 className="errorMsg">{error}</h3>
-      
     </div>
   );
 }

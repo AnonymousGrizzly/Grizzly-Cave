@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import '../designs/Auth.css';
-import { AuthService } from '../services/auth';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router';
 import { LogIn } from 'react-feather';
-import { setItem } from '../helpers/localstorage';
 import useAuth from '../hooks/useAuth';
+import useKeyPress from '../hooks/useKeyPress';
+import { useEffect } from 'react';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -15,8 +15,15 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [repassword, setRepassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const history = useHistory();
   const { signUp, error } = useAuth();
+
+  const isEnterPressed = useKeyPress('Enter');
+
+  useEffect(() => {
+    if (isEnterPressed === true) {
+      handleSubmit();
+    }
+  }, [isEnterPressed]);
 
   function validateEmail(signup_email) {
     //Must contain @, can't be shorter than 8 characters
@@ -70,15 +77,14 @@ function SignUp() {
         <h1>
           {' '}
           You are about to enter <br />
-          <b> GrizzlyCave </b>
-          {' '}
+          <b> GrizzlyCave </b>{' '}
         </h1>
         <br />
         <p>- please provide the necessary information to get inside -</p>
         <br />
-        <div className='btn-centered'>
+        <div className="btn-centered">
           <Link to="/signin" className="secondary-btn icon">
-            Already have an account? Login &nbsp; <LogIn size="20"/>
+            Already have an account? Login &nbsp; <LogIn size="20" />
           </Link>
         </div>
       </div>
@@ -125,7 +131,7 @@ function SignUp() {
           className="submit-btn"
         />
       </div>
-      <h3 className="errorMsg">{error}</h3>
+      <h3 className="errorMsg">{error || errorMsg}</h3>
     </div>
   );
 }

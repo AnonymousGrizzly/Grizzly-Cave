@@ -34,24 +34,25 @@ export class AuthService {
       message: data.message,
     };
   }
-  static async updateUser(user){
+  static async updateUser(user) {
     const url = BASEURL + 'update_user.php';
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
-        ...user, jwt: getItem('PHPTOKEN'),
+        ...user,
+        jwt: getItem('PHPTOKEN'),
       }),
     });
     return response;
   }
-  static async deleteUser(){
+  static async deleteUser() {
     const url = BASEURL + 'delete_user.php';
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         jwt: getItem('PHPTOKEN'),
       }),
-    })
+    });
     return response;
   }
   static async getUserInfo() {
@@ -84,6 +85,4 @@ export class AuthService {
       data: await response.json(),
     };
   }
-  
-
 }

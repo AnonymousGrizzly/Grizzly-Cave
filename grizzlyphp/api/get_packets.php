@@ -16,8 +16,7 @@ use Firebase\JWT\Key;
 
 include_once './config/database.php';
 include_once './objects/user.php';
-include_once './objects/file_system.php';
-include_once './objects/folder_system.php';
+include_once './objects/packet_system.php';
 
 if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
     http_response_code(200);
@@ -27,7 +26,7 @@ if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
 $database = new Database();
 $db = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
-$jwtData=isset($data->jwt) ? $data->jwt : "";
+$jwtData = isset($data->jwt) ? $data->jwt : "";
 
 
 if(!$jwtData){
@@ -38,13 +37,11 @@ if(!$jwtData){
 $decoded = JWT::decode($jwtData, new Key($key, 'HS256'));
 
 $user_id = $decoded->data->user_id;
-$parent_folder_id = $data->parent_folder_id;
 
-$file_system = new FileSystem($db);
-$folder_system = new FolderSystem($db);
+$packet = new PacketSystem($db);
+$packet->receiver_id = $user_id;
 
-$files = $file_system->getFilesByFolder($user_id, $parent_folder_id);
-$folders = $folder_system->getFolderByParentId($user_id, $parent_folder_id);
+$packets = $packet->getPacketsByRecieverId();
 
 http_response_code(200);
-echo json_encode(array("files" => $files, "folders" => $folders));
+echo json_encode(array("packets" => $packets));

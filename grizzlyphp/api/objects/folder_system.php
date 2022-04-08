@@ -13,9 +13,29 @@ class FolderSystem{
     //owner
     public $user_id;
 
+    public static $FETCH_DELETED_FOLDERS = 0;
 
     public function __construct($db){
         $this->conn = $db;
+    }
+
+    public function getFolderByParentId($user_id, $parent_id) {
+        $query = "SELECT * 
+                    FROM folders 
+            WHERE ((? IS NULL AND parentfolder_id IS NULL) OR (parentfolder_id = ?)) AND user_id = ? AND deleted = 0";
+
+        
+        $stmt  = $this->conn->prepare($query);
+        $stmt->bindParam(1, $parent_id);
+        $stmt->bindParam(2, $parent_id);
+        $stmt->bindParam(3, $user_id);
+
+
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); //return associative table of files
+        } 
+        
+        return [];
     }
 
     public function createFolder(){
@@ -38,11 +58,10 @@ class FolderSystem{
         return false;
     }
     public function deleteFolder(){
-        $query = "DELETE FROM".$this->table."
-            WHERE folder_id = ?
-        ";
+        $query = "DELETE FROM $this->table WHERE folder_id = ? AND user_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->folder_id);
+        $stmt->bindParam(2, $this->user_id);
         if($stmt->execute()){
             return true;
         }

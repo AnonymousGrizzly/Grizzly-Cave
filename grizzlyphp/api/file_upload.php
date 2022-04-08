@@ -5,12 +5,12 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once '../config/core.php';
-include_once '../libs/php-jwt-main/src/BeforeValidException.php';
-include_once '../libs/php-jwt-main/src/ExpiredException.php';
-include_once '../libs/php-jwt-main/src/SignatureInvalidException.php';
-include_once '../libs/php-jwt-main/src/JWT.php';
-include_once '../libs/php-jwt-main/src/Key.php';
+include_once 'config/core.php';
+include_once 'libs/php-jwt-main/src/BeforeValidException.php';
+include_once 'libs/php-jwt-main/src/ExpiredException.php';
+include_once 'libs/php-jwt-main/src/SignatureInvalidException.php';
+include_once 'libs/php-jwt-main/src/JWT.php';
+include_once 'libs/php-jwt-main/src/Key.php';
 
 use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -58,18 +58,26 @@ if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD
         $file->filetype = $fileType;
         $file->sanitized_name = $sanitizedFileName;
         $file->user_id = $decoded->data->user_id;
+        $file->folder_id = $_POST['parent_folder_id'] === 'null' ? NULL : $_POST['parent_folder_id'];
         $file->createFile();
 
-        $uploadFileDir = $file->getPath();
-        $destinationPath = $uploadFileDir . $sanitizedFileName;
+        $uploadFileDir = $file->getDir();
 
         if ( ! is_dir($uploadFileDir)) {
             mkdir($uploadFileDir, 0777, true);
         }
 
-        if(move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $destinationPath)){
+        $now = time();
+
+        if(move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $file->getPath())){
             http_response_code(201);
-            echo json_encode(array("message"=>"Uploaded successfully"));
+            echo json_encode(array("message"=>"Uploaded successfully", "data" => array(
+                "filename" => $file->filename, 
+                "file_id" =>  $file->file_id, 
+                "filesize" => $file->filesize,
+                "modified_at" => $now,
+                "created_at" => $now
+             )));
         }else{
             http_response_code(401);
             echo json_encode(array("message"=>"Failed to upload."));

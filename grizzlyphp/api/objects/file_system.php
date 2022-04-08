@@ -48,6 +48,7 @@ class FileSystem{
         $stmt->bindParam(5, $this->user_id);
         $stmt->bindParam(6, $this->sanitized_name);
         if($stmt->execute()){ //if successful
+            $this->file_id = $this->conn->lastInsertId();
             return true;
         } 
         return false;
@@ -64,12 +65,10 @@ class FileSystem{
                 return true;
             }
         }else{
-            $query = "UPDATE FROM".$this->table."
-            SET
-            deleted = 1
-            WHERE file_id = ?";
+            $query = "UPDATE ".$this->table." SET deleted = 1 WHERE file_id = ? AND user_id = ?";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $this->file_id);
+            $stmt->bindParam(2, $this->user_id);
             if($stmt->execute()){
                 return true;
             }
@@ -121,7 +120,7 @@ class FileSystem{
         filesize
             FROM ".$this->table."
             WHERE ((? IS NULL AND folder_id IS NULL) OR (folder_id = ?)) AND 
-            user_id = ?
+            user_id = ? AND deleted = 0
         ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $folder_id); //if parent folder id is root 
@@ -133,12 +132,11 @@ class FileSystem{
 
     public function getPath(){
         $path = $this->target_dir . $this->user_id . '/';
+        return $path . $this->sanitized_name;
+    }
 
-        if ($this->folder_id === NULL) {
-    
-            return $path.$this->sanitized_name;
-        }
-        return $path.$this->sanitized_name;
+    public function getDir() {
+        return $this->target_dir . $this->user_id;
     }
     /*public function getSanitizedName(){
         $query = "SELECT sanitized_name FROM ".$this->table."
@@ -150,12 +148,13 @@ class FileSystem{
         $stmt->bind_result($result);
         return $result;
     }*/
-    public function getFileDetails($fileId, $userId){
-        $query = "SELECT filetype, filesize, filename, sanitized_name FROM ".$this->table."
+    public function getFileDetails($file_id, $user_id){
+        $query = "SELECT folder_id, filetype, filesize, filename, sanitized_name FROM $this->table
         WHERE file_id = ? AND user_id = ?";
+
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $fileId);
-        $stmt->bindParam(2, $userId);
+        $stmt->bindParam(1, $file_id);
+        $stmt->bindParam(2, $user_id);
         $stmt->execute();
         return $stmt;
     }
