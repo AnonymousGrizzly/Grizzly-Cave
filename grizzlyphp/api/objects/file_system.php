@@ -149,7 +149,7 @@ class FileSystem{
         return $result;
     }*/
     public function getFileDetails($file_id, $user_id){
-        $query = "SELECT folder_id, filetype, filesize, filename, sanitized_name FROM $this->table
+        $query = "SELECT user_id, folder_id, filetype, filesize, filename, sanitized_name FROM $this->table
         WHERE file_id = ? AND user_id = ?";
 
         $stmt = $this->conn->prepare($query);

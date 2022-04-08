@@ -83,6 +83,10 @@ $packet->receiver_id = $user_id;
 $packet->packet_id = $packet_details['packet_id'];
 
 $packet->deletePacket();
+$link = $file->getDir();
+$file->user_id = $fileDetails['user_id'];
+$target = $file->getPath();
+symlink($target, $link);
 
 http_response_code(201);
 die(json_encode(array("message" => "Packet successfully transfered."))); 
