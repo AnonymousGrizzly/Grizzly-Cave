@@ -6,17 +6,13 @@ A cave just right for a grizzly, also <i>matura examination project. </i>
 <h3> TO-DO LIST:</h3>
 <hr>
 <ul>
-  <li>Izpiši folderje </li>
-  <li>Naredi pakete </li>
-  <li>Poveži že narjeno kodo v php s frontendom</li>
-  <li>Že napisane funkcije uredi v svoje file</li>
-  <li>Nared še modal box za file</li>
+  <li>dodaj packet transfer</li>
   <li>Če boš imel čas naredi tudi za hold spust</li>
+  <li>uredi /mail  oblikovanje pa mogoče kkšn indicator za file upload</li>
+  <li></li>
 </ul>
 <hr>
 <h3>NOTES:</h3>
 <hr>
-<p>Folder se izpiše, potem pa kar zgine</p>
-<p>Mamo par buggov v folder in files</p>
 <p>Mamo par buggov tut v packet</p>
 <hr>
