@@ -3,23 +3,6 @@ import "../designs/News.css";
 import {Coffee} from 'react-feather';
 
 export default function News(){
-  const calculateTimeLeft = () => {
-    let year = new Date().getFullYear();
-    let difference = +new Date(`10/01/${year}`) - +new Date();
-  
-    let timeLeft = {};
-  
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      };
-    }
-  
-    return timeLeft;
-  }
     return (
      <>
         <div className="news-cntnr">
@@ -28,8 +11,7 @@ export default function News(){
             <hr/>
             <div className="news-blocks">
               <br/>
-              <p>Time left till push: so long the countdown hasn't even started.</p>
-              
+              <p>The app has just been started. We will write the news here, when there while be some!</p>
             </div>
           </div>
         </div>
