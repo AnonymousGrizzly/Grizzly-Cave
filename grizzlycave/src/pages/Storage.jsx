@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
-import '../designs/Storage.css';
+import '../styles/Storage.css';
 import { FileService } from '../services/file';
 import {
   Upload,

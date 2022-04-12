@@ -1,5 +1,5 @@
 import React from 'react'
-import "../designs/HeroSection.css"
+import "../styles/HeroSection.css"
 import HeroImg from "../images/Grizzly.png"
 import { HashLink as Link } from 'react-router-hash-link';
 

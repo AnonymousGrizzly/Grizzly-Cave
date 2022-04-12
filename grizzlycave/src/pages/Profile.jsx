@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../designs/Profile.css';
+import '../styles/Profile.css';
 import useAuth from '../hooks/useAuth';
 import Input from '../components/Input';
 import Button from '../components/Button';

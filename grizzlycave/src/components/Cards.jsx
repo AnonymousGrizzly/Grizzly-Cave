@@ -1,7 +1,7 @@
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import React, {useEffect} from 'react'
-import "../designs/Cards.css"
+import "../styles/Cards.css"
 import GrizzlyFeet from "../images/GrizzlyFeet.png";
 import {HashLink as Link} from 'react-router-hash-link';
 import { Info, Shield, Coffee } from 'react-feather';

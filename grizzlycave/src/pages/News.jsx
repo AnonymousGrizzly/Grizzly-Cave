@@ -1,5 +1,5 @@
 import React from "react";
-import "../designs/News.css";
+import "../styles/News.css";
 import {Coffee} from 'react-feather';
 
 export default function News(){

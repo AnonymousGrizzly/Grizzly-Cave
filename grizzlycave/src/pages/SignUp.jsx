@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import '../designs/Auth.css';
+import '../styles/Auth.css';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router';
 import { LogIn } from 'react-feather';

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../designs/NotFound.css'
+import '../styles/NotFound.css'
 import { useHistory } from 'react-router';
 
 function NotFound() {

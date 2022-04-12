@@ -1,5 +1,5 @@
 import React from 'react'
-import '../designs/Footer.css';
+import '../styles/Footer.css';
 import { GitHub, Instagram } from 'react-feather';
 
 

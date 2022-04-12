@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import '../designs/ContactForm.css';
+import '../styles/ContactForm.css';
 import { Mail, Lock } from 'react-feather';
 import TreesRight from '../images/trees-right.png'
 import TreesLeft from '../images/trees-left.png'

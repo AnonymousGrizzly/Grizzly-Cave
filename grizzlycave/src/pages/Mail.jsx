@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../designs/Mail.css';
+import '../styles/Mail.css';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { useRef } from 'react';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-import '../designs/Navbar.css';
+import '../styles/Navbar.css';
 import icon from '../images/encryption-white.png';
 import NavItem from './NavItem';
 import useAuth from '../hooks/useAuth';

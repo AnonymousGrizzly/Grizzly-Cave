@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './Button';
 import Input from './Input';
-import '../designs/Modal.css';
+import '../styles/Modal.css';
 import { Lock, Mail, X, User } from 'react-feather';
 import { FolderService } from '../services/folder';
 import { FileService } from '../services/file';
