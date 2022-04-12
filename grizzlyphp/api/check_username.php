@@ -17,25 +17,25 @@ include_once 'objects/user.php';
  
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->getConnection(); //get connection with database
  
 $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
  
 
-$user->username = $data->username;
+$user->username = $data->username; 
 
-$stmt = $user -> getUserByUsername();
+$stmt = $user -> getUserByUsername(); //searches for username
 
-if($stmt->rowCount() == 0){
+if($stmt->rowCount() == 0){ //if database returns a row, there's a username
     http_response_code(400);
-    echo json_encode(array("message" => "User does not exist"));
+    echo json_encode(array("message" => "User does not exist")); //return code
     exit();
 }
 
 $user_id = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
 
 http_response_code(200);
-echo json_encode(array("message" => "User exists", "id" => $user_id));
+echo json_encode(array("message" => "User exists", "id" => $user_id)); //return that it there is a user
 
 ?>
