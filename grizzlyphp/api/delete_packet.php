@@ -24,18 +24,18 @@ if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
 
 $database = new Database();
 
-$db = $database->getConnection();
+$db = $database->getConnection(); //get connection
 $data = json_decode(file_get_contents("php://input"));
 $jwtData=isset($data->jwt) ? $data->jwt : "";
 
-$packet = new PacketSystem($db);
+$packet = new PacketSystem($db); //create new object for method usage
 
 $decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
 
 $packet->packet_id = $data->packet_id;
 $packet->receiver_id = $decoded->data->user_id;
 
-if(!$jwtData){
+if(!$jwtData){ //if no token, deny access
     http_response_code(401);
     die( json_encode(array("message" => "Access denied."))); 
 }
@@ -43,12 +43,12 @@ if(!$jwtData){
 try{
     if($packet->deletePacket()){
         http_response_code(200);
-        echo json_encode(array("message" => "Packet deleted."));
+        echo json_encode(array("message" => "Packet deleted.")); //return message
     }else{
         http_response_code(401);
-        echo json_encode(array("message" => "Unable to delete packet."));
+        echo json_encode(array("message" => "Unable to delete packet."));  //return message
     }
-}catch (Exception $e){
+}catch (Exception $e){ //if it fails, deny access
     http_response_code(401);
     echo json_encode(array(
         "message" => "Access denied.",

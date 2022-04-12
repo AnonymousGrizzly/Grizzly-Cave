@@ -52,18 +52,18 @@ if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD
     $sanitizedFileName = md5(time() . $fileName) . '.' . $fileExtension;
     if(!in_array($fileExtension, $bannedExtensions)){
         
-        $file = new FileSystem($db);
+        $file = new FileSystem($db); //new object for method usage
         $file->filename = $fileName;
         $file->filesize = $fileSize;
         $file->filetype = $fileType;
         $file->sanitized_name = $sanitizedFileName;
         $file->user_id = $decoded->data->user_id;
-        $file->folder_id = $_POST['parent_folder_id'] === 'null' ? NULL : $_POST['parent_folder_id'];
-        $file->createFile();
+        $file->folder_id = $_POST['parent_folder_id'] === 'null' ? NULL : $_POST['parent_folder_id']; //for folder path: it can be a folder in main container, or in other file
+        $file->createFile(); //try to create file
 
-        $uploadFileDir = $file->getDir();
+        $uploadFileDir = $file->getDir(); //get place to upload
 
-        if ( ! is_dir($uploadFileDir)) {
+        if ( ! is_dir($uploadFileDir)) { //if doesn't exist, create 
             mkdir($uploadFileDir, 0777, true);
         }
 

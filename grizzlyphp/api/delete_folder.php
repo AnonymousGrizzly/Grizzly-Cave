@@ -21,7 +21,7 @@ include_once './objects/folder_system.php';
 $database = new Database();
 
 
-$db = $database->getConnection();
+$db = $database->getConnection(); //get connection
 $data = json_decode(file_get_contents("php://input"));
 $jwtData=isset($data->jwt) ? $data->jwt : "";
 
@@ -32,24 +32,28 @@ $decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
 $folder->user_id = $decoded->data->user_id;
 $folder->folder_id = $data->folder_id;
 
-if(!$jwtData){
+if(!$jwtData){ //if no token, deny access
     http_response_code(401);
     die( json_encode(array("message" => "Access denied."))); 
 }
 
 try{
-    if($folder->deleteFolder()){
+    if($folder->deleteFolder()){ //try to use the method
         http_response_code(200);
         echo json_encode(array("message" => "Folder deleted."));
     }else{
         http_response_code(401);
         echo json_encode(array("message" => "Unable to delete folder."));
     }
-}catch (Exception $e){
+}catch (Exception $e){  //if it fails, deny access
     http_response_code(401);
     echo json_encode(array(
         "message" => "Access denied.",
         "error" => $e->getMessage()
     ));
 }
+
+//should probably do the full delete and semi delete as well
+
 ?>
+

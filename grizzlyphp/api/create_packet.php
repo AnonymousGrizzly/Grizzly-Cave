@@ -18,22 +18,22 @@ include_once './config/database.php';
 include_once './objects/user.php';
 include_once './objects/packet_system.php';
 
-if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
+if($_SERVER['REQUEST_METHOD']==="OPTIONS"){   //to enable calls from different domains (production mode: react :3000, php :3001)
     http_response_code(200);
     die;
 }
 
-$database = new Database();
-$db = $database->getConnection();
+$database = new Database(); 
+//get connection$db = $database->getConnection(); 
 $data = json_decode(file_get_contents("php://input"));
 $jwtData = isset($data->jwt) ? $data->jwt : "";
 
-if(!$jwtData){
+if(!$jwtData){ //if no token, deny access
     http_response_code(401);
     die( json_encode(array("message" => "Access denied."))); 
 }
 
-$packet = new PacketSystem($db);
+$packet = new PacketSystem($db); //create new object for method usage
 
 $decoded = JWT::decode($jwtData,  new Key($key, 'HS256'));
 
@@ -43,15 +43,15 @@ $packet->sender_id = $decoded->data->user_id;
 $packet->short_message = $data->short_message;
 
 try{
-    if($packet->createPacket()){        
+    if($packet->createPacket()){          //try to use the method
         http_response_code(200);
-        echo json_encode(array("message" => "Packet created.", "data" => $packet) );
+        echo json_encode(array("message" => "Packet created.", "data" => $packet) );  //return message & data
     }else{
         http_response_code(401);
-        echo json_encode(array("message" => "Unable to create packet."));
+        echo json_encode(array("message" => "Unable to create packet."));  //return message
     }
     
-}catch (Exception $e){
+}catch (Exception $e){ //if it fails, deny access
     http_response_code(401);
     echo json_encode(array(
         "message" => "Access denied.",
