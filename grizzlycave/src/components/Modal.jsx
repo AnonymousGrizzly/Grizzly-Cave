@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './Button';
-import Input from './Input';
 import '../styles/Modal.css';
-import { Lock, Mail, X, User } from 'react-feather';
-import { FolderService } from '../services/folder';
-import { FileService } from '../services/file';
+import { X } from 'react-feather';
 import { useContext } from 'react';
 import ModalContext, { ModalType } from '../contexts/ModalContext';
 import FolderActionMenu from './modals/FolderActionMenu';

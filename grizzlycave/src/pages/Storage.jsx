@@ -14,10 +14,6 @@ import TableRow from '../components/TableRow';
 import { FolderService } from '../services/folder';
 import { formatDate } from '../helpers/formatDate';
 import { formatBytes } from '../helpers/formatSize';
-import useModal from '../hooks/useModal';
-import Modal from '../components/Modal';
-import { useMemo } from 'react';
-import { useCallback } from 'react';
 import { useContext } from 'react';
 import ModalContext, { ModalType } from '../contexts/ModalContext';
 
@@ -53,7 +49,7 @@ function Storage() {
 
   function validateFolderName(folderName) {
     //special chars not allowed, at least 3 chars, just numbers and letters
-    const re = /^([a-zA-Z0-9][^*/><?\|:]*)$/;
+    const re = /^([a-zA-Z0-9][^*/><?|:]*)$/;
     return re.test(folderName);
   }
 

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import '../styles/ContactForm.css';
 import { Mail, Lock } from 'react-feather';
-import TreesRight from '../images/trees-right.png'
-import TreesLeft from '../images/trees-left.png'
 
 export default function ContactForm() {
   const [email, setEmail] = useState();

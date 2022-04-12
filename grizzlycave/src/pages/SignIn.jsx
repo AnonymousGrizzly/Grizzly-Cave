@@ -5,8 +5,6 @@ import '../styles/Auth.css';
 import { HashLink as Link } from 'react-router-hash-link';
 import useAuth from '../hooks/useAuth';
 import { LogIn } from 'react-feather';
-import TreesRight from '../images/trees-right.png';
-import TreesLeft from '../images/trees-left.png';
 import useKeyPress from '../hooks/useKeyPress';
 import { useEffect } from 'react';
 
