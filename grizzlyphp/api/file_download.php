@@ -18,8 +18,8 @@ include_once './config/database.php';
 include_once './objects/user.php';
 include_once './objects/file_system.php';
 
-if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
-    http_response_code(200);
+if($_SERVER['REQUEST_METHOD']==="OPTIONS"){ //enables calls from diff. domains
+    http_response_code(200); 
     die;
 }
 
@@ -39,21 +39,21 @@ $file = new FileSystem($db);
 $fileId = $data->fileId;
 $userId = $decoded->data->user_id;
 $file->user_id = $userId;
-$fileDetails = $file->getFileDetails($fileId, $userId)->fetch();
+$fileDetails = $file->getFileDetails($fileId, $userId)->fetch(); //get details of file we want to download
 
-if($fileDetails == NULL){
+if($fileDetails == NULL){ //no details, no file
     http_response_code(404);
-    die(json_encode(array("message"=>"File doesn't exist.")));
+    die(json_encode(array("message"=>"File doesn't exist."))); 
 }
-$file->filesize = $fileDetails['filesize'];
+$file->filesize = $fileDetails['filesize']; //get details
 $file->filename = $fileDetails['filename'];
-$file->sanitized_name = $fileDetails['sanitized_name'];
+$file->sanitized_name = $fileDetails['sanitized_name']; //for database usage
 
-$path = $file->getPath();
+$path = $file->getPath(); //get path for downloading files
 header("Content-Description: File Transfer");
 // header ("Content-Disposition: attachment; filename=".$file->filename);
 
-if(readfile($path)){
+if(readfile($path)){ //try download
     http_response_code(200);
 }else{
     http_response_code(401);

@@ -16,9 +16,9 @@ include_once 'objects/user.php';
  
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->getConnection(); //get connection 
  
-$user = new User($db);
+$user = new User($db);  //create new object for method usage
 $data = json_decode(file_get_contents("php://input"));
  
 
@@ -26,20 +26,20 @@ $user->username = $data->username;
 $user->email = $data->email;
 $user->password = $data->password;
 
-$stmt = $user -> getUserByEmail();
+$stmt = $user -> getUserByEmail(); //see if email exists
 
 
-if($stmt->rowCount()>0){
+if($stmt->rowCount()>0){  //if database returns a row, there's an email
     http_response_code(409);
     echo json_encode(array("message" => "Email already exists"));
     exit();
 }
 
-$stmt = $user -> getUserByUsername();
+$stmt = $user -> getUserByUsername(); //if database returns a row, there's a username
 
 if($stmt->rowCount()>0){
     http_response_code(409);
-    echo json_encode(array("message" => "Username already exists"));
+    echo json_encode(array("message" => "Username already exists")); //return message
     exit();
 }
 
