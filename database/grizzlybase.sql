@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2022 at 05:34 PM
+-- Generation Time: Apr 13, 2022 at 05:43 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -45,7 +45,13 @@ CREATE TABLE `files` (
 --
 
 INSERT INTO `files` (`file_id`, `filename`, `filesize`, `filetype`, `deleted`, `modified_at`, `created_at`, `user_id`, `folder_id`, `sanitized_name`) VALUES
-(17, 'polar-bear.svg', 45803, 'image/svg+xml', 0, '2022-03-21 17:33:59', '2022-03-21 17:33:59', 21, NULL, '71235ded5de2d50ead44d31f22b28920.svg');
+(17, 'polar-bear.svg', 45803, 'image/svg+xml', 0, '2022-03-21 17:33:59', '2022-03-21 17:33:59', 21, NULL, '71235ded5de2d50ead44d31f22b28920.svg'),
+(18, 'ZANR__ZGODOVINSKI_ROMAN_4_1.docx', 23065, 'application/vnd.openxmlformats-officedocument.wordprocessingml.d', 0, '2022-04-08 20:43:44', '2022-04-08 20:43:44', 21, NULL, '99780fc756e5e215a4354bb267154265.docx'),
+(19, 'ZANR__ZGODOVINSKI_ROMAN_4_1.docx', 23065, 'application/vnd.openxmlformats-officedocument.wordprocessingml.d', 0, '2022-04-08 20:43:56', '2022-04-08 20:43:56', 21, NULL, '56930b3ee25356a9252d07169605520b.docx'),
+(20, 'ZANR__ZGODOVINSKI_ROMAN_4_1.docx', 23065, 'application/vnd.openxmlformats-officedocument.wordprocessingml.d', 0, '2022-04-08 20:45:22', '2022-04-08 20:45:22', 21, NULL, 'a1ad0114ea732c9b945b572a1377a277.docx'),
+(21, 'ZANR__ZGODOVINSKI_ROMAN_4_1.docx', 23065, 'application/vnd.openxmlformats-officedocument.wordprocessingml.d', 0, '2022-04-08 20:45:46', '2022-04-08 20:45:46', 17, NULL, 'a1ad0114ea732c9b945b572a1377a277.docx'),
+(22, 'anastazija_earrape.mp3', 596328, 'audio/mpeg', 0, '2022-04-08 20:56:19', '2022-04-08 20:56:19', 17, NULL, '2f8b9712af6d2cc293a82cc936c596b9.mp3'),
+(23, 'anastazija_earrape.mp3', 596328, 'audio/mpeg', 1, '2022-04-08 20:57:13', '2022-04-08 20:57:13', 21, NULL, '2f8b9712af6d2cc293a82cc936c596b9.mp3');
 
 -- --------------------------------------------------------
 
@@ -83,7 +89,7 @@ CREATE TABLE `packets` (
   `sender_id` int(11) NOT NULL,
   `edit_perm` tinyint(1) NOT NULL DEFAULT 1,
   `created_packet` datetime NOT NULL DEFAULT current_timestamp(),
-  `message` text DEFAULT NULL
+  `short_message` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -154,7 +160,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `folders`
@@ -166,7 +172,7 @@ ALTER TABLE `folders`
 -- AUTO_INCREMENT for table `packets`
 --
 ALTER TABLE `packets`
-  MODIFY `packet_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `packet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
