@@ -115,6 +115,25 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `created`, `mod
 (17, 'Neva', 'neva.accetto@yahoo.com', '$2y$10$udKDaaflc1YADdImOrCUJeSYR53sk8wba9gJGizBPKi/5Qh3Zq7UO', '2022-03-19 12:34:12', '2022-03-19 11:34:12'),
 (21, 'Test1', 'test1@gmail.com', '$2y$10$7mmfaE339gV/nvg.Cc6PcuxtSRcmSbozrxzXK/CoyTBBkTlZMbF6O', '2022-03-20 18:06:33', '2022-03-20 17:06:33');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `details`
+--
+CREATE TABLE `details` (
+  `details_id` int(11) NOT NULL,
+  `overall_time` time NOT NULL DEFAULT 0,
+  `last_time` timestamp DEFAULT current_timestamp(),
+  `storage_space` int(11) NOT NULL DEFAULT 100000000,
+  `user_id` int(11) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Table structure for table ``
+--
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------DODAJ TABLE neki-------------------------
+
 --
 -- Indexes for dumped tables
 --
@@ -153,6 +172,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `details`
+--
+ALTER TABLE `details`
+  ADD PRIMARY KEY (`details_id`);
+  
+
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -181,6 +208,12 @@ ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `details`
+--
+ALTER TABLE  `details`
+  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -206,6 +239,13 @@ ALTER TABLE `packets`
   ADD CONSTRAINT `packets_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `packets_ibfk_3` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 COMMIT;
+
+--
+-- Constraints for table `details`
+--
+ALTER TABLE `details`
+  ADD CONSTRAINT `details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
