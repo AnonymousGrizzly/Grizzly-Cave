@@ -10,9 +10,9 @@ export default function Cards() {
     useEffect(() => { Aos.init({duration:1000}); }, []);
     return (
         <div className="cards">
-            <img src={GrizzlyFeet} alt=""/>
+            <img src={GrizzlyFeet} alt="" data-aos="fade-down"/>
             <div className="card-cntnr"> 
-                <div id="AboutUs" className='section'>
+                <div id="AboutUs" className='section' data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
                     <h2 className='icon'><Info size="28" />&nbsp; About Us </h2>
                     <p>
                         This is a web app for storing and sending files. <br/>
@@ -22,7 +22,7 @@ export default function Cards() {
                         For more information, click on the buttons in the footer section.
                     </p>
                 </div>
-                <div className='section'>
+                <div className='section' data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
                     <h2 className='icon'>Security &nbsp;<Shield size="30"/></h2>
                     <p> 
                         Don't worry about other people trying to read your stuff. Focus on your work and leave security to us!<br/>    
@@ -31,7 +31,7 @@ export default function Cards() {
                         It's still a new web app, so we are still programming new ways to secure our application. To read more about what we add every day, check out our news page!
                     </p>
                 </div>
-                <div className='section'>
+                <div className='section' data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
                     <h2 className='icon'><Coffee size="28"/>&nbsp; Check out new things we added!</h2>
                     <p>
                         Our app is still new, so there are daily updates to make your stay in our cave more comfortable.<br/>
