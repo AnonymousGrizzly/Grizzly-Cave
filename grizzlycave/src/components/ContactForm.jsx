@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import '../styles/ContactForm.css';
 import { Mail, Lock } from 'react-feather';
+import {validateEmail} from '../RegEx/validateEmail';
 
 export default function ContactForm() {
   const [email, setEmail] = useState();
@@ -24,11 +25,6 @@ export default function ContactForm() {
     validateEmail(email);
   }, [email]);
 
-  function validateEmail(user_email){ //Must contain @, can't be shorter than 8 characters
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setValid(re.test(user_email));
-  }
-  
   return (
     <div className='contactform-cntnr'>
      <form className="contact-form" onSubmit={sendEmail}>

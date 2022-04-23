@@ -6,7 +6,10 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { LogIn } from 'react-feather';
 import useAuth from '../hooks/useAuth';
 import useKeyPress from '../hooks/useKeyPress';
-import { useEffect } from 'react';
+import { validateEmail } from '../RegEx/validateEmail'
+import { validatePassword } from '../RegEx/validatePassword'
+import { validateUsername } from '../RegEx/validateUsername'
+import { useEffect } from 'react';  
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -23,23 +26,6 @@ function SignUp() {
       handleSubmit();
     }
   }, [isEnterPressed]);
-
-  function validateEmail(signup_email) {
-    //Must contain @, can't be shorter than 8 characters
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(signup_email);
-  }
-  function validatePassword(signup_password) {
-    //  Must contain 8 characters, 1 number, 1 letter and 1 unique character (!#$%/?-.;,:)
-    const re = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
-    return re.test(signup_password);
-  }
-  function validateUsername(username) {
-    //Must be shorter than 20 characters, no spaces, no special characters
-    const re = /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){2,18}[a-zA-Z0-9]$/;
-    return re.test(username);
-  }
 
   const handleSubmit = async () => {
     setErrorMsg('');

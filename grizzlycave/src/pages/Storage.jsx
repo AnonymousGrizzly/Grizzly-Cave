@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import Button from '../components/Button';
 import '../styles/Storage.css';
 import { FileService } from '../services/file';
@@ -14,7 +14,7 @@ import TableRow from '../components/TableRow';
 import { FolderService } from '../services/folder';
 import { formatDate } from '../helpers/formatDate';
 import { formatBytes } from '../helpers/formatSize';
-import { useContext } from 'react';
+import { validateFolderName } from '../RegEx/validateFolderName';
 import ModalContext, { ModalType } from '../contexts/ModalContext';
 
 function Storage() {
@@ -47,14 +47,7 @@ function Storage() {
     history.push('/mail');
   };
 
-  function validateFolderName(folderName) {
-    //special chars not allowed, at least 3 chars, just numbers and letters
-    const re = /^([a-zA-Z0-9][^*/><?|:]*)$/;
-    return re.test(folderName);
-  }
-
   const handleFolderSubmit = async (currentFolder, folderName) => {
-    console.log(folderName, currentFolder);
     if (validateFolderName(folderName)) {
       const folder = await FolderService.createFolder(
         currentFolder,
@@ -215,13 +208,6 @@ function Storage() {
                     />
                   );
                 })}
-                {/* <TableRow
-                  Name={'FolderTest'}
-                  lastModified={'12.3.2022'}
-                  fileSize={'-'}
-                  folder={true}
-                  showMore={toggle}
-                /> */}
               </tbody>
             </table>
           </div>
