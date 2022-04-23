@@ -24,8 +24,6 @@ const Modal = () => {
 
   const Component = MODALS[type];
 
-  console.log(data);
-
   return ReactDOM.createPortal(
     <React.Fragment>
       <div className="modal-overlay" />
