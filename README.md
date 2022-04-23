@@ -7,7 +7,7 @@ A cave just right for a grizzly, also <i>matura examination project. </i>
 <hr>
 <ul>
   <li>dodaj  going back v storage</li>
-  <li>naredi tudi za hold spust</li>
+  <li>naredi tudi za hold spust (ze nalozen react-dropzone)</li>
   <li>uredi /mail  oblikovanje pa mogoče kkšn indicator za file upload</li>
   <li></li>
 </ul>
