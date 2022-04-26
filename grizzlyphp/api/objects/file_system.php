@@ -166,5 +166,10 @@ class FileSystem{
         $stmt->execute();
         return $stmt;
     }
+
+    public function storageSize($user_id){
+        # code...
+    }
+    
 }
 ?>
