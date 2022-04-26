@@ -24,6 +24,7 @@ $database = new Database();
 $db = $database->getConnection(); //get connection
 $user = new User($db);
 $file = new FileSystem($db);
+$details = new Details($db);
 
 $data = json_decode(file_get_contents("php://input"));
 $jwt=isset($data->jwt) ? $data->jwt : "";
@@ -37,6 +38,9 @@ try{
     $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
     $user->user_id = $decoded->data->user_id;
     $num_of_files = $file->getNumberOfFiles($user->user_id);
+    $storage_size = $file->storageSize($user->user_id);
+    $overall_time = 0; //še naredi
+    $details->logout_procedure($overall_time, $storage_size, $user_id, $num_of_files);
 }catch (Exception $e){ //deny access if fails
     http_response_code(401);
     echo json_encode(array(
