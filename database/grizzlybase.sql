@@ -125,14 +125,11 @@ CREATE TABLE `details` (
   `overall_time` time NOT NULL DEFAULT 0,
   `last_time` timestamp DEFAULT current_timestamp(),
   `storage_space` int(11) NOT NULL DEFAULT 100000000,
+  `num_of_files` int(11) NOT NULL DEFAULT 0,
   `user_id` int(11) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Table structure for table ``
---
-
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------DODAJ TABLE neki-------------------------
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables
@@ -238,13 +235,13 @@ ALTER TABLE `packets`
   ADD CONSTRAINT `packets_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `packets_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `packets_ibfk_3` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-COMMIT;
 
 --
 -- Constraints for table `details`
 --
 ALTER TABLE `details`
-  ADD CONSTRAINT `details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON
+  ADD CONSTRAINT `details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

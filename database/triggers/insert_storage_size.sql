@@ -8,8 +8,8 @@ FOR EACH ROW
         IF (storage_size + NEW.filesize)  > 100000000 THEN
         SIGNAL SQLSTATE '1642' SET MESSAGE_TEXT = 'Storage space used up.';
         END IF;
+        INSERT INTO details 
     END //
 DELIMITER ;
 
 DELIMITER //
-CREATE TRIGGER storage_

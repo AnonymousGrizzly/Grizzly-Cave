@@ -51,3 +51,5 @@ try { //try to delete user
     ));
 }
 //should do full and semi delete
+
+?>

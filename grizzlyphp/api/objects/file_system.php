@@ -158,5 +158,13 @@ class FileSystem{
         $stmt->execute();
         return $stmt;
     }
+    public function getNumberOfFiles($user_id){
+        $query = "SELECT COUNT(file_id) FROM ".$this->table."
+        WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $user_id);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 ?>
