@@ -6,10 +6,8 @@ FOR EACH ROW
         DECLARE storage_size bigint;
         SELECT SUM(filesize) INTO storage_size FROM files WHERE user_id = NEW.user_id;
         IF (storage_size + NEW.filesize)  > 100000000 THEN
-        SIGNAL SQLSTATE '1642' SET MESSAGE_TEXT = 'Storage space used up.';
+        SIGNAL SQLSTATE '02' SET MESSAGE_TEXT = 'Storage space used up.';
         END IF;
-        INSERT INTO details 
     END //
 DELIMITER ;
 
-DELIMITER //

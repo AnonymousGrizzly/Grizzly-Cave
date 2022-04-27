@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2022 at 05:43 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Apr 27, 2022 at 12:15 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 --
 -- Database: `grizzlybase`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_files` (IN `wanted_user` INT)   BEGIN
+    DELETE FROM files WHERE user_id = wanted_user;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_folders` (IN `wanted_user` INT)   BEGIN
+    DELETE FROM folders WHERE user_id = wanted_user;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_packets` (IN `wanted_user` INT)   BEGIN
+    DELETE FROM packets WHERE receiver_id = wanted_user;
+    DELETE FROM packets WHERE sender_id = wanted_user;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `logout_procedure` (IN `insert_time` TIME, IN `insert_user` INT, IN `insert_storage` INT, IN `insert_num_of_files` INT)   BEGIN
+    INSERT INTO details(overall_time, storage_size, user_id, num_of_files) VALUES(insert_time, insert_storage, insert_user, num_of_files);
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `details`
+--
+
+CREATE TABLE `details` (
+  `details_id` int(11) NOT NULL,
+  `overall_time` int(11) NOT NULL DEFAULT 0,
+  `last_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `storage_size` int(11) NOT NULL DEFAULT 100000000,
+  `num_of_files` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -52,6 +90,20 @@ INSERT INTO `files` (`file_id`, `filename`, `filesize`, `filetype`, `deleted`, `
 (21, 'ZANR__ZGODOVINSKI_ROMAN_4_1.docx', 23065, 'application/vnd.openxmlformats-officedocument.wordprocessingml.d', 0, '2022-04-08 20:45:46', '2022-04-08 20:45:46', 17, NULL, 'a1ad0114ea732c9b945b572a1377a277.docx'),
 (22, 'anastazija_earrape.mp3', 596328, 'audio/mpeg', 0, '2022-04-08 20:56:19', '2022-04-08 20:56:19', 17, NULL, '2f8b9712af6d2cc293a82cc936c596b9.mp3'),
 (23, 'anastazija_earrape.mp3', 596328, 'audio/mpeg', 1, '2022-04-08 20:57:13', '2022-04-08 20:57:13', 21, NULL, '2f8b9712af6d2cc293a82cc936c596b9.mp3');
+
+--
+-- Triggers `files`
+--
+DELIMITER $$
+CREATE TRIGGER `storage_size_check` BEFORE INSERT ON `files` FOR EACH ROW BEGIN
+        DECLARE storage_size bigint;
+        SELECT SUM(filesize) INTO storage_size FROM files WHERE user_id = NEW.user_id;
+        IF (storage_size + NEW.filesize)  > 100000000 THEN
+        SIGNAL SQLSTATE '01000' SET MESSAGE_TEXT = 'Storage space used up.';
+        END IF;
+    END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -115,25 +167,27 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `created`, `mod
 (17, 'Neva', 'neva.accetto@yahoo.com', '$2y$10$udKDaaflc1YADdImOrCUJeSYR53sk8wba9gJGizBPKi/5Qh3Zq7UO', '2022-03-19 12:34:12', '2022-03-19 11:34:12'),
 (21, 'Test1', 'test1@gmail.com', '$2y$10$7mmfaE339gV/nvg.Cc6PcuxtSRcmSbozrxzXK/CoyTBBkTlZMbF6O', '2022-03-20 18:06:33', '2022-03-20 17:06:33');
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `details`
+-- Triggers `users`
 --
-CREATE TABLE `details` (
-  `details_id` int(11) NOT NULL,
-  `overall_time` time NOT NULL DEFAULT 0,
-  `last_time` timestamp DEFAULT current_timestamp(),
-  `storage_space` int(11) NOT NULL DEFAULT 100000000,
-  `num_of_files` int(11) NOT NULL DEFAULT 0,
-  `user_id` int(11) NOT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+DELIMITER $$
+CREATE TRIGGER `after_delete_user` AFTER DELETE ON `users` FOR EACH ROW BEGIN
+        CALL delete_files(OLD.user_id);
+        CALL delete_folders(OLD.user_id);
+    END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `details`
+--
+ALTER TABLE `details`
+  ADD PRIMARY KEY (`details_id`),
+  ADD KEY `details_ibfk_1` (`user_id`);
 
 --
 -- Indexes for table `files`
@@ -169,16 +223,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `details`
---
-ALTER TABLE `details`
-  ADD PRIMARY KEY (`details_id`);
-  
-
-
---
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `details`
+--
+ALTER TABLE `details`
+  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `files`
@@ -205,14 +257,14 @@ ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `details`
---
-ALTER TABLE  `details`
-  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
-
---
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `details`
+--
+ALTER TABLE `details`
+  ADD CONSTRAINT `details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `files`
@@ -235,14 +287,7 @@ ALTER TABLE `packets`
   ADD CONSTRAINT `packets_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `packets_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `packets_ibfk_3` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-
---
--- Constraints for table `details`
---
-ALTER TABLE `details`
-  ADD CONSTRAINT `details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
