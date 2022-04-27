@@ -2,7 +2,6 @@
 class FileSystem{
     private $conn;
     private $table = "files";
-    private $folder_table = "folders";
     
     public $target_dir = "../fileUploads/";
     public $max_size = 500000000;
@@ -29,7 +28,7 @@ class FileSystem{
         $this->conn = $db;
     }
 
-    public function createFile(){
+    public function createFile(){ //creation of file
         $query = "INSERT INTO ".$this->table." (folder_id, filename, filesize, filetype, user_id, sanitized_name)
             VALUES (
             ?,
@@ -54,7 +53,7 @@ class FileSystem{
         return false;
     }
     
-    public function deleteFile($fullDelete){
+    public function deleteFile($fullDelete){ //same as by folder
         if($fullDelete){
             $query = "DELETE FROM ".$this->table."
             WHERE file_id=?
@@ -75,7 +74,7 @@ class FileSystem{
         }
         return false;
     }
-    public function deleteFileByFolder($fullDelete){
+    public function deleteFileByFolder($fullDelete){ //I shouldn't full delete all the time
         if($fullDelete){
             $query = "DELETE FROM ".$this->table."
             WHERE folder_id=? AND deleted != 1
@@ -138,17 +137,8 @@ class FileSystem{
     public function getDir() {
         return $this->target_dir . $this->user_id;
     }
-    /*public function getSanitizedName(){
-        $query = "SELECT sanitized_name FROM ".$this->table."
-        WHERE file_id = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->file_id);
-        $stmt->execute();
-        $result = '';
-        $stmt->bind_result($result);
-        return $result;
-    }*/
-    public function getFileDetails($file_id, $user_id){
+
+    public function getFileDetails($file_id, $user_id){ //all file details
         $query = "SELECT user_id, folder_id, filetype, filesize, filename, sanitized_name FROM $this->table
         WHERE file_id = ? AND user_id = ?";
 
@@ -158,17 +148,13 @@ class FileSystem{
         $stmt->execute();
         return $stmt;
     }
-    public function getNumberOfFiles($user_id){
+    public function getNumberOfFiles($user_id){ //number of file for a user
         $query = "SELECT COUNT(file_id) FROM ".$this->table."
         WHERE user_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $user_id);
         $stmt->execute();
         return $stmt;
-    }
-
-    public function storageSize($user_id){
-        # code...
     }
     
 }

@@ -1,8 +1,15 @@
 <?php
 
 class Details{
-
-    private $table = "details"
+    private $conn;    
+    private $table = "details";
+  
+    public $details_id;
+    public $overall_time;
+    public $last_time;
+    public $storage_size;
+    public $num_of_files;
+    public $user_id;
 
     public function __construct($db){
         $this->conn = $db;
@@ -19,6 +26,31 @@ class Details{
         return $stmt;
     }
 
+    public function calculateTime($start){
+        $query = "SELECT overall_time FROM ".$this->table."
+            WHERE user_id = ? 
+            ORDER BY details_id DESC
+            LIMIT 0, 1
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        $diff = $start - time();
+        $result = $diff + $stmt;
+        return $result;
+    }
+
+    public function storageSize(){
+        $query = "SELECT storage_size from ".$this->table."
+            WHERE user_id = ? 
+            ORDER BY details_id DESC
+            LIMIT 0, 1
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 
 ?>
