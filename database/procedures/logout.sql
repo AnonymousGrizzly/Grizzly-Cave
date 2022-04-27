@@ -1,6 +1,6 @@
 DELIMITER //
 CREATE PROCEDURE logout_procedure (
-    IN insert_time TIME,
+    IN insert_time INT,
     IN insert_user INT, 
     IN insert_storage INT,
     IN insert_num_of_files INT

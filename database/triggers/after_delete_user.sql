@@ -5,5 +5,6 @@ FOR EACH ROW
     BEGIN
         CALL delete_files(OLD.user_id);
         CALL delete_folders(OLD.user_id);
+        CALL delete_packets(OLD.user_id);
     END //
 DELIMITER ;
