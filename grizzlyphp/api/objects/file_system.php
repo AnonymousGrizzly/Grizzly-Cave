@@ -149,12 +149,13 @@ class FileSystem{
         return $stmt;
     }
     public function getNumberOfFiles($user_id){ //number of file for a user
-        $query = "SELECT COUNT(file_id) FROM ".$this->table."
+        $query = "SELECT file_id FROM ".$this->table."
         WHERE user_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $user_id);
         $stmt->execute();
-        return $stmt;
+        $result = $stmt->rowCount();
+        return $result;
     }
     
 }

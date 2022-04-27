@@ -77,7 +77,8 @@ export function AuthProvider({ children }) {
     .catch((error) => setError(error));
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await AuthService.onLogout();
     setUser(undefined);
     setIsLoggedIn(false);
     localStorage.removeItem('PHPTOKEN');

@@ -15,12 +15,12 @@ class Details{
         $this->conn = $db;
     }
 
-    public function logout_procedure($overall_time, $storage_size, $user_id, $num_of_files){
+    public function logout_procedure($overall_time, $storage_size, $num_of_files){
         $query = "logout_procedure(?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $overall_time);
         $stmt->bindParam(2, $storage_size);
-        $stmt->bindParam(3, $user_id);
+        $stmt->bindParam(3, $this->user_id);
         $stmt->bindParam(4, $num_of_files);
         $stmt->execute();
         return $stmt;
@@ -35,8 +35,9 @@ class Details{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->user_id);
         $stmt->execute();
-        $diff = $start - time();
-        $result = $diff + $stmt;
+        $diff = time()-$start;
+        $calc = $stmt->fetch();
+        $result = $diff + $calc['overall_time'];
         return $result;
     }
 
@@ -49,7 +50,8 @@ class Details{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->user_id);
         $stmt->execute();
-        return $stmt;
+        $result = $stmt->fetch();
+        return $result['storage_size'];
     }
 }
 

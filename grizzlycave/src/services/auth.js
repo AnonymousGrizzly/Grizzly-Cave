@@ -85,4 +85,15 @@ export class AuthService {
       data: await response.json(),
     };
   }
+  static async onLogout(){
+    const url = BASEURL + 'on_logout.php';
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({jwt: getItem('PHPTOKEN')}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response;
+  }
 }
