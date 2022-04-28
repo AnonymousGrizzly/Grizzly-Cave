@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Mail.css';
+import '../styles/Storage.css';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { useRef } from 'react';
@@ -10,6 +11,11 @@ import { UserService } from '../services/user';
 import { useContext } from 'react';
 import ModalContext, { ModalType } from '../contexts/ModalContext';
 import Letter from '../components/Letter';
+import {
+  Tool
+} from 'react-feather';
+
+
 function Mail() {
   const [username, setUsername] = useState('');
   const [shortMessage, setShortMessage] = useState('');
@@ -119,58 +125,64 @@ function Mail() {
     <div>
       <div id="mail" className="mail-cntnr">
         <h1>File Send</h1>
-        <div className="mailbox-cntnr">
-          <h3>Mailbox</h3>
-          <br/>
-          {packets.map((packet) => (
-            <Letter
-              Name={packet.username}
-              onClick={() => openPacketMenu(packet)}
-              key={packet.packet_id}
-            />
+        <div className='content-cntnr'> 
+          <div className="mailbox-cntnr">
+            <h3>Mailbox</h3>
+            {packets.map((packet) => (
+              <Letter
+                Name={packet.username}
+                onClick={() => openPacketMenu(packet)}
+                key={packet.packet_id}
+              />
             ))}
-        </div>
-        <div className="postaloffice-cntnr">
-          <h3 className="icon">New Packet</h3>
-          <div>
-            <p>to:</p>
-            <Input
-              required
-              placeholder="Receiver username"
-              type="text"
-              value={username}
-              setValue={setUsername}
-            />
-            <p>short message:</p>
-            <Input
-              placeholder={'message'}
-              value={shortMessage}
-              setValue={setShortMessage}
-            />
-            <p>choose file:</p>
-            <div className="office-btns">
-              <Button
-                text={'Choose file'}
-                onClick={onChooseFileClick}
-                className={'choose-btn'}
+
+          </div>
+          <div className="postaloffice-cntnr">
+            <h3 className="icon">New Packet</h3>
+            <div>
+              <p>to:</p>
+              <Input
+                required
+                placeholder="Receiver username"
+                type="text"
+                value={username}
+                setValue={setUsername}
               />
-              <input
-                type="file"
-                ref={fileInput}
-                onChange={onFiles}
-                style={{
-                  display: 'none',
-                }}
+              <p>short message:</p>
+              <Input
+                placeholder={'message'}
+                value={shortMessage}
+                setValue={setShortMessage}
               />
-              <br />
-              <Button
-                text={'SEND'}
-                onClick={onSendClick}
-                className={'secondary-btn'}
-              />
+              <p>choose file:</p>
+              <div className="office-btns">
+                <Button
+                  text={'Choose file'}
+                  onClick={onChooseFileClick}
+                  className={'choose-btn'}
+                />
+                <input
+                  type="file"
+                  ref={fileInput}
+                  onChange={onFiles}
+                  style={{
+                    display: 'none',
+                  }}
+                />
+                <br />
+                <Button
+                  text={'SEND'}
+                  onClick={onSendClick}
+                  className={'secondary-btn'}
+                />
+              </div>
+              <div className='control-panel'>
+
+              </div>
             </div>
           </div>
         </div>
+        
       </div>
       <h3 className='errorMsg'>{statusMessage}</h3>
     </div>

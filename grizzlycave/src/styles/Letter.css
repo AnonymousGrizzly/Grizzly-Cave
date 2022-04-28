@@ -1,0 +1,15 @@
+.letter:hover{
+    border-left: 5px solid #fff;
+}
+.letter{
+    display: flex;
+    flex-direction: row;
+    background-color: #000000;
+    padding: 7px;
+    border-left: 2px solid #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+}   
+.letter-name{
+    padding-left: 15px;
+}

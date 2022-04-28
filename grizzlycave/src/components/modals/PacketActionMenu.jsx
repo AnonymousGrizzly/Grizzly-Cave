@@ -7,6 +7,7 @@ const PacketActionMenu = ({ removePacket, transferPacket, message }) => {
       <h3>
         <h3>Packet Details</h3>
       </h3>
+      <br/>
       {message}
       <div className="modal-btns">
         <Button text="Remove" className={'error-btn'} onClick={removePacket} />
