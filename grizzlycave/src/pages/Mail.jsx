@@ -7,10 +7,9 @@ import { FileService } from '../services/file';
 import { PacketService } from '../services/packet';
 import { useEffect } from 'react';
 import { UserService } from '../services/user';
-import TableRow from '../components/TableRow';
 import { useContext } from 'react';
 import ModalContext, { ModalType } from '../contexts/ModalContext';
-
+import Letter from '../components/Letter';
 function Mail() {
   const [username, setUsername] = useState('');
   const [shortMessage, setShortMessage] = useState('');
@@ -34,7 +33,6 @@ function Mail() {
 
   useEffect(() => {
     if (username === '') return;
-
     const delayDebounceFn = setTimeout(() => {
       UserService.checkUsername(username).then(({ success, data }) => {
         setIsValidUser(success);
@@ -123,14 +121,14 @@ function Mail() {
         <h1>File Send</h1>
         <div className="mailbox-cntnr">
           <h3>Mailbox</h3>
+          <br/>
           {packets.map((packet) => (
-            <TableRow
+            <Letter
               Name={packet.username}
-              lastModified={packet.created_packet}
+              onClick={() => openPacketMenu(packet)}
               key={packet.packet_id}
-              showMore={() => openPacketMenu(packet)}
             />
-          ))}
+            ))}
         </div>
         <div className="postaloffice-cntnr">
           <h3 className="icon">New Packet</h3>
@@ -164,18 +162,17 @@ function Mail() {
                   display: 'none',
                 }}
               />
-
               <br />
               <Button
                 text={'SEND'}
                 onClick={onSendClick}
                 className={'secondary-btn'}
               />
-              {statusMessage}
             </div>
           </div>
         </div>
       </div>
+      <h3 className='errorMsg'>{statusMessage}</h3>
     </div>
   );
 }
