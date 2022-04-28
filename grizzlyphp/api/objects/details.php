@@ -15,12 +15,12 @@ class Details{
         $this->conn = $db;
     }
 
-    public function logout_procedure($overall_time, $storage_size, $num_of_files){
-        $query = "logout_procedure(?, ?, ?, ?)";
+    public function logout_procedure($overall_time, $storage_size, $user_id, $num_of_files){
+        $query = "CALL logout_procedure(?, ?, ?, ?);";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $overall_time);
-        $stmt->bindParam(2, $storage_size);
-        $stmt->bindParam(3, $this->user_id);
+        $stmt->bindParam(2, $user_id);
+        $stmt->bindParam(3, $storage_size);
         $stmt->bindParam(4, $num_of_files);
         $stmt->execute();
         return $stmt;

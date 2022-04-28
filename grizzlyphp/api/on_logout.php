@@ -42,12 +42,12 @@ if(!$jwt){ //Don't do it if there's no token
 try{
     $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
     $details->user_id = $decoded->data->user_id;
-    var_dump($details->user_id);
-    $num_of_files = $file->getNumberOfFiles($details->user_id);
-    $storage_size = $details->storageSize();
-    $start = $decoded->iat; //get token create time from cookie
-    $overall_time = $details->calculateTime($start);
-    $details->logout_procedure($overall_time, $storage_size, $num_of_files);
+    $user_id = (int)$details->user_id;
+    $num_of_files = (int)$file->getNumberOfFiles($details->user_id);
+    $storage_size = (int)$details->storageSize();
+    $start = (int)$decoded->iat; //get token create time from cookie
+    $overall_time = (int)$details->calculateTime($start);
+    $details->logout_procedure($overall_time, $storage_size, $user_id, $num_of_files);
     http_response_code(200);
     echo json_encode(array("message" => "Success"));
 }catch (Exception $e){ //get message if it fails

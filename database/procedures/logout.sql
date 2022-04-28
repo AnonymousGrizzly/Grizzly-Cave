@@ -6,6 +6,7 @@ CREATE PROCEDURE logout_procedure (
     IN insert_num_of_files INT
 )
 BEGIN
-    INSERT INTO details(overall_time, storage_size, user_id, num_of_files) VALUES(insert_time, insert_storage, insert_user, num_of_files);
+    INSERT INTO `details` (`details_id`, `overall_time`, `last_time`, `storage_size`, `num_of_files`, `user_id`) 
+    VALUES (NULL, insert_time, current_timestamp(), insert_storage, insert_num_of_files, insert_user);
 END //
 DELIMITER ;
