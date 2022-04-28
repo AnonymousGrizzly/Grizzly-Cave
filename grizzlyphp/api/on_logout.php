@@ -49,7 +49,7 @@ try{
     $overall_time = (int)$details->calculateTime($start);
     $details->logout_procedure($overall_time, $storage_size, $user_id, $num_of_files);
     http_response_code(200);
-    echo json_encode(array("message" => "Success"));
+    echo json_encode(array("message" => "Success."));
 }catch (Exception $e){ //get message if it fails
     http_response_code(401);
     echo json_encode(array(
