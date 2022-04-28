@@ -144,15 +144,6 @@ class User{
         }
         return false;
     }   
-
-    public function setDev(){
-        $query = "SELECT user_id FROM".$this->table_name."
-        WHERE email = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->email);
-        $stmt->execute();
-        return $stmt;
-    }
 }
 
 ?>

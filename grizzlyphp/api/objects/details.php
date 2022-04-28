@@ -53,6 +53,16 @@ class Details{
         $result = $stmt->fetch();
         return $result['storage_size'];
     }
+    public function getData(){
+        $query = "SELECT user_id, storage_size, last_time, num_of_files, overall_time
+            FROM ".$this->table."
+            WHERE user_id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>

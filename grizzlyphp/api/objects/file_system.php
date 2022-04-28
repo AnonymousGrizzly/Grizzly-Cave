@@ -157,6 +157,16 @@ class FileSystem{
         $result = $stmt->rowCount();
         return $result;
     }
-    
+    public function getAllFiles(){
+        $query = "SELECT user_id. filetype, filesize, filename
+            FROM ".$this->table."
+            WHERE user_id = ?
+            ORDER BY filetype, filesize ASC
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 ?>
