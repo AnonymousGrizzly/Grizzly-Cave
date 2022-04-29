@@ -17,4 +17,5 @@ A cave just right for a grizzly, also <i>matura examination project. </i>
 <h3>NOTES:</h3>
 <hr>
 <p>Mamo par buggov tut v packet</p>
+ja MySql neki ne dela . . .
 <hr>

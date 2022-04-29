@@ -128,6 +128,11 @@ function Mail() {
         <div className='content-cntnr'> 
           <div className="mailbox-cntnr">
             <h3>Mailbox</h3>
+            {packets.length == 0 &&
+              <div>
+                <p>- You have no mail -</p>
+              </div>
+            }
             {packets.map((packet) => (
               <Letter
                 Name={packet.username}
@@ -135,7 +140,7 @@ function Mail() {
                 key={packet.packet_id}
               />
             ))}
-
+            {}
           </div>
           <div className="postaloffice-cntnr">
             <h3 className="icon">New Packet</h3>
