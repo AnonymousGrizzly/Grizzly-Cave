@@ -181,6 +181,11 @@ function Storage() {
                 </tr>
               </thead>
               <tbody>
+                {data.files.length == 0 && data.folders.length == 0 &&
+                  <div className='centered-p'>
+                    <p>- Storage is empty - </p>
+                  </div>
+                }
                 {data.files.map((file, i) => {
                   return (
                     <TableRow

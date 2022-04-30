@@ -101,7 +101,7 @@ function Profile() {
               text = "Delete User"
               onClick = {handleDeleteSubmit}
               className = "error-btn"
-            />
+              />
             </div>
           ):(
             <div className='update-profile'>
@@ -148,11 +148,14 @@ function Profile() {
               onClick = {handleSubmit}
               className = "secondary-btn"
             />
-            
           </div>
          )}
         </div>
         <h3 className="errorMsg">{errorMsg}</h3>
+
+        <div className='details'>
+            
+        </div>
       </div>
     </div>
   );

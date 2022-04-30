@@ -70,6 +70,7 @@ td:first-child{
 td, th{
     padding: 10px 30px 10px 0px;
     width: 150px;
+    text-align: center;
 }
 td:last-child{
     padding: 10px 0px 7px 0px;
@@ -83,6 +84,11 @@ td:active, table:active, table:hover{
     margin: 0;
     padding: 0px;
     width: 138px;
+}
+
+.centered-p{
+    padding-top: 20px;
+    text-align: center;
 }
 
 @media screen and (min-width: 1500px){

@@ -13,11 +13,11 @@
     background-color: var(--secondary);
     padding-bottom: 100px;
     padding-top: 50px;
-    width: 400px;
     margin-left: 6%;
     padding-left: 50px;
     padding-right: 50px;
     height: fit-content;
+    width: fit-content;
 }
 .profile-wrapper h2{
     padding-bottom: 25px;
