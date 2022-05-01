@@ -12,10 +12,10 @@ A cave just right for a grizzly, also <i>matura examination project. </i>
   <li>dodaj grafe na profile page</li>
   <li>dodaj storage size na storage page</li>
   <li>dodaj file check v backend </li>
+  <li>dodaj grafe na profile</li>
 </ul>
 <hr>
 <h3>NOTES:</h3>
 <hr>
 <p>Mamo par buggov tut v packet</p>
-ja MySql neki ne dela . . .
 <hr>
