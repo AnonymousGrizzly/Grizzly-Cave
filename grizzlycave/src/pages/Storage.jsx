@@ -16,6 +16,7 @@ import { formatDate } from '../helpers/formatDate';
 import { formatBytes } from '../helpers/formatSize';
 import { validateFolderName } from '../RegEx/validateFolderName';
 import ModalContext, { ModalType } from '../contexts/ModalContext';
+import Dropzone, {useDropzone} from 'react-dropzone';
 
 function Storage() {
   const { closeModal, type, openModal } = useContext(ModalContext);
@@ -105,14 +106,12 @@ function Storage() {
 
   const deleteFile = async (fileId) => {
     const { success } = await FileService.deleteFile(fileId);
-
     if (success) {
       return setData({
         folders: data.folders,
         files: data.files.filter((f) => f.file_id !== fileId),
       });
     }
-
     // if not | show message
   };
 
@@ -156,6 +155,7 @@ function Storage() {
       },
     });
   };
+  const { getInputProps, getRootProps } = useDropzone({ onFiles })
 
   return (
     <div id="storage">
@@ -164,6 +164,7 @@ function Storage() {
           {uploadDone ? 'Done! ' : progress.toFixed(1) + ' %'}{' '}
         </div>
       )}
+      
       <div className="storage-cntnr">
         <div className="storagetitle-cntnr">
           <h1>File Storage</h1>
@@ -181,11 +182,7 @@ function Storage() {
                 </tr>
               </thead>
               <tbody>
-                {data.files.length == 0 && data.folders.length == 0 &&
-                  <div className='centered-p'>
-                    <p>- Storage is empty - </p>
-                  </div>
-                }
+                
                 {data.files.map((file, i) => {
                   return (
                     <TableRow
@@ -215,6 +212,9 @@ function Storage() {
                 })}
               </tbody>
             </table>
+            {data.files.length == 0 && data.folders.length == 0 &&
+              <p className='centered-p'>- Storage is empty - </p>
+            }
           </div>
           <div className="control-panel">
             <h3 className="icon">

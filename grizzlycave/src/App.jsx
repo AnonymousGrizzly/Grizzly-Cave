@@ -16,6 +16,7 @@ import ModalContext from './contexts/ModalContext';
 import { useState } from 'react';
 import { useMemo } from 'react';
 import Modal from './components/Modal';
+import useAuth from './hooks/useAuth';
 
 function App() {
   const [type, setType] = useState(null);
@@ -32,6 +33,10 @@ function App() {
   };
 
   const value = useMemo(() => ({ data, type, openModal, closeModal }));
+
+  const logout = useAuth();
+  window.addEventListener("beforeunload", logout);
+
 
   return (
     <Router>
