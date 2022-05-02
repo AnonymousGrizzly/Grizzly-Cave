@@ -1,5 +1,4 @@
 .news-cntnr{  
-  height: 100%;
   align-items: center;
   justify-content: center;
   margin-top:100px;
@@ -14,5 +13,20 @@
   margin: auto;
   padding-left: 40px;
   padding-right: 40px;
-  height: 600px;
+  height: fit-content;
+}
+.news-item{
+  border-bottom: 2px dashed var(--smallText);
+  margin-bottom: 20px;
+}
+
+.small{
+  font-size: 12px;
+  padding-left: 15px;
+  padding-top: 3px;
+  color: var(--smallText);
+}
+.body{
+  padding-left: 15px;
+  color: var(--bodyText);
 }
