@@ -53,4 +53,13 @@ export class FolderService {
     });
     return response;
   }
+  static async openParentFolder(folderId){
+    const response = await axios.post(`${BASEURL}/get_parent_folder.php`, {
+      folder_id: folderId,
+      jwt: getItem('PHPTOKEN'),
+    });
+    return response.data.data;
+  }
+
+
 }

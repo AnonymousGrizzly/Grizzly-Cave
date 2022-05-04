@@ -171,7 +171,7 @@ class FileSystem{
     public function StorageSize($user_id){
         $query = "SELECT SUM(filesize) FROM ".$this->table."
             WHERE user_id = ? 
-        "
+        ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->user_id);
         $stmt->execute();

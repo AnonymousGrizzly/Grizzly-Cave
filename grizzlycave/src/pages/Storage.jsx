@@ -61,6 +61,11 @@ function Storage() {
     }
   };
 
+  const back = async (folderId) => {
+    const result  = await FolderService.getParentFolder(folderId);
+    setCurrentFolderId(result);
+  }
+
   const onFiles = async () => {
     const file = fileInput.current.files[0];
 
@@ -92,6 +97,8 @@ function Storage() {
 
     fileInput.current.value = null;
   };
+
+  
 
   const deleteFolder = async (folderId) => {
     const { success } = await FolderService.deleteFolder(folderId);
@@ -183,33 +190,36 @@ function Storage() {
               </thead>
               <tbody>
                 
-                {data.files.map((file, i) => {
-                  return (
-                    <TableRow
-                      Name={file.filename}
-                      onClick={openFile}
-                      lastModified={formatDate(file.modified_at)}
-                      fileSize={formatBytes(file.filesize)}
-                      folder={false}
-                      key={i}
-                      id={file.file_id}
-                      showMore={() => openFileMenu(file)}
-                    />
-                  );
-                })}
                 {data.folders.map((folder, i) => {
+
                   return (
                     <TableRow
-                      Name={folder.foldername}
-                      onClick={() => openFolder(folder.folder_id)}
-                      lastModified={formatDate(folder.modified_at)}
-                      fileSize={'-'}
-                      folder={true}
-                      showMore={() => openFolderMenu(folder)}
-                      key={i}
+                    Name={folder.foldername}
+                    onClick={() => openFolder(folder.folder_id)}
+                    lastModified={formatDate(folder.modified_at)}
+                    fileSize={'-'}
+                    folder={true}
+                    showMore={() => openFolderMenu(folder)}
+                    key={i}
+                    index = {i}
+                    back={()=>openFolder(folder.parentfolder_id)}
                     />
-                  );
-                })}
+                    );
+                  })}
+                  {data.files.map((file, i) => {
+                    return (
+                      <TableRow
+                        Name={file.filename}
+                        onClick={openFile}
+                        lastModified={formatDate(file.modified_at)}
+                        fileSize={formatBytes(file.filesize)}
+                        folder={false}
+                        key={i}
+                        id={file.file_id}
+                        showMore={() => openFileMenu(file)}
+                      />
+                    );
+                  })}
               </tbody>
             </table>
             {data.files.length == 0 && data.folders.length == 0 &&
