@@ -1,19 +1,18 @@
 import React from 'react'
 import {Folder, File, MoreVertical, MoreHorizontal} from 'react-feather'
 
-function TableRow({Name, onClick, lastModified, fileSize, folder, showMore, index, id, back}) {
+function TableRow({Name, onClick, lastModified, fileSize, folder, showMore, index, id, back, parent}) {
  
-  const fFolder = (index == 0);
-
+  const fFolder = (!!parent); 
   return (
     <>
     { fFolder && (
       <tr className='first-folder'>
-        <td onClick={()=>{back(id, Name)}}><MoreHorizontal size="20"/></td>
-        <td onClick={()=>{back(id, Name)}}></td>
-        <td onClick={()=>{back(id, Name)}}></td>
-        <td onClick={()=>{back(id, Name)}}></td>
-        <td onClick={()=>{back(id, Name)}}></td>
+        <td onClick={()=> onClick(parent)}><MoreHorizontal size="20"/></td>
+        <td onClick={()=> onClick(parent)}></td>
+        <td onClick={()=> onClick(parent)}></td>
+        <td onClick={()=> onClick(parent)}></td>
+        <td onClick={()=> onClick(parent)}></td>
       </tr>
     )}
     <tr key={index}>

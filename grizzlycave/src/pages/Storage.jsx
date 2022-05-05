@@ -60,12 +60,7 @@ function Storage() {
       });
     }
   };
-
-  const back = async (folderId) => {
-    const result  = await FolderService.getParentFolder(folderId);
-    setCurrentFolderId(result);
-  }
-
+  
   const onFiles = async () => {
     const file = fileInput.current.files[0];
 
@@ -202,7 +197,7 @@ function Storage() {
                     showMore={() => openFolderMenu(folder)}
                     key={i}
                     index = {i}
-                    back={()=>openFolder(folder.parentfolder_id)}
+                    parent = {folder.parentfolder_id}
                     />
                     );
                   })}
