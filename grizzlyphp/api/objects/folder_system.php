@@ -84,7 +84,15 @@ class FolderSystem{
         }
         return false;
     }
-    
+    public function getParentFolder($n){
+        $query = "SELECT parentfolder_id FROM ".$this->table."
+            WHERE folder_id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $n);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 
 ?>

@@ -53,6 +53,12 @@ export class FolderService {
     });
     return response;
   }
-  
+  static async getParent(currentFolder) {
+    const response = await axios.post(`${BASEURL}/get_parent.php`, {
+      id: currentFolder,
+      jwt: getItem('PHPTOKEN'),
+    });
+    return response.parentfolder_id;
+  }
 
 }

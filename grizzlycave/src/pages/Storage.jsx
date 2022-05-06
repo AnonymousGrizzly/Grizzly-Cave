@@ -8,6 +8,7 @@ import {
   Mail,
   Tool,
   ArrowRightCircle,
+  MoreHorizontal
 } from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
@@ -28,122 +29,119 @@ function Storage() {
   const [uploadStart, setUploadStart] = useState(false);
   const [uploadDone, setUploadDone] = useState(false);
   const [currentFolderId, setCurrentFolderId] = useState(null);
+  const [currentParentFolderId, setCurrentParentFolderId] = useState(null);
   const [showFolderInput, setShowFolderInput] = useState(false);
   const [data, setData] = useState({
     files: [],
     folders: [],
   });
-
+  
   useEffect(() => {
     FolderService.getData(currentFolderId).then((data) => {
       setData(data);
     });
   }, [currentFolderId]);
-
+  
   const onClick = () => {
     fileInput.current.click();
   };
-
+  
   const fileSend = () => {
     history.push('/mail');
   };
-
+  
   const handleFolderSubmit = async (currentFolder, folderName) => {
     if (validateFolderName(folderName)) {
       const folder = await FolderService.createFolder(
         currentFolder,
         folderName
-      );
-      setData({
-        files: data.files,
-        folders: [...data.folders, folder],
-      });
-    }
+        );
+        setData({
+          files: data.files,
+          folders: [...data.folders, folder],
+        });
+      }
   };
-  
+    
   const onFiles = async () => {
     const file = fileInput.current.files[0];
-
     if (!file) return;
     setUploadStart(true);
-    const uploadedFile = await FileService.uploadFile(
-      {
+    const uploadedFile = await FileService.uploadFile({
         file,
         parentFolderId: currentFolderId,
-      },
-      (pr) => {
+      }, (pr) => {
         if (pr > 99) {
           setTimeout(() => {
             setUploadStart(false);
           }, 3000);
           setUploadDone(true);
         }
-
         if (pr > 0) {
           setProgress(pr);
         }
-      }
-    );
-
-    setData({
-      folders: data.folders,
-      files: [...data.files, uploadedFile],
-    });
-
-    fileInput.current.value = null;
-  };
-
-  
-
-  const deleteFolder = async (folderId) => {
-    const { success } = await FolderService.deleteFolder(folderId);
-
-    if (success) {
-      return setData({
-        folders: data.folders.filter((f) => f.folder_id !== folderId),
-        files: data.files,
       });
-    }
-  };
-
-  const deleteFile = async (fileId) => {
-    const { success } = await FileService.deleteFile(fileId);
-    if (success) {
-      return setData({
+      setData({
         folders: data.folders,
-        files: data.files.filter((f) => f.file_id !== fileId),
+        files: [...data.files, uploadedFile],
       });
-    }
-    // if not | show message
+      fileInput.current.value = null;
   };
+      
+      
+      
+    const deleteFolder = async (folderId) => {
+      const { success } = await FolderService.deleteFolder(folderId);
+      if (success) {
+        return setData({
+          folders: data.folders.filter((f) => f.folder_id !== folderId),
+          files: data.files,
+        });
+      }
+    };
+      
+    const deleteFile = async (fileId) => {
+      const { success } = await FileService.deleteFile(fileId);
+      if (success) {
+        return setData({
+          folders: data.folders,
+          files: data.files.filter((f) => f.file_id !== fileId),
+        });
+      }
+      // if not | show message
+    };
+      
+    const openFile = async (id, filename) => {
+      const url = await FileService.downloadFile(id);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', filename);
+      a.click();
+    };
 
-  const openFile = async (id, filename) => {
-    const url = await FileService.downloadFile(id);
-    const a = document.createElement('a');
-    a.setAttribute('href', url);
-    a.setAttribute('download', filename);
-    a.click();
-  };
-  const openFolder = (folderId) => {
-    setCurrentFolderId(folderId);
-  };
+    const openFolder = async (folderId) => {
+      const parent = await FolderService.getParent(folderId);
+      setCurrentParentFolderId(parent);
+      setCurrentFolderId(folderId);
+    };
+      
 
-  const changeShowInput = () => {
-    setShowFolderInput(!showFolderInput);
-  };
-
-  const openFolderMenu = (folder) => {
-    openModal(ModalType.FOLDER_ACTION_MENU, {
-      openFolder: () => {
-        openFolder(folder.folder_id);
-        closeModal();
-      },
-      removeFolder: async () => {
-        await deleteFolder(folder.folder_id);
-        closeModal();
-      },
-    });
-  };
+    const changeShowInput = () => {
+      setShowFolderInput(!showFolderInput);
+    };
+      
+      const openFolderMenu = (folder) => {
+        openModal(ModalType.FOLDER_ACTION_MENU, {
+          openFolder: () => {
+            openFolder(folder.folder_id);
+            closeModal();
+          },
+          removeFolder: async () => {
+            await deleteFolder(folder.folder_id);
+            closeModal();
+          },
+        });
+      };
 
   const openFileMenu = (file) => {
     openModal(ModalType.FILE_ACTION_MENU, {
@@ -157,7 +155,7 @@ function Storage() {
       },
     });
   };
-  const { getInputProps, getRootProps } = useDropzone({ onFiles })
+
 
   return (
     <div id="storage">
@@ -185,21 +183,32 @@ function Storage() {
               </thead>
               <tbody>
                 
+                {!!currentFolderId && (
+                  <tr className='first-folder'>
+                    <td onClick = {()=>openFolder(currentParentFolderId)}>
+                      <MoreHorizontal size="20"/>
+                    </td>
+                    <td onClick = {()=>openFolder(currentParentFolderId)}>back</td>
+                    <td onClick = {()=>openFolder(currentParentFolderId)}></td>
+                    <td onClick = {()=>openFolder(currentParentFolderId)}></td>
+                    <td onClick = {()=>openFolder(currentParentFolderId)}></td>
+                  </tr>
+                )}
+                
                 {data.folders.map((folder, i) => {
-
                   return (
                     <TableRow
-                    Name={folder.foldername}
-                    onClick={() => openFolder(folder.folder_id)}
-                    lastModified={formatDate(folder.modified_at)}
-                    fileSize={'-'}
-                    folder={true}
-                    showMore={() => openFolderMenu(folder)}
-                    key={i}
-                    index = {i}
-                    parent = {folder.parentfolder_id}
+                      Name={folder.foldername}
+                      onClick={() => openFolder(folder.folder_id, folder.parentFolderId)}
+                      lastModified={formatDate(folder.modified_at)}
+                      fileSize={'-'}
+                      folder={true}
+                      showMore={() => openFolderMenu(folder)}
+                      key={i}
+                      index = {i}
+                      backFunction = {false}
                     />
-                    );
+                  );
                   })}
                   {data.files.map((file, i) => {
                     return (
