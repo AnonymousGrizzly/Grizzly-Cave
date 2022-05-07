@@ -8,7 +8,8 @@ import {
   Mail,
   Tool,
   ArrowRightCircle,
-  MoreHorizontal
+  MoreHorizontal,
+  HardDrive
 } from 'react-feather';
 import { useHistory } from 'react-router';
 import TableRow from '../components/TableRow';
@@ -34,6 +35,7 @@ function Storage() {
   const [data, setData] = useState({
     files: [],
     folders: [],
+    storage: [],
   });
   
   useEffect(() => {
@@ -166,9 +168,6 @@ function Storage() {
       )}
       
       <div className="storage-cntnr">
-        <div className="storagetitle-cntnr">
-          <h1>File Storage</h1>
-        </div>
         <div className="content-cntnr">
           <div className="files-cntnr">
             <table className="files-table">
@@ -176,8 +175,8 @@ function Storage() {
                 <tr>
                   <th></th>
                   <th>Name</th>
-                  <th>Last modified</th>
-                  <th>File size</th>
+                  <th>Created at</th>
+                  <th>Size</th>
                   <th></th>
                 </tr>
               </thead>
@@ -206,7 +205,6 @@ function Storage() {
                       showMore={() => openFolderMenu(folder)}
                       key={i}
                       index = {i}
-                      backFunction = {false}
                     />
                   );
                   })}
@@ -272,6 +270,11 @@ function Storage() {
             />
             <Mail size={'18'} />
             <br />
+            <h3 className="icon">
+              <HardDrive size="22" />
+              &nbsp;Storage Space{' '}
+            </h3>
+            <p className='centered-p'>{formatBytes(data.storage)}</p>
           </div>
         </div>
       </div>

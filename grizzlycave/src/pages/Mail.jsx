@@ -124,7 +124,6 @@ function Mail() {
   return (
     <div>
       <div id="mail" className="mail-cntnr">
-        <h1>File Send</h1>
         <div className='content-cntnr'> 
           <div className="mailbox-cntnr">
             <h3>Mailbox</h3>

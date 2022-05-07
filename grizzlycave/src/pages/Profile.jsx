@@ -76,7 +76,6 @@ function Profile() {
   return (
     <div>
       <div className="profile-cntnr">
-        <h1>Profile</h1>
         <div className="profile-wrapper">
           {showUpdate ? (
             <div>
