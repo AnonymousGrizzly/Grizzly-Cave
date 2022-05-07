@@ -41,7 +41,7 @@ class Details{
         return $result;
     }
 
-    public function storageSize(){
+    public function storageSpace(){
         $query = "SELECT storage_size from ".$this->table."
             WHERE user_id = ? 
             ORDER BY details_id DESC

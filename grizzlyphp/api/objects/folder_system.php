@@ -20,9 +20,10 @@ class FolderSystem{
     }
 
     public function getFolderByParentId($user_id, $parent_id) {
-        $query = "SELECT * 
-                    FROM folders 
-            WHERE ((? IS NULL AND parentfolder_id IS NULL) OR (parentfolder_id = ?)) AND user_id = ? AND deleted = 0";
+        $query = "SELECT * FROM ".$this->table." 
+            WHERE ((? IS NULL AND parentfolder_id IS NULL) OR (parentfolder_id = ?)) 
+            AND user_id = ? AND deleted = 0
+        ";
 
         
         $stmt  = $this->conn->prepare($query);
@@ -31,7 +32,7 @@ class FolderSystem{
         $stmt->bindParam(3, $user_id);
 
 
-        if ($stmt->execute()) {
+        if ($stmt->execute()) { 
             return $stmt->fetchAll(PDO::FETCH_ASSOC); //return associative table of files
         } 
         

@@ -44,10 +44,10 @@ try{
     $details->user_id = $decoded->data->user_id;
     $user_id = (int)$details->user_id;
     $num_of_files = (int)$file->getNumberOfFiles($details->user_id);
-    $storage_size = (int)$details->storageSize();
+    $storage = (int)$file->storageSize($user_id);
     $start = (int)$decoded->iat; //get token create time from cookie
     $overall_time = (int)$details->calculateTime($start);
-    $details->logout_procedure($overall_time, $storage_size, $user_id, $num_of_files);
+    $details->logout_procedure($overall_time, $storage, $user_id, $num_of_files);
     http_response_code(200);
     echo json_encode(array("message" => "Success."));
 }catch (Exception $e){ //get message if it fails

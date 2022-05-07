@@ -45,6 +45,8 @@ $folder_system = new FolderSystem($db);
 
 $files = $file_system->getFilesByFolder($user_id, $parent_folder_id);
 $folders = $folder_system->getFolderByParentId($user_id, $parent_folder_id);
+$storage = (int)$file_system->storageSize($user_id);
 
 http_response_code(200);
-echo json_encode(array("files" => $files, "folders" => $folders));
+echo json_encode(array("files" => $files, "folders" => $folders, "storage" => $storage));
+?>

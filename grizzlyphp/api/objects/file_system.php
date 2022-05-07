@@ -2,9 +2,9 @@
 class FileSystem{
     private $conn;
     private $table = "files";
+    private $overall_storage = 100000000;
     
     public $target_dir = "../fileUploads/";
-    public $max_size = 500000000;
     
     //object properties
     public $file_id;
@@ -168,14 +168,16 @@ class FileSystem{
         $stmt->execute();
         return $stmt;
     }
-    public function StorageSize($user_id){
-        $query = "SELECT SUM(filesize) FROM ".$this->table."
+    public function storageSize($user_id){
+        $query = "SELECT SUM(filesize) AS filesSize FROM ".$this->table."
             WHERE user_id = ? 
         ";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->user_id);
+        $stmt->bindParam(1, $user_id);
         $stmt->execute();
-        return $stmt;
+        $result = $stmt->fetch();
+        $calculated =  $this->overall_storage - $result['filesSize'];
+        return $calculated;
     }
 }
 ?>

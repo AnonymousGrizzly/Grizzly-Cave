@@ -12,6 +12,7 @@ export class FolderService {
     return {
       files: response.data.files,
       folders: response.data.folders,
+      storage: response.data.storage
     };
   }
   static async createFolder(parentId, folderName) {
@@ -23,15 +24,6 @@ export class FolderService {
     return response.data.data;
   }
   static async deleteFolder(folderId) {
-    // const response = await axios.delete(`${BASEURL}/delete_folder.php`, {
-    //   folder_id: folderId,
-    //   jwt: getItem('PHPTOKEN'),
-    // });
-    // return {
-    //   data: response.data,
-    //   status: response.
-    // }
-
     const response = await fetch(`${BASEURL}delete_folder.php`, {
       method: 'POST',
       body: JSON.stringify({
@@ -54,7 +46,8 @@ export class FolderService {
     return response;
   }
   static async getParent(currentFolder) {
-    const response = await axios.post(`${BASEURL}/get_parent.php`, {
+    const response = await fetch(`${BASEURL}/get_parent.php`, {
+      method: 'POST',
       id: currentFolder,
       jwt: getItem('PHPTOKEN'),
     });
