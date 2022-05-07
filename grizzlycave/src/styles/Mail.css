@@ -1,19 +1,18 @@
-.mail-cntnr h1{
+.content-cntnr{
     margin-top: 100px;
-    margin-left: 6%;
 }
 .postaloffice-cntnr{
     width: fit-content;
     height: fit-content;
     background-color: var(--secondary);
-    padding: 50px;
+    padding: 30px;
     margin-left: 50px;
 }
 
 .mailbox-cntnr{
     margin-left: 50px;
     margin-bottom: 50px;
-    padding: 50px;
+    padding: 30px;
     background-color: var(--secondary);
     width:  254px;
 } 
