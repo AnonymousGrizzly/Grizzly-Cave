@@ -6,13 +6,14 @@ A cave just right for a grizzly, also <i>matura examination project. </i>
 <h3> TO-DO LIST:</h3>
 <hr>
 <ul>
-  <li>dodaj  going back v storage</li>
+  <li>**popravi**  going back v storage</li>
   <li>naredi tudi za hold spust (ze nalozen react-dropzone)</li>
   <li>uredi /mail  oblikovanje pa mogoče kkšn indicator za file upload</li>
   <li>dodaj grafe na profile page</li>
   <li>dodaj storage size na storage page</li>
   <li>dodaj file check v backend </li>
   <li>dodaj grafe na profile</li>
+  <li>sir.</li>
 </ul>
 <hr>
 <h3>NOTES:</h3>
