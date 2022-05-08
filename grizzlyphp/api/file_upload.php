@@ -18,6 +18,7 @@ use Firebase\JWT\Key;
 include_once './config/database.php';
 include_once './objects/user.php';
 include_once './objects/file_system.php';
+include_once './objects/details.php';
 
 if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
     http_response_code(200);
@@ -26,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']==="OPTIONS"){
 
 $database = new Database();
 $db = $database->getConnection();
-
+$file = new FileSystem($db);
 $jwt = $_POST['token'];
 
 if (!$jwt) {
@@ -38,10 +39,11 @@ $bannedExtensions = array('exe', 'php', 'dll', 'lnk', 'sys', 'jar', 'swf', 'gzqu
 
 if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK){
     $decoded = JWT::decode($jwt,  new Key($key, 'HS256'));
+    $file->user_id = $decoded->data->user_id;
 
     $fileName = $_FILES['uploadedFile']['name'];
     $fileSize = $_FILES['uploadedFile']['size'];
-    if($fileSize>5000000){
+    if(((int)$file->storageSize($file->user_id)-$fileSize)<=0){
         http_response_code(413);
         die(json_encode(array("message"=>"File to large!")));
     }
@@ -52,12 +54,11 @@ if(isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD
     $sanitizedFileName = md5(time() . $fileName) . '.' . $fileExtension;
     if(!in_array($fileExtension, $bannedExtensions)){
         
-        $file = new FileSystem($db); //new object for method usage
+         //new object for method usage
         $file->filename = $fileName;
         $file->filesize = $fileSize;
         $file->filetype = $fileType;
         $file->sanitized_name = $sanitizedFileName;
-        $file->user_id = $decoded->data->user_id;
         $file->folder_id = $_POST['parent_folder_id'] === 'null' ? NULL : $_POST['parent_folder_id']; //for folder path: it can be a folder in main container, or in other file
         $file->createFile(); //try to create file
 

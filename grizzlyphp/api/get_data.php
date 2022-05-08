@@ -38,7 +38,11 @@ if(!$jwtData){
 $decoded = JWT::decode($jwtData, new Key($key, 'HS256'));
 
 $user_id = $decoded->data->user_id;
-$parent_folder_id = $data->parent_folder_id;
+if(isset($data->parent_folder_id)){
+    $parent_folder_id = $data->parent_folder_id;
+}else{
+    $parent_folder_id = null;
+}
 
 $file_system = new FileSystem($db);
 $folder_system = new FolderSystem($db);

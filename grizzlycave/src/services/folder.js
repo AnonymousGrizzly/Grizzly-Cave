@@ -48,8 +48,10 @@ export class FolderService {
   static async getParent(currentFolder) {
     const response = await fetch(`${BASEURL}/get_parent.php`, {
       method: 'POST',
-      id: currentFolder,
-      jwt: getItem('PHPTOKEN'),
+      body: JSON.stringify({
+        id: currentFolder,
+        jwt: getItem('PHPTOKEN'),
+      }),
     });
     return response.parentfolder_id;
   }

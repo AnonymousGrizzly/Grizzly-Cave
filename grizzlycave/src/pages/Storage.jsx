@@ -22,7 +22,6 @@ import Dropzone, {useDropzone} from 'react-dropzone';
 
 function Storage() {
   const { closeModal, type, openModal } = useContext(ModalContext);
-
   const history = useHistory();
   const fileInput = useRef();
   const folderInput = useRef();
@@ -61,6 +60,7 @@ function Storage() {
         setData({
           files: data.files,
           folders: [...data.folders, folder],
+          storage: data.storage,
         });
       }
   };
@@ -86,6 +86,7 @@ function Storage() {
       setData({
         folders: data.folders,
         files: [...data.files, uploadedFile],
+        storage: [data.storage],
       });
       fileInput.current.value = null;
   };
@@ -98,6 +99,7 @@ function Storage() {
         return setData({
           folders: data.folders.filter((f) => f.folder_id !== folderId),
           files: data.files,
+          storage: data.storage
         });
       }
     };
@@ -108,6 +110,7 @@ function Storage() {
         return setData({
           folders: data.folders,
           files: data.files.filter((f) => f.file_id !== fileId),
+          storage: data.storage,
         });
       }
       // if not | show message
