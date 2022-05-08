@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "../styles/News.css";
 import {Coffee} from 'react-feather';
-import NewsItem from "../components/NewsItem";
+
 
 export default function News(){
+  const NewsItem = React.lazy(()=>import("../components/NewsItem"));
   return (
     <>
        <div className="news-cntnr">
@@ -12,6 +13,7 @@ export default function News(){
            <hr/>
            <div className="news-blocks">
              <br/>
+             <Suspense fallback={<p className="centered-p">Loading . . .</p>}>
              <NewsItem
               title= "Updated UI"
               p1 = {"Updated UI in Storage and Mail. Now it should be easier to use."}
@@ -23,7 +25,7 @@ export default function News(){
               created_at={"02-05-2022"}
               p1 = {"Various bug fixes in Profile and Mail. If you find any new bugs, contact us from our home page. Thank you!"}
             />
-
+             </Suspense>
            </div>
          </div>
        </div>
