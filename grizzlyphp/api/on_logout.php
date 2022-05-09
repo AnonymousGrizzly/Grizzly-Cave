@@ -43,10 +43,10 @@ try{
     $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
     $details->user_id = $decoded->data->user_id;
     $user_id = (int)$details->user_id;
-    $num_of_files = (int)$file->getNumberOfFiles($details->user_id);
+    $num_of_files = (int)$file->getNumberOfFiles($user_id);
     $storage = (int)$file->storageSize($user_id);
     $start = (int)$decoded->iat; //get token create time from cookie
-    $overall_time = (int)$details->calculateTime($start);
+    $overall_time = (int)$details->calculateTime($start); 
     $details->logout_procedure($overall_time, $storage, $user_id, $num_of_files);
     http_response_code(200);
     echo json_encode(array("message" => "Success."));

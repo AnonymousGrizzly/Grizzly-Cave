@@ -154,6 +154,7 @@ class FileSystem{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $user_id);
         $stmt->execute();
+        $stmt->fetch();
         $result = $stmt->rowCount();
         return $result;
     }
