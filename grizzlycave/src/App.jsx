@@ -17,6 +17,9 @@ import { useState } from 'react';
 import { useMemo } from 'react';
 import Modal from './components/Modal';
 import useAuth from './hooks/useAuth';
+import LogRocket from 'logrocket';
+LogRocket.init('dgrxaz/grizzlycave');
+
 
 function App() {
   const [type, setType] = useState(null);
