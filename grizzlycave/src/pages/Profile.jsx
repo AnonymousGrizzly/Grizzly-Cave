@@ -151,11 +151,7 @@ function Profile() {
          )}
         </div>
         <h3 className="errorMsg">{errorMsg}</h3>
-        <div className='details'>
-        </div>
-        <div className="profile-wrapper">
-            <p>On app: </p>
-        </div>
+        
       </div>
     </div>
   );
