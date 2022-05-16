@@ -1,7 +1,15 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
+import { useHistory } from 'react-router';
 import Button from '../components/Button';
-import '../styles/Storage.css';
+import TableRow from '../components/TableRow';
 import { FileService } from '../services/file';
+import { FolderService } from '../services/folder';
+import { formatDate } from '../helpers/formatDate';
+import { formatBytes } from '../helpers/formatSize';
+import { validateFolderName } from '../RegEx/validateFolderName';
+import ModalContext, { ModalType } from '../contexts/ModalContext';
+import Dropzone, {useDropzone} from 'react-dropzone';
+import '../styles/Storage.css';
 import {
   Upload,
   FolderPlus,
@@ -11,14 +19,6 @@ import {
   MoreHorizontal,
   HardDrive
 } from 'react-feather';
-import { useHistory } from 'react-router';
-import TableRow from '../components/TableRow';
-import { FolderService } from '../services/folder';
-import { formatDate } from '../helpers/formatDate';
-import { formatBytes } from '../helpers/formatSize';
-import { validateFolderName } from '../RegEx/validateFolderName';
-import ModalContext, { ModalType } from '../contexts/ModalContext';
-import Dropzone, {useDropzone} from 'react-dropzone';
 
 function Storage() {
   const { closeModal, type, openModal } = useContext(ModalContext);

@@ -12,15 +12,15 @@ import {validateUsername} from '../RegEx/validateUsername';
 function Profile() {
   const [userData, setUserData] = useState({});
   const { getProfileData, user } = useAuth();
+  const { updateUser, deleteUser } = useAuth();
+
   const [showUpdate, setShowUpdate] = useState(true);
- 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const { updateUser, deleteUser } = useAuth();
-
+  
 
   useEffect(() => {
     getProfileData().then((data) => setUserData(data)).catch(err=>console.log(err));
