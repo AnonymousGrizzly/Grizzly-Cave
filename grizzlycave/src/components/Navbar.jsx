@@ -42,7 +42,7 @@ function Navbar() {
               onClick={closeMobileMenu}
             />
             <NavItem
-              text="Sign Up/In"
+              text="Log In"
               to="/signin"
               className="commonLink"
               activeClassName="activeLink"

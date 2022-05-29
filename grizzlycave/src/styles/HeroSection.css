@@ -31,19 +31,19 @@
     padding: 17px;
     padding-left: 20px;
     padding-right: 27px;
-    background-color: #000000;
-    border: 1px solid #252525; 
+    background-color: var(--black);
+    border: 1px solid var(--secondaryText); 
 }
 .hero-btn:nth-child(even){
     margin-left:  100px;
-    border: 1px solid white; 
+    border: 1px solid var(--white); 
 }
 .hero-btn:active{
     transform: translateY(3px) !important;
     transition: 0.5s ease !important;
 }
 .hero-btn:hover{
-    background-color: #252525;
+    background-color: var(--secondaryText);
     transform: translateY(0);
     transition: all 0.5s ease;
 }

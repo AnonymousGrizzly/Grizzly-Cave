@@ -6,10 +6,11 @@ A cave just right for a grizzly, also <i>matura examination project. </i>
 <h3> TO-DO LIST:</h3> 
 <hr>
 <ul>
-  <li>naredi tudi za hold spust (ze nalozen react-dropzone)</li>
-  <li>uredi /mail  oblikovanje pa mogoče kkšn indicator za file upload</li>
-  <li>dodaj grafe na profile page</li>
-  <li>dodaj file check v backend </li>
+  <li>hold spust (ze nalozen react-dropzone)</li>
+  <li>/mail indicator za file upload</li>
+  <li>file check v backend </li>
+  <li>error msg on profile, mail, storage</li>
+  <li>framer motion on all pages</li>
 </ul>
 <hr>
 <h3>NOTES:</h3>
