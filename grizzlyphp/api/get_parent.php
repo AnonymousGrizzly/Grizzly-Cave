@@ -35,7 +35,6 @@ if(!$jwtData){
 
 $decoded = JWT::decode($jwtData, new Key($key, 'HS256'));
 $folder_system = new FolderSystem($db);
-var_dump($data);
 if(isset($data->id)){
     $id = $data->id;
 }else{
@@ -43,4 +42,4 @@ if(isset($data->id)){
 }
 $result = $folder_system->getParentFolder($id)->fetch();
 http_response_code(200);
-echo json_encode(array("parentfolder_id" => $result));
+echo json_encode(array("parentfolder_id" => $result["parentfolder_id"]));

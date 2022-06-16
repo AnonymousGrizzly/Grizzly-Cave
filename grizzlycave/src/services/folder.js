@@ -53,7 +53,9 @@ export class FolderService {
         jwt: getItem('PHPTOKEN'),
       }),
     });
-    return response.parentfolder_id;
+
+    const data = await response.json();
+    return data.parentfolder_id;
   }
 
 }

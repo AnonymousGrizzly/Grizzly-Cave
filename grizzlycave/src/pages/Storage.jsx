@@ -125,8 +125,12 @@ function Storage() {
     };
 
     const openFolder = async (folderId) => {
-      const parent = await FolderService.getParent(folderId);
-      setCurrentParentFolderId(parent);
+      if (folderId !== null) {
+        const parent = await FolderService.getParent(folderId);
+        setCurrentParentFolderId(parent);
+      } else {
+        setCurrentParentFolderId(undefined);
+      }
       setCurrentFolderId(folderId);
     };
       
