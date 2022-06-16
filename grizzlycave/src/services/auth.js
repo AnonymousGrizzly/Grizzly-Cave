@@ -1,6 +1,6 @@
 import { getItem } from '../helpers/localstorage';
 
-const BASEURL = 'http://localhost:3001/grizzlyphp/api/';
+const BASEURL = 'https://www.grizzly-cave.com/api/';
 
 export class AuthService {
   static async createUser(user) {
@@ -85,11 +85,11 @@ export class AuthService {
       data: await response.json(),
     };
   }
-  static async onLogout(){
+  static async onLogout() {
     const url = BASEURL + 'on_logout.php';
     const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({jwt: getItem('PHPTOKEN')}),
+      body: JSON.stringify({ jwt: getItem('PHPTOKEN') }),
       headers: {
         'Content-Type': 'application/json',
       },

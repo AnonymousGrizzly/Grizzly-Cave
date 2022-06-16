@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getItem } from '../helpers/localstorage';
 
-const BASEURL = 'http://localhost:3001/grizzlyphp/api/';
+const BASEURL = 'https://www.grizzly-cave.com/api/';
 
 export class UserService {
   static async checkUsername(username) {
@@ -17,15 +17,15 @@ export class UserService {
       data: await response.json(),
     };
   }
-  static async getGraphData(){
-    const response = await axios.post(`${BASEURL}graphs_data.php`,{
-      jwt:getItem('PHPTOKEN'),
+  static async getGraphData() {
+    const response = await axios.post(`${BASEURL}graphs_data.php`, {
+      jwt: getItem('PHPTOKEN'),
     });
     return {
-       overall_time: response.data.overall_time,
-       last_time: response.data.last_time,
-       storage_size: response.data.storage_size,
-       num_of_files: response.data.num_of_files
-    }
+      overall_time: response.data.overall_time,
+      last_time: response.data.last_time,
+      storage_size: response.data.storage_size,
+      num_of_files: response.data.num_of_files,
+    };
   }
 }

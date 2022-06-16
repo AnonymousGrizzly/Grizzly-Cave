@@ -1,6 +1,6 @@
 import { getItem } from '../helpers/localstorage';
 
-const BASEURL = 'http://localhost:3001/grizzlyphp/api/';
+const BASEURL = 'https://www.grizzly-cave.com/api/';
 
 export class PacketService {
   static async createPacket({ fileId, username, shortMessage, recieverId }) {

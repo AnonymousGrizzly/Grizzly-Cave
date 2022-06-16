@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getItem } from '../helpers/localstorage';
 
-const BASEURL = 'http://localhost:3001/grizzlyphp/api/';
+const BASEURL = 'https://www.grizzly-cave.com/api/';
 
 export class FileService {
   static async uploadFile({ file, parentFolderId }, changeProgress) {

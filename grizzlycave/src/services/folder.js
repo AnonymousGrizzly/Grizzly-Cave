@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getItem } from '../helpers/localstorage';
 
-const BASEURL = 'http://localhost:3001/grizzlyphp/api/';
+const BASEURL = 'https://www.grizzly-cave.com/api/';
 
 export class FolderService {
   static async getData(parentId) {
@@ -12,7 +12,7 @@ export class FolderService {
     return {
       files: response.data.files,
       folders: response.data.folders,
-      storage: response.data.storage
+      storage: response.data.storage,
     };
   }
   static async createFolder(parentId, folderName) {
@@ -57,5 +57,4 @@ export class FolderService {
     const data = await response.json();
     return data.parentfolder_id;
   }
-
 }
