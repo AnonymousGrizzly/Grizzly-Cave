@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD']==="OPTIONS"){   //to enable calls from different d
 }
 
 $database = new Database(); 
-//get connection$db = $database->getConnection(); 
+$db = $database->getConnection(); 
 $data = json_decode(file_get_contents("php://input"));
 $jwtData = isset($data->jwt) ? $data->jwt : "";
 
