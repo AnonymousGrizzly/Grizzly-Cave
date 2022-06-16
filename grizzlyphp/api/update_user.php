@@ -83,7 +83,7 @@ if($jwt){
             http_response_code(401);
             echo json_encode(array("message" => "Unable to update user."));
             exit();
-        }
+            }   
         }else{
             $user->password = $data->password;
         }

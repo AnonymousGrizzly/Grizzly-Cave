@@ -104,9 +104,9 @@ class User{
         $this->email=htmlspecialchars(strip_tags($this->email));
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->email);
-        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
         $this->password=htmlspecialchars(strip_tags($this->password));
-        $stmt->bindParam(3, $this->$password_hash);
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(3, $password_hash);
         $stmt->bindParam(4, $this->user_id);
         if($stmt->execute()){
             return true;
