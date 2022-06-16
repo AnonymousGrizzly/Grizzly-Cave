@@ -5,8 +5,8 @@ import { Mail, Lock } from 'react-feather';
 import {validateEmail} from '../RegEx/validateEmail';
 
 export default function ContactForm() {
-  const [email, setEmail] = useState();
-  const [isValid, setValid] = useState();
+  const [email, setEmail] = useState('');
+  const [isValid, setValid] = useState('');
 
   function sendEmail(e) {
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function ContactForm() {
   }
 
   useEffect(() => {
-    validateEmail(email);
+    setValid(validateEmail(email));
   }, [email]);
 
   return (
